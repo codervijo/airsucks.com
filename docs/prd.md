@@ -4,6 +4,39 @@
 
 ---
 
+## Problem
+
+Indoor air quality, vacuum/suction performance, HVAC airflow — the
+"why does my air suck?" cluster of consumer questions — is poorly
+served by existing content. Search results lean heavily on
+affiliate-spam roundups, vendor-published "guides" that double as
+product pitches, and Reddit threads with no schema. Real diagnostic
+help (flowcharts, sizing calculators, "is this normal" tooling)
+exists in a few niche forums but isn't packaged for search.
+
+This site addresses that gap with topic-organized content paired with
+interactive diagnostic tools — same "content + tool" hybrid pattern
+that works on `hybridautopart.com`. v1 starts with the Lovable-
+scaffolded React app (the `air-fixer` diagnostic). Content layer
+follows once pillars are locked.
+
+## Users
+
+Primary: homeowners and DIYers troubleshooting suction / airflow /
+indoor-air problems — vacuum loss, weak HVAC, musty smells, room
+imbalances. Search-driven traffic, not subscribers.
+
+Secondary: small-shop HVAC / appliance-repair contractors who want
+quick reference diagnostics or sizing rules without digging through
+manufacturer docs.
+
+Not the target: industrial HVAC engineers (different vocabulary +
+scale), pure product-buying intent (better served by Amazon /
+Wirecutter), allergy/medical claims (YMYL — explicitly out of scope
+per AI_AGENTS.md).
+
+---
+
 ## V1 — Foundation
 **Status:** Not started
 
