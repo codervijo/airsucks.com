@@ -77,6 +77,41 @@ See `hybridautopart.com/AI_AGENTS.md` for the full portfolio context — airsuck
 
 ---
 
+## Building info
+
+Stack: Vite + React + TypeScript, scaffolded from a Lovable export
+(originally named `air-fixer`). Configured for Cloudflare Workers
+deploy via `wrangler.jsonc` (note: `wrangler.jsonc`'s `name` is still
+the Lovable placeholder `tanstack-start-app` — change before deploy).
+
+Package manager is **pnpm** (per portfolio-wide convention; the
+Lovable export's `bun.lock` was removed by the bootstrap's CF safety
+fixes). Build via the central builder Makefile:
+
+```bash
+cd sites/airsucks.com
+make deps         # → pnpm install via the central builder
+make dev          # → pnpm dev (vite dev server)
+make build        # → pnpm build (vite build → dist/)
+```
+
+Direct pnpm equivalents work too (`pnpm dev`, `pnpm build`), but
+the Makefile path is the conformance-tracked one.
+
+Note: the WordPress-based strategy captured above in `## Stack`
+reflects the original 2025-era plan. The v1 implementation landing
+now is the Lovable-derived React app; WordPress integration (if it
+happens) is downstream.
+
+## Deployment info
+
+- **Platform**: Cloudflare Workers (per `wrangler.jsonc`).
+- **Live URL**: https://airsucks.com/ (after deploy completes).
+- **Deploy trigger**: `pnpm wrangler deploy` (or run `portfolio new
+  deploy airsucks.com` to set up the GitHub repo + Cloudflare project
+  connection in one step).
+- **Last deployed commit**: not yet deployed.
+
 ## Out of scope / don't touch
 
 - Publishing to WordPress without owner review pass
