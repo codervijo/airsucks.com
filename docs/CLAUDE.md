@@ -325,3 +325,23 @@ Probability math is intentionally simple. Resist the temptation to make it ML.
 - Sitemap is in GSC, impressions chart is non-empty by month 2.
 
 If those things work, v2 starts.
+
+## Project
+
+<1-2 sentence description — fill in what airsucks.com does and who the
+user is. The stack uses the sites/* workspace shared infra: Vite or
+Astro + pnpm + Cloudflare Pages, with Makefile forwarding to the
+central builder at `~/work/projects/builder/`.>
+
+## Commands
+
+```bash
+# Build / dev (forwards to the parent Makefile)
+make deps           # install deps via the central builder
+make dev            # local dev server
+make build          # production build → dist/
+
+# Deploy
+git push            # Cloudflare Pages auto-builds on push to main
+```
+
