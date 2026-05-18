@@ -345,3 +345,31 @@ make build          # production build → dist/
 git push            # Cloudflare Pages auto-builds on push to main
 ```
 
+
+## Heading hygiene
+
+**Before adding any section, subsection, or heading to a Markdown
+file, output the file's current heading outline first:**
+
+```bash
+grep -nE '^#+ ' path/to/file.md
+```
+
+Then confirm — in the chat — that the planned new heading's:
+
+1. **Depth** (`#`, `##`, `###`, …) is the intended depth, not
+   accidentally one level too shallow.
+2. **Label** doesn't collide with existing headings — no duplicate
+   `## 1. <title>`, no `### N.X` subsection labels that look like
+   `vN.X` phase identifiers.
+
+Only after that confirmation, write.
+
+Applies especially to long-lived docs: `docs/prd.md`, `AI_AGENTS.md`,
+`docs/architecture.md`, `docs/CLAUDE.md`.
+
+**Why:** structural drift is invisible in any single editing session
+— it only becomes obvious in the aggregate, by which time the doc is
+hard to fix. The pre-edit outline ritual catches collisions and depth
+mistakes at the point of writing, not at quarterly cleanup time.
+
