@@ -43,6 +43,17 @@ All content pages must be statically generated or server-rendered. **Never ship 
 
 ---
 
+## Site history & SEO state (as of 2026-06-13)
+
+Read this before any SEO/indexing work — it explains why the site gets 0 impressions.
+
+- **Domain is aged + long-parked, not new.** Wayback shows airsucks.com was a **parked domain for ~15 years** (domain-name-as-title parking page 2013; empty/JS-parking 2014–15; 302 parking-redirects 2018–2025) — never a real site. Relaunched with real content **~2026-05-11**. **No prior spam/penalty** — clean but *cold*: Google's decade-long prior is "low-value parking → ignore," so fresh content re-indexes slowly and skeptically.
+- **⚠ Stack drift — the deployed site VIOLATES the Critical SSG rule above.** The spec says Astro SSG, but what's actually deployed is the **TanStack Start (Vite/React)** export. Result (verified by `curl`/view-source): only `/` server-renders; the sub-routes `/diagnose`, `/diagnose/airflow|vacuum|odor`, `/learn`, `/calculate`, `/about` return an **empty CSR shell — no `<title>`, no body content**. This is precisely the "Googlebot can't index a CSR shell" failure the rule warns about. **Resolve before any content work:** either finish the planned Astro rebuild, or make the current TanStack app fully SSR every route (a `lamill project delegate` SSR task is in flight).
+- **Current GSC state (2026-06-12 snapshot):** homepage = **"Crawled – currently not indexed"** (Google saw it, declined — cold-domain + thin); only 1 URL inspected. **Sitemap lists only the homepage** (`/sitemap.xml` = 1 `<loc>`) — the real routes aren't discoverable. **`[content]` in `lamill.toml` is empty** — no SEO identity, so rankmill can't audit-with-intent or `generate` a content plan yet.
+- **Plan to earn indexing** (counters the parked-prior): (1) SSR all routes + per-route title/meta; (2) complete sitemap from the route tree + submit in GSC; (3) Request Indexing + IndexNow (enabled); (4) configure `[content]`; (5) content depth + a few inbound links + weeks of consistency. Full diagnosis + review dates: `docs/growth.md` (2026-06-13 entry).
+
+---
+
 ## Working memory — Claude instructions
 
 - The canonical spec is `docs/CLAUDE.md`. When a strategy, schema, or scope decision is accepted by the user, update `docs/CLAUDE.md` first and this file second (only if pillar/agent/stack-level info changed).
