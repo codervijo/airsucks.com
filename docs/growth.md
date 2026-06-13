@@ -64,3 +64,11 @@ https://search.google.com/search-console directly.
   the sitemap.
 - **Result:** TBD — review 2026-06-06
 - **Learning:** TBD
+
+## 2026-06-13 — Domain was parked ~15 years before the May relaunch — cold-start indexing drag
+- **Status:** active
+- **KPI:** indexed-page count + impressions (GSC `coverage_state`)
+- **Baseline:** 0 impressions; GSC homepage = "Crawled – currently not indexed" (2026-06-12 snapshot); only 1 URL inspected.
+- **Action:** Diagnosed *why* Google isn't indexing. Wayback shows airsucks.com was a **parked domain for its entire history** — domain-name-as-title parking page (2013), empty/JS-parking (2014–15), 302 parking-redirects (2018–2025); never a real site. Relaunched with real content ~2026-05-11. **No sign of prior spam/penalty** — clean but *cold*: Google's decade-long prior is "low-value parking → ignore," so fresh content reads as "Crawled – not indexed" until it's convinced the domain changed. Plan to counter the stale prior: (1) SSR all routes + per-route title/meta [delegate pending]; (2) complete sitemap from the route tree + submit in GSC; (3) Request Indexing + IndexNow (enabled); (4) content depth + a few inbound links + weeks of consistency.
+- **Result:** TBD — review 2026-07-11 (re-check GSC `coverage_state`)
+- **Learning:** TBD — does a long-parked domain re-index once real content + explicit re-crawl signals land? Reusable for other parked/aftermarket domains in the fleet.
