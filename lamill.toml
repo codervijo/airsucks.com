@@ -11,6 +11,10 @@ custom_domains = [
     "airsucks.com",
 ]
 
+[index]
+indexnow_key = "dbe4128b785da11e5eb575de32ee68c3"
+indexnow_enabled = true
+
 [stack]
 framework = "tanstack"
 
