@@ -59,11 +59,58 @@ function versionStamp(): Plugin {
 }
 // ─── end version-stamp ───────────────────────────────────────────────────────
 
+// ─── SEO: prerender every route to crawlable static HTML ─────────────────────
+// The whole site is static (no per-request data), so we statically prerender all
+// routes at build time. Each route already exports head:{} with a unique title +
+// meta description; prerendering renders that head + the route body into a real
+// HTML file (dist/client/<route>/index.html) instead of shipping a CSR shell.
+// Cloudflare serves the static file directly; src/server.ts SSR remains the
+// fallback for anything not prerendered. Without this, `vite build` emits no
+// static HTML and only "/" gets server-rendered at runtime — the rest reach
+// Googlebot as an empty shell (the site's #1 indexing blocker).
+//
+// `pages` is the canonical route list: it drives BOTH the prerender targets and
+// the generated sitemap (TanStack's buildSitemap reads startConfig.pages — and
+// any auto-discovered/crawled page gets appended to it too). We list every route
+// explicitly and turn OFF the two implicit discovery paths:
+//   - crawlLinks: false               — don't follow in-page <a> links
+//   - autoStaticPathsDiscovery: false — don't derive paths from the route tree
+// Both are on by default and, left on, they discovered a trailing-slash
+// "/diagnose/" (from the diagnose layout route) alongside "/diagnose" and emitted
+// BOTH into the sitemap — a duplicate-URL signal we don't want. Explicit list =
+// deterministic, exactly-8-entry sitemap. Tradeoff: a new route in src/routes must
+// be added to PAGES below to be prerendered/listed (intentional — see
+// docs/delegate-notes.md).
+//
+// Options are forwarded verbatim to tanstackStart() by the lovable wrapper
+// (mergeConfig over its defaults) — this is the supported path; we are NOT adding
+// the tanstackStart plugin manually.
+const SITE_HOST = "https://airsucks.com";
+
+const PAGES = [
+  { path: "/", sitemap: { priority: 1.0, changefreq: "weekly" } },
+  { path: "/diagnose", sitemap: { priority: 0.9, changefreq: "weekly" } },
+  { path: "/diagnose/vacuum", sitemap: { priority: 0.8, changefreq: "weekly" } },
+  { path: "/diagnose/odor", sitemap: { priority: 0.8, changefreq: "weekly" } },
+  { path: "/diagnose/airflow", sitemap: { priority: 0.8, changefreq: "weekly" } },
+  { path: "/calculate", sitemap: { priority: 0.7, changefreq: "weekly" } },
+  { path: "/learn", sitemap: { priority: 0.7, changefreq: "weekly" } },
+  { path: "/about", sitemap: { priority: 0.5, changefreq: "monthly" } },
+] as const;
+
 // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
 // @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
 export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
+    pages: PAGES,
+    prerender: {
+      enabled: true,
+      crawlLinks: false,
+      autoStaticPathsDiscovery: false,
+      failOnError: true,
+    },
+    sitemap: { enabled: true, host: SITE_HOST },
   },
   vite: {
     plugins: [versionStamp()],
