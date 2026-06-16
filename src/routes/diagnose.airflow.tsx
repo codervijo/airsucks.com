@@ -4,11 +4,13 @@ import { CategoryPage } from "@/components/category-page";
 export const Route = createFileRoute("/diagnose/airflow")({
   head: () => ({
     meta: [
-      { title: "Diagnose weak airflow and room balance problems — AirSucks.com" },
+      { title: "Diagnose weak airflow problems — AirSucks.com" },
       { name: "description", content: "Vents that barely blow, hot or cold rooms, return air problems, and dust — diagnose your home's airflow." },
       { property: "og:title", content: "Diagnose weak airflow — AirSucks.com" },
       { property: "og:description", content: "Find why your vents and rooms aren't moving air the way they should." },
+      { property: "og:url", content: "https://airsucks.com/diagnose/airflow/" },
     ],
+    links: [{ rel: "canonical", href: "https://airsucks.com/diagnose/airflow/" }],
   }),
   component: () => (
     <CategoryPage

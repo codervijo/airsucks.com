@@ -8,7 +8,9 @@ export const Route = createFileRoute("/diagnose/odor")({
       { name: "description", content: "Musty rooms, sour AC, bathroom and laundry smells — diagnose where the odor is coming from and how to remove it." },
       { property: "og:title", content: "Diagnose bad smells in your home — AirSucks.com" },
       { property: "og:description", content: "Find the source of the smell instead of masking it." },
+      { property: "og:url", content: "https://airsucks.com/diagnose/odor/" },
     ],
+    links: [{ rel: "canonical", href: "https://airsucks.com/diagnose/odor/" }],
   }),
   component: () => (
     <CategoryPage

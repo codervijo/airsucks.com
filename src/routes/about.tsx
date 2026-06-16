@@ -7,7 +7,9 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "AirSucks.com is a diagnostic-first tool for figuring out why your air is bad and your air machines are misbehaving." },
       { property: "og:title", content: "About — AirSucks.com" },
       { property: "og:description", content: "Why we built a diagnostic engine for air." },
+      { property: "og:url", content: "https://airsucks.com/about/" },
     ],
+    links: [{ rel: "canonical", href: "https://airsucks.com/about/" }],
   }),
   component: AboutPage,
 });

@@ -9,7 +9,9 @@ export const Route = createFileRoute("/diagnose/")({
       { name: "description", content: "Run a free 60-second diagnosis on smells, dust, weak airflow, or a misbehaving air machine." },
       { property: "og:title", content: "Diagnose your air — AirSucks.com" },
       { property: "og:description", content: "Answer 4 questions and get a practical, ranked diagnosis." },
+      { property: "og:url", content: "https://airsucks.com/diagnose/" },
     ],
+    links: [{ rel: "canonical", href: "https://airsucks.com/diagnose/" }],
   }),
   component: DiagnosePage,
 });

@@ -9,7 +9,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Smells, dust, weak airflow, and machines that don't suck right. Answer a few questions and get likely causes, DIY checks, parts, and when to call a pro." },
       { property: "og:title", content: "AirSucks.com — Diagnose everything wrong with your air" },
       { property: "og:description", content: "A diagnostic engine for bad air and broken air machines." },
+      { property: "og:url", content: "https://airsucks.com/" },
     ],
+    links: [{ rel: "canonical", href: "https://airsucks.com/" }],
   }),
   component: Index,
 });

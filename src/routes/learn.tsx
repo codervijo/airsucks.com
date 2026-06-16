@@ -7,7 +7,9 @@ export const Route = createFileRoute("/learn")({
       { name: "description", content: "Short, practical guides on indoor air, HVAC, and the machines that move air around your home." },
       { property: "og:title", content: "Learn — AirSucks.com" },
       { property: "og:description", content: "Plain-English guides on air quality, airflow, and air machines." },
+      { property: "og:url", content: "https://airsucks.com/learn/" },
     ],
+    links: [{ rel: "canonical", href: "https://airsucks.com/learn/" }],
   }),
   component: LearnPage,
 });

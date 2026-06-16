@@ -8,7 +8,9 @@ export const Route = createFileRoute("/calculate")({
       { name: "description", content: "Free calculators for return air sizing, room CFM, filter pressure drop, and air changes per hour." },
       { property: "og:title", content: "Air calculators — AirSucks.com" },
       { property: "og:description", content: "Practical math for HVAC and indoor air." },
+      { property: "og:url", content: "https://airsucks.com/calculate/" },
     ],
+    links: [{ rel: "canonical", href: "https://airsucks.com/calculate/" }],
   }),
   component: CalculatePage,
 });

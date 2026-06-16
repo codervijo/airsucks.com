@@ -4,11 +4,13 @@ import { CategoryPage } from "@/components/category-page";
 export const Route = createFileRoute("/diagnose/vacuum")({
   head: () => ({
     meta: [
-      { title: "Diagnose vacuum suction, smells, and dust problems — AirSucks.com" },
+      { title: "Vacuum lost suction, smells & dust — AirSucks.com" },
       { name: "description", content: "Vacuum lost suction, burning smell, brush not spinning, blowing dust — diagnose what's wrong with your vacuum." },
       { property: "og:title", content: "Diagnose vacuum problems — AirSucks.com" },
       { property: "og:description", content: "Suction, smells, dust, and brush issues — find the cause fast." },
+      { property: "og:url", content: "https://airsucks.com/diagnose/vacuum/" },
     ],
+    links: [{ rel: "canonical", href: "https://airsucks.com/diagnose/vacuum/" }],
   }),
   component: () => (
     <CategoryPage

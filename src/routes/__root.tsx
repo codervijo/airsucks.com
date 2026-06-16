@@ -78,12 +78,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "AirSucks.com — Diagnose everything wrong with your air" },
       { property: "og:description", content: "A diagnostic-first tool for bad air, weak airflow, and broken air machines." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:image", content: "https://airsucks.com/og.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://airsucks.com/og.png" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://airsucks.com/#org",
+              name: "AirSucks.com",
+              url: "https://airsucks.com/",
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://airsucks.com/#website",
+              name: "AirSucks.com",
+              url: "https://airsucks.com/",
+              publisher: { "@id": "https://airsucks.com/#org" },
+              description:
+                "Diagnose everything wrong with your air — weak airflow, bad smells, and air machines that don't suck right.",
+            },
+          ],
+        }),
       },
     ],
   }),
