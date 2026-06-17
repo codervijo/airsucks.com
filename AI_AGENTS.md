@@ -181,3 +181,44 @@ Cloudflare Pages. Push to `main` triggers an auto-build via the
 `wrangler.jsonc` config; build output is `dist/`. Custom domain
 configured via the CF Pages dashboard.
 
+## Summary
+
+*one paragraph: what this site is, what it does*
+
+(to be filled in)
+
+## Audience
+
+*one sentence: who this is for (broad demographic)*
+
+(to be filled in)
+
+## ICP
+
+*the specific ideal customer — demographics, pain points, what they use today. More detail than Audience: Audience is the broad demo ("homeowners with EV chargers"), ICP is the specific targetable subset ("Tesla owners in CA who installed in last 90d, paid $2k+")*
+
+(to be filled in)
+
+## Goals
+
+*1-2 sentences: primary business / product goal*
+
+(to be filled in)
+
+## Tech stack
+
+*frontend stack (Astro / Vite / etc.) + key deps*
+
+(to be filled in by bootstrap template renderer)
+
+## Content strategy
+
+*what content this site needs — page types, initial topics, format mix (long-form vs reference vs tool)*
+
+(to be filled in)
+
+## Conventions
+
+*pnpm-only, Vite ≥6, deferred-decisions log, project-specific quirks*
+
+(to be filled in by bootstrap template renderer)
