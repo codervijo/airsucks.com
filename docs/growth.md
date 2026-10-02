@@ -35,10 +35,12 @@ this work?" is just a feeling.
 ### Where to get the numbers
 
 ```bash
-cd ~/work/projects/sites/portfolio && make run ARGS="gsc sync"
+cd ~/work/projects/sites/portfolio && uv run portfolio project seo airsucks.com
 ```
 
-Then read the row for `airsucks.com`. Or pull from
+Prints the GSC 28d row (impressions / clicks / CTR / position) plus
+URL Inspection coverage for the sitemap URLs. Add `--refresh` to bypass
+the 24h cache. Or pull from
 https://search.google.com/search-console directly.
 
 ### Format
@@ -66,9 +68,9 @@ https://search.google.com/search-console directly.
 - **Learning:** TBD
 
 ## 2026-06-13 — Domain was parked ~15 years before the May relaunch — cold-start indexing drag
-- **Status:** active
+- **Status:** shipped
 - **KPI:** indexed-page count + impressions (GSC `coverage_state`)
 - **Baseline:** 0 impressions; GSC homepage = "Crawled – currently not indexed" (2026-06-12 snapshot); only 1 URL inspected.
 - **Action:** Diagnosed *why* Google isn't indexing. Wayback shows airsucks.com was a **parked domain for its entire history** — domain-name-as-title parking page (2013), empty/JS-parking (2014–15), 302 parking-redirects (2018–2025); never a real site. Relaunched with real content ~2026-05-11. **No sign of prior spam/penalty** — clean but *cold*: Google's decade-long prior is "low-value parking → ignore," so fresh content reads as "Crawled – not indexed" until it's convinced the domain changed. Plan to counter the stale prior: (1) SSR all routes + per-route title/meta [delegate pending]; (2) complete sitemap from the route tree + submit in GSC; (3) Request Indexing + IndexNow (enabled); (4) content depth + a few inbound links + weeks of consistency.
-- **Result:** TBD — review 2026-07-11 (re-check GSC `coverage_state`)
-- **Learning:** TBD — does a long-parked domain re-index once real content + explicit re-crawl signals land? Reusable for other parked/aftermarket domains in the fleet.
+- **Result:** Reviewed 2026-10-02 (late; due 2026-07-11). Indexing recovered: **7/8 sitemap URLs `submitted_indexed`** (`/`, `/diagnose/`, `/diagnose/odor/`, `/diagnose/airflow/`, `/calculate/`, `/learn/`, `/about/`). Holdout: `/diagnose/vacuum/` = "Discovered – currently not indexed". `/diagnose` (no slash) = "Page with redirect" — benign, the trailing-slash canonical is indexed. Sitemap 8 URLs, submitted, fetched 2026-09-26. GSC 28d: **11 impressions, 0 clicks, avg position 29.8**.
+- **Learning:** Yes — a long-parked domain with no penalty re-indexes once routes serve real prerendered HTML + a complete sitemap + re-crawl signals (steps 1–3). The gap is now content, not indexability: 8 thin pages earn near-zero impressions. Ironically the one unindexed page is `/diagnose/vacuum/` — the v1 pillar — so it needs internal links from `/` and real depth (the v1 engine/pSEO grid). Reusable for parked/aftermarket domains in the fleet: fix rendering + sitemap first, expect indexing within weeks, then traffic is a content problem.
