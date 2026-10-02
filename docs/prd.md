@@ -227,7 +227,7 @@ Goal: measure whether the strategy is working before investing more.
 
 ## v2 — Smells & odor diagnosis (Quality pillar, pulled forward)
 
-**Status:** v2.A–F done 2026-10-02 (not yet deployed); v2.G–J queued — v2.G blocks deploy. v2 is scoped to *prove* the smell silo (build, deploy, measure, decide); scale-out moved to v3, monetization to v4. Pulled ahead of v1 by
+**Status:** v2.A–F done 2026-10-02 (not yet deployed); v2.H–J queued. v2 is scoped to *prove* the smell silo (build, deploy, measure, decide); scale-out moved to v3, monetization to v4. Pulled ahead of v1 by
 operator direction; the old "gated on v1 Month-6 thresholds" condition
 is waived.
 
@@ -267,7 +267,7 @@ safe checks → fix → when DIY stops → which trade to call.
 | v2.D | ☑ | **`/diagnose/smell/` interactive diagnostic.** Steps: odor family → where → when → observations → ranked causes, red-flag override, safe checks, next action, links into `/smells/` pages. Deterministic scoring over the same cause library (no ML, no LLM at runtime). |
 | v2.E | ☑ | **Integration, migration, validation.** Header, footer and homepage entry points; `/diagnose/odor/` 301 → `/diagnose/smell/`; site-wide `trailingSlash: 'always'`; a post-build SEO audit script (`scripts/seo-audit.mjs`) checking titles, H1s, metas, canonicals, schema, broken links, sitemap parity and near-duplicate detection; unit tests for data integrity and the engine. |
 | v2.F | ☑ | **Credibility cleanup (2026-10-02).** Removed the non-functional homepage email capture; replaced the disabled "Find local pros (coming soon)" button with per-result who-to-call guidance; removed the fake "Find it" part links + affiliate disclosure (no affiliate links exist); fixed the legacy wizard's mold threshold to EPA's ~10 sq ft; added a mobile header menu (native `<details>`); CI pinned to pnpm 10. |
-| v2.G | ☐ | **Retire placeholder pages (blocks deploy).** `/learn/` and `/calculate/` are whole "Coming soon" pages, live and indexed. `/learn/` becomes the guides index, listing the real `/smells/` guides by family. `/calculate/` drops out of nav, footer and sitemap and gets `noindex` until v5 (Engineering) builds real calculators. |
+| v2.G | ☑ | **Retire placeholder pages (2026-10-02).** `/learn/` and `/calculate/` are whole "Coming soon" pages, live and indexed. `/learn/` becomes the guides index, listing the real `/smells/` guides by family. `/calculate/` drops out of nav, footer and sitemap and gets `noindex` until v5 (Engineering) builds real calculators. |
 | v2.H | ☐ | **Deploy + indexing push.** Deploy; verify `/diagnose/odor/` 301 and every sitemap URL live; resubmit the sitemap; Request Indexing for `/smells/` + the top-5 target pages; IndexNow ping; confirm `lamill.toml [content]` (updated 2026-10-02) is picked up by rankmill. |
 | v2.I | ☐ | **Soak + measure (28 days after deploy).** Search Console per page: indexed state, impressions, positions, queries. Fill in the Result for the 2026-10-02 `growth.md` entry. |
 | v2.J | ☐ | **Continue/stop review.** From v2.I data: start v3 (scale smells), hold, or resume v1 (vacuums). Closes v2. |
@@ -387,7 +387,7 @@ below can be overridden; overriding one moves the affected phase.
 - Playwright mobile pass: no overflow or console errors on 19 pages,
   the menu navigates and closes, and no dead buttons in the results.
 
-**v2.G — Retire placeholder pages.**
+**v2.G — Retire placeholder pages — done 2026-10-02.**
 - `/learn/`: replace the "Coming soon" cards with a guides index built
   from the smell registry (one source of truth, so it never goes
   stale). Keep its URL, title and canonical. Retitle the meta to
@@ -399,6 +399,17 @@ below can be overridden; overriding one moves the affected phase.
 - Audit: it must not flag the noindexed page. The audit's sitemap
   parity check needs an allowlist for intentionally unlisted pages.
 - Gates as for v2.F.
+- Result:
+  - `/learn/` is a 249-word guides index linking all 13 smell guides
+    and 4 diagnostics. Retitled "Guides to Home Air & Smell Problems",
+    with a BreadcrumbList. It isn't in the audit's top-similarity
+    pairs, so it doesn't duplicate the `/smells/` hub.
+  - `/calculate/` is `noindex, follow`, unlinked, and excluded from
+    the sitemap (`sitemap: { exclude: true }`) but still prerendered.
+  - Sitemap: 21 URLs.
+  - Nav label "Learn" → "Guides".
+  - The audit now allows intentional noindex pages, and errors if one
+    lands in the sitemap.
 
 **v2.H — Deploy + indexing push.** Deploying is the operator's call.
 After deploy:

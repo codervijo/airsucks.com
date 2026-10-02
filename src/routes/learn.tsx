@@ -1,60 +1,116 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { childrenOf, hubGroups } from "@/content/smells";
+import { breadcrumbJsonLd, pageHead } from "@/lib/seo";
 
+// v2.G: the guides index. Built from the smell registry, so it can't go stale
+// or advertise guides that don't exist. Deliberately a compact link index
+// (no per-guide descriptions) so it doesn't near-duplicate the /smells/ hub.
 export const Route = createFileRoute("/learn")({
-  head: () => ({
-    meta: [
-      { title: "Learn — AirSucks.com" },
-      { name: "description", content: "Short, practical guides on indoor air, HVAC, and the machines that move air around your home." },
-      { property: "og:title", content: "Learn — AirSucks.com" },
-      { property: "og:description", content: "Plain-English guides on air quality, airflow, and air machines." },
-      { property: "og:url", content: "https://airsucks.com/learn/" },
-    ],
-    links: [{ rel: "canonical", href: "https://airsucks.com/learn/" }],
-  }),
+  head: () =>
+    pageHead({
+      path: "/learn/",
+      title: "Guides to Home Air & Smell Problems",
+      description:
+        "Every AirSucks guide in one place: household smells from musty to gas, plus the interactive diagnostics for smells, vacuums, and airflow.",
+      jsonLd: [
+        breadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Guides", href: "/learn/" },
+        ]),
+      ],
+    }),
   component: LearnPage,
 });
 
-const TOPICS = [
-  { title: "What MERV rating actually means", body: "And why a higher number isn't always better." },
-  { title: "Why your HVAC filter affects every room", body: "Static pressure, airflow, and the wrong filter trap." },
-  { title: "Humidity 101", body: "The 30–50% rule and what happens outside it." },
-  { title: "Vacuum filtration explained", body: "Bag, cyclone, HEPA — what catches what." },
-  { title: "Return air, plainly", body: "Why returns matter as much as supplies." },
-  { title: "When to call HVAC vs appliance repair", body: "A quick decision tree." },
+const TOOLS = [
+  {
+    to: "/diagnose/smell/",
+    title: "Smell diagnostic",
+    hint: "What it smells like, where, and when",
+  },
+  { to: "/diagnose/vacuum/", title: "Vacuum problems", hint: "Suction, smells, brush, dust" },
+  { to: "/diagnose/airflow/", title: "Airflow problems", hint: "Weak vents, hot or cold rooms" },
+  { to: "/diagnose/", title: "General diagnostic", hint: "Not sure where to start" },
 ];
 
 function LearnPage() {
+  const groups = hubGroups();
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 md:py-16">
       <div className="max-w-2xl">
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Learn</h1>
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Guides</h1>
         <p className="mt-2 text-muted-foreground">
-          Short, practical guides — no fluff. We're publishing the first set soon.
+          Every guide on the site, grouped by problem. Each one ranks the likely causes, separates
+          dangerous situations from routine ones, and tells you when DIY stops.
         </p>
       </div>
 
-      <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {TOPICS.map((t) => (
-          <div key={t.title} className="rounded-2xl border border-border bg-card p-5">
-            <div className="font-medium">{t.title}</div>
-            <p className="mt-1 text-sm text-muted-foreground">{t.body}</p>
-            <span className="mt-3 inline-flex rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
-              Coming soon
-            </span>
-          </div>
-        ))}
-      </div>
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold tracking-tight">Smells in the house</h2>
+        <div className="mt-5 grid gap-6 md:grid-cols-2">
+          {groups.map((g) => (
+            <div key={g.family}>
+              <h3 className="font-semibold">{g.heading}</h3>
+              <ul className="mt-2 space-y-1.5 text-sm">
+                {g.pages.map((p) => (
+                  <li key={p.path}>
+                    <Link to={p.path} className="text-primary underline-offset-2 hover:underline">
+                      {p.h1.split(":")[0]}
+                    </Link>
+                    {childrenOf(p).length ? (
+                      <ul className="mt-1.5 ml-4 space-y-1 border-l border-border pl-3">
+                        {childrenOf(p).map((c) => (
+                          <li key={c.path}>
+                            <Link
+                              to={c.path}
+                              className="text-primary underline-offset-2 hover:underline"
+                            >
+                              {c.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <div className="mt-12 rounded-2xl border border-border bg-primary-soft p-6 text-center">
-        <h3 className="text-lg font-semibold">Want to skip the reading?</h3>
-        <p className="mt-1 text-sm text-muted-foreground">Run a diagnosis and we'll only explain what's relevant to your problem.</p>
-        <Link
-          to="/diagnose/"
-          className="mt-4 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          Start diagnosis
-        </Link>
-      </div>
+      <section className="mt-12">
+        <h2 className="text-2xl font-semibold tracking-tight">Interactive diagnostics</h2>
+        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+          {TOOLS.map((t) => (
+            <li key={t.to}>
+              <Link
+                to={t.to}
+                className="block rounded-2xl border border-border bg-card p-4 transition-colors hover:bg-muted"
+              >
+                <span className="block font-medium">{t.title}</span>
+                <span className="mt-0.5 block text-sm text-muted-foreground">{t.hint}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-12 max-w-3xl">
+        <h2 className="text-2xl font-semibold tracking-tight">How these guides are written</h2>
+        <div className="mt-3 space-y-3 text-foreground/90">
+          <p>
+            Causes are ranked by how often they explain a problem in ordinary homes, using plumbing,
+            HVAC, electrical, and building-science guidance. We label rankings as judgments rather
+            than dressing them up as statistics. Where a public agency publishes guidance, such as
+            the EPA on mold and humidity or the CPSC on carbon monoxide, we link it.
+          </p>
+          <p>
+            Safety comes first on every guide: anything that could be gas, fire, or electrical gets
+            a separate "act now" block before the troubleshooting. We don't give medical advice.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

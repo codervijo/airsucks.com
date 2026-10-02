@@ -126,7 +126,9 @@ for (const p of pages) {
   const expected = SITE + p.url;
   if (p.canonical !== expected) err(p.url, `canonical ${p.canonical} ≠ ${expected}`);
   if (p.ogUrl && p.ogUrl !== expected) err(p.url, `og:url ${p.ogUrl} ≠ ${expected}`);
-  if (/noindex/i.test(p.robots)) err(p.url, "noindex");
+  // noindex is allowed (intentional placeholders, e.g. /calculate/ until v5)
+  // but such pages must stay out of the sitemap — checked below.
+  p.noindex = /noindex/i.test(p.robots);
   for (const raw of p.jsonLd) {
     try {
       const data = JSON.parse(raw);
@@ -179,11 +181,16 @@ for (const [kind, map] of Object.entries(seen)) {
     if (urls.length > 1) err(urls.join(", "), `duplicate ${kind}: "${key}"`);
 }
 for (const [url, n] of inbound)
-  if (url !== "/" && n === 0) err(url, "orphan: no internal links point here");
+  if (url !== "/" && n === 0 && !byUrl.get(url).noindex)
+    err(url, "orphan: no internal links point here");
 
 // sitemap parity
 for (const u of sitemapUrls) if (!byUrl.has(u)) err(u, "in sitemap but no prerendered page");
-for (const p of pages) if (!sitemapUrls.includes(p.url)) err(p.url, "page not in sitemap");
+for (const p of pages) {
+  const listed = sitemapUrls.includes(p.url);
+  if (p.noindex && listed) err(p.url, "noindex page is listed in the sitemap");
+  else if (!p.noindex && !listed) err(p.url, "page not in sitemap");
+}
 if (new Set(sitemapUrls).size !== sitemapUrls.length) err("sitemap.xml", "duplicate <loc> entries");
 
 // near-duplicates (main content only, so shared chrome doesn't count)
@@ -244,7 +251,7 @@ if (JSON_OUT) {
   console.log(`SEO audit — ${pages.length} pages, ${sitemapUrls.length} sitemap URLs\n`);
   for (const p of [...pages].sort((a, b) => a.url.localeCompare(b.url))) {
     console.log(
-      `  ${String(p.words).padStart(5)}w  in:${String(inbound.get(p.url)).padStart(2)}  ${p.url.padEnd(34)} ${p.title}`,
+      `  ${String(p.words).padStart(5)}w  in:${String(inbound.get(p.url)).padStart(2)}  ${p.url.padEnd(34)} ${p.noindex ? "[noindex] " : ""}${p.title}`,
     );
   }
   console.log("\nMost similar page pairs (5-word shingle Jaccard, main content):");

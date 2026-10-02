@@ -26,7 +26,6 @@ const STATIC_ROUTES = new Set([
   "/diagnose/smell/",
   "/diagnose/vacuum/",
   "/diagnose/airflow/",
-  "/calculate/",
   "/learn/",
   "/about/",
 ]);

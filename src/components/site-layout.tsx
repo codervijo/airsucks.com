@@ -18,8 +18,7 @@ function SiteHeader() {
   const links = [
     { to: "/diagnose/", label: "Diagnose" },
     { to: "/smells/", label: "Smells" },
-    { to: "/calculate/", label: "Calculate" },
-    { to: "/learn/", label: "Learn" },
+    { to: "/learn/", label: "Guides" },
     { to: "/about/", label: "About" },
   ] as const;
   return (
@@ -130,13 +129,7 @@ function SiteFooter() {
             { to: "/smells/burning-plastic/", label: "Burning plastic" },
           ]}
         />
-        <FooterCol
-          title="Tools"
-          links={[
-            { to: "/calculate/", label: "Calculators" },
-            { to: "/learn/", label: "Learn" },
-          ]}
-        />
+        <FooterCol title="Guides" links={[{ to: "/learn/", label: "All guides" }]} />
         <FooterCol title="Company" links={[{ to: "/about/", label: "About" }]} />
       </div>
       <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">

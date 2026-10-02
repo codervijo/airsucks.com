@@ -5,7 +5,13 @@ export const Route = createFileRoute("/calculate")({
   head: () => ({
     meta: [
       { title: "Air calculators — AirSucks.com" },
-      { name: "description", content: "Free calculators for return air sizing, room CFM, filter pressure drop, and air changes per hour." },
+      // v2.G: no calculators exist yet (planned in v5) — keep this out of the index.
+      { name: "robots", content: "noindex, follow" },
+      {
+        name: "description",
+        content:
+          "Free calculators for return air sizing, room CFM, filter pressure drop, and air changes per hour.",
+      },
       { property: "og:title", content: "Air calculators — AirSucks.com" },
       { property: "og:description", content: "Practical math for HVAC and indoor air." },
       { property: "og:url", content: "https://airsucks.com/calculate/" },
@@ -16,10 +22,22 @@ export const Route = createFileRoute("/calculate")({
 });
 
 const CALCS = [
-  { title: "Return air size calculator", body: "Estimate the right return grille and duct size for a given CFM and noise target." },
-  { title: "Room CFM calculator", body: "Calculate the airflow each room actually needs based on size, use, and load." },
-  { title: "Filter pressure drop estimator", body: "See how MERV and face velocity affect static pressure and airflow." },
-  { title: "Air changes per hour calculator", body: "Convert room volume and CFM into ACH so you can size ventilation properly." },
+  {
+    title: "Return air size calculator",
+    body: "Estimate the right return grille and duct size for a given CFM and noise target.",
+  },
+  {
+    title: "Room CFM calculator",
+    body: "Calculate the airflow each room actually needs based on size, use, and load.",
+  },
+  {
+    title: "Filter pressure drop estimator",
+    body: "See how MERV and face velocity affect static pressure and airflow.",
+  },
+  {
+    title: "Air changes per hour calculator",
+    body: "Convert room volume and CFM into ACH so you can size ventilation properly.",
+  },
 ];
 
 function CalculatePage() {
@@ -31,7 +49,8 @@ function CalculatePage() {
         </span>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Air calculators</h1>
         <p className="mt-2 text-muted-foreground">
-          Plain-English calculators for the most common air and HVAC math. We're polishing each one — drop your email on the home page to be notified.
+          Plain-English calculators for the most common air and HVAC math. We're polishing each one
+          — drop your email on the home page to be notified.
         </p>
       </div>
 
@@ -61,7 +80,9 @@ function CalculatePage() {
 
       <div className="mt-12 rounded-2xl border border-border bg-primary-soft p-6 text-center">
         <h3 className="text-lg font-semibold">Need an answer now?</h3>
-        <p className="mt-1 text-sm text-muted-foreground">Run a diagnosis — we'll suggest the right next step without the math.</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Run a diagnosis — we'll suggest the right next step without the math.
+        </p>
         <Link
           to="/diagnose/"
           className="mt-4 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"

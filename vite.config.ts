@@ -46,8 +46,7 @@ function versionStamp(): Plugin {
           "unknown";
       }
       const builtAt = new Date().toISOString();
-      const payload =
-        JSON.stringify({ schema: 1, commit, built_at: builtAt }) + "\n";
+      const payload = JSON.stringify({ schema: 1, commit, built_at: builtAt }) + "\n";
       // Write to the build outDir (Astro serves dist/), AND to the client
       // subdir when it exists — TanStack Start / Vite-SSR (CF Workers) serve
       // dist/client/, so without this the live /version.json is unserved and
@@ -59,9 +58,7 @@ function versionStamp(): Plugin {
         writeFileSync(join(clientDir, "version.json"), payload);
       }
       // eslint-disable-next-line no-console
-      console.log(
-        `[lamill version-stamp] ${commit.slice(0, 12)} @ ${builtAt}`,
-      );
+      console.log(`[lamill version-stamp] ${commit.slice(0, 12)} @ ${builtAt}`);
     },
   };
 }
@@ -105,7 +102,9 @@ const PAGES = [
   { path: "/diagnose/vacuum/", sitemap: { priority: 0.8, changefreq: "weekly" } },
   { path: "/diagnose/smell/", sitemap: { priority: 0.9, changefreq: "weekly" } },
   { path: "/diagnose/airflow/", sitemap: { priority: 0.8, changefreq: "weekly" } },
-  { path: "/calculate/", sitemap: { priority: 0.7, changefreq: "weekly" } },
+  // v2.G: placeholder until v5 (Engineering) builds real calculators. Still
+  // prerendered (keeps its URL, serves noindex HTML) but kept out of the sitemap.
+  { path: "/calculate/", sitemap: { exclude: true } },
   { path: "/learn/", sitemap: { priority: 0.7, changefreq: "weekly" } },
   { path: "/about/", sitemap: { priority: 0.5, changefreq: "monthly" } },
   // v2 — /smells/ silo. The hub is listed here; every page in the smell
@@ -114,7 +113,10 @@ const PAGES = [
   { path: "/smells/", sitemap: { priority: 0.9, changefreq: "weekly" } },
   ...smellPaths().map((path) => ({
     path,
-    sitemap: { priority: path.split("/").filter(Boolean).length > 2 ? 0.7 : 0.8, changefreq: "monthly" as const },
+    sitemap: {
+      priority: path.split("/").filter(Boolean).length > 2 ? 0.7 : 0.8,
+      changefreq: "monthly" as const,
+    },
   })),
 ];
 
