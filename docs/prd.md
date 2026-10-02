@@ -422,6 +422,39 @@ After deploy:
   `/smells/rotten-eggs/`, `/smells/musty/basement/`,
   `/smells/gas-but-no-leak/` and `/smells/musty/no-visible-mold/`.
 - Ping IndexNow.
+- **Results (2026-10-02):**
+  - ✓ Deployed: `ddd0d80` live at 19:21 UTC via Cloudflare **Pages**
+    (project `airsucks-com`, build `pnpm run build` → `dist/client`,
+    every deploy since June succeeded). The portfolio tool misreported
+    this as "Workers" / "IN_PROGRESS since 2026-06-17" (logged as a
+    portfolio bug).
+  - ✓ `/diagnose/odor/` and `/diagnose/odor` → 301 → `/diagnose/smell/`.
+  - ✓ Sitemap is live with 21 URLs, and all 21 return 200 with a
+    self-canonical and their JSON-LD. `/calculate/` is
+    `noindex, follow`.
+  - ✓ Sitemap resubmitted to GSC (`--force` refetch).
+  - ✓ IndexNow pinged 15 new URLs.
+  - ☐ **Operator:** Request Indexing (GSC UI only; there's no API) for
+    the 6 URLs above.
+  - ☑ **Soft 404s fixed (locally, 2026-10-02; not yet deployed).**
+    - Cause: Pages treats a deploy with no top-level `404.html` as an
+      SPA and answers every unknown URL with `index.html` + 200. That
+      also served `/version.json` as HTML, and the version stamp
+      wasn't writing `dist/client/version.json` anyway: its
+      single-`outDir` design picked `dist/server` under Vite's
+      multi-environment build.
+    - Fix: `/not-found/` is prerendered (noindex, out of the sitemap),
+      and `scripts/postbuild.mjs` copies it to `dist/client/404.html`
+      with the app scripts stripped (no hydration mismatch; its links
+      and menu work without JS). The version stamp writes to each
+      environment's own `outDir`. `postbuild` fails the build if
+      either file is missing.
+    - Shared `NotFoundComponent` (`src/components/not-found.tsx`) now
+      links to the smells hub and the diagnostics.
+    - Verify after deploy: `curl -s -o /dev/null -w '%{http_code}'
+      https://airsucks.com/smells/not-a-real-page/` returns 404, and
+      `/version.json` parses as JSON.
+  - ☐ Confirm rankmill reads the new `lamill.toml [content]`.
 
 **v2.I — Soak + measure.** At deploy +28 days, use
 `uv run portfolio project seo airsucks.com --refresh` plus GSC page

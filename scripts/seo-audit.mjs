@@ -124,7 +124,9 @@ for (const p of pages) {
     warn(p.url, `description ${p.desc.length} chars`);
   if (p.h1s.length !== 1) err(p.url, `${p.h1s.length} <h1> elements`);
   const expected = SITE + p.url;
-  if (p.canonical !== expected) err(p.url, `canonical ${p.canonical} ≠ ${expected}`);
+  const isNoindex = /noindex/i.test(p.robots);
+  // noindex pages (e.g. /not-found/ → 404.html) intentionally carry no canonical.
+  if (!isNoindex && p.canonical !== expected) err(p.url, `canonical ${p.canonical} ≠ ${expected}`);
   if (p.ogUrl && p.ogUrl !== expected) err(p.url, `og:url ${p.ogUrl} ≠ ${expected}`);
   // noindex is allowed (intentional placeholders, e.g. /calculate/ until v5)
   // but such pages must stay out of the sitemap — checked below.

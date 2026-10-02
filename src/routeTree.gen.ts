@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as NotFoundRouteImport } from './routes/not-found'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as DiagnoseRouteImport } from './routes/diagnose'
 import { Route as CalculateRouteImport } from './routes/calculate'
@@ -21,6 +22,11 @@ import { Route as DiagnoseVacuumRouteImport } from './routes/diagnose.vacuum'
 import { Route as DiagnoseSmellRouteImport } from './routes/diagnose.smell'
 import { Route as DiagnoseAirflowRouteImport } from './routes/diagnose.airflow'
 
+const NotFoundRoute = NotFoundRouteImport.update({
+  id: '/not-found',
+  path: '/not-found',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LearnRoute = LearnRouteImport.update({
   id: '/learn',
   path: '/learn',
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/calculate': typeof CalculateRoute
   '/diagnose': typeof DiagnoseRouteWithChildren
   '/learn': typeof LearnRoute
+  '/not-found': typeof NotFoundRoute
   '/diagnose/airflow': typeof DiagnoseAirflowRoute
   '/diagnose/smell': typeof DiagnoseSmellRoute
   '/diagnose/vacuum': typeof DiagnoseVacuumRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/calculate': typeof CalculateRoute
   '/learn': typeof LearnRoute
+  '/not-found': typeof NotFoundRoute
   '/diagnose/airflow': typeof DiagnoseAirflowRoute
   '/diagnose/smell': typeof DiagnoseSmellRoute
   '/diagnose/vacuum': typeof DiagnoseVacuumRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   '/calculate': typeof CalculateRoute
   '/diagnose': typeof DiagnoseRouteWithChildren
   '/learn': typeof LearnRoute
+  '/not-found': typeof NotFoundRoute
   '/diagnose/airflow': typeof DiagnoseAirflowRoute
   '/diagnose/smell': typeof DiagnoseSmellRoute
   '/diagnose/vacuum': typeof DiagnoseVacuumRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/calculate'
     | '/diagnose'
     | '/learn'
+    | '/not-found'
     | '/diagnose/airflow'
     | '/diagnose/smell'
     | '/diagnose/vacuum'
@@ -136,6 +146,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/calculate'
     | '/learn'
+    | '/not-found'
     | '/diagnose/airflow'
     | '/diagnose/smell'
     | '/diagnose/vacuum'
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
     | '/calculate'
     | '/diagnose'
     | '/learn'
+    | '/not-found'
     | '/diagnose/airflow'
     | '/diagnose/smell'
     | '/diagnose/vacuum'
@@ -163,12 +175,20 @@ export interface RootRouteChildren {
   CalculateRoute: typeof CalculateRoute
   DiagnoseRoute: typeof DiagnoseRouteWithChildren
   LearnRoute: typeof LearnRoute
+  NotFoundRoute: typeof NotFoundRoute
   SmellsSplatRoute: typeof SmellsSplatRoute
   SmellsIndexRoute: typeof SmellsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/not-found': {
+      id: '/not-found'
+      path: '/not-found'
+      fullPath: '/not-found'
+      preLoaderRoute: typeof NotFoundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/learn': {
       id: '/learn'
       path: '/learn'
@@ -273,6 +293,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculateRoute: CalculateRoute,
   DiagnoseRoute: DiagnoseRouteWithChildren,
   LearnRoute: LearnRoute,
+  NotFoundRoute: NotFoundRoute,
   SmellsSplatRoute: SmellsSplatRoute,
   SmellsIndexRoute: SmellsIndexRoute,
 }

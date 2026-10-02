@@ -32,6 +32,15 @@ function versionStamp(): Plugin {
       outDir = c.build?.outDir ?? "dist";
     },
     closeBundle() {
+      // Vite 6+ builds each environment (client, ssr) separately, but
+      // configResolved fires once, so `outDir` alone points at whichever
+      // environment resolved last (here dist/server). That left
+      // dist/client/version.json missing in production. Prefer the current
+      // environment's own outDir.
+      const envOutDir: string | undefined = (
+        this as unknown as { environment?: { config?: { build?: { outDir?: string } } } }
+      ).environment?.config?.build?.outDir;
+      const dir = envOutDir ?? outDir;
       let commit = "unknown";
       try {
         commit = execSync("git rev-parse HEAD", {
@@ -51,9 +60,9 @@ function versionStamp(): Plugin {
       // subdir when it exists — TanStack Start / Vite-SSR (CF Workers) serve
       // dist/client/, so without this the live /version.json is unserved and
       // soft-200s the app HTML, breaking lamill's deploy-fresh (CHECK_144/145).
-      mkdirSync(outDir, { recursive: true });
-      writeFileSync(join(outDir, "version.json"), payload);
-      const clientDir = join(outDir, "client");
+      mkdirSync(dir, { recursive: true });
+      writeFileSync(join(dir, "version.json"), payload);
+      const clientDir = join(dir, "client");
       if (existsSync(clientDir)) {
         writeFileSync(join(clientDir, "version.json"), payload);
       }
@@ -105,6 +114,10 @@ const PAGES = [
   // v2.G: placeholder until v5 (Engineering) builds real calculators. Still
   // prerendered (keeps its URL, serves noindex HTML) but kept out of the sitemap.
   { path: "/calculate/", sitemap: { exclude: true } },
+  // Prerendered only so scripts/postbuild.mjs can copy it to dist/client/404.html.
+  // Without a top-level 404.html, Cloudflare Pages treats the site as an SPA
+  // and answers every unknown URL with index.html + 200 (soft 404s).
+  { path: "/not-found/", sitemap: { exclude: true } },
   { path: "/learn/", sitemap: { priority: 0.7, changefreq: "weekly" } },
   { path: "/about/", sitemap: { priority: 0.5, changefreq: "monthly" } },
   // v2 — /smells/ silo. The hub is listed here; every page in the smell

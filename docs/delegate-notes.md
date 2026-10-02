@@ -144,3 +144,28 @@ a pnpm-12 run leaves behind.
   before the fix.
 - Prerendered pages + client-side navigation into an async loader: tests must
   wait for the new H1 or title, not just the URL.
+
+## 2026-10-02 — Soft 404s on Cloudflare Pages (and the missing version.json)
+
+- **Pages SPA fallback:** if a deploy has no **top-level `404.html`**,
+  Pages assumes an SPA and serves `index.html` with **200** for every
+  unknown path. Every typo'd or stale URL becomes a duplicate homepage
+  (soft 404), and missing static files like `/version.json` come back as
+  HTML. The fix is to ship a `404.html` (here: prerender `/not-found/`, then
+  `scripts/postbuild.mjs` copies it).
+- **Don't hydrate the 404 page.** The prerendered `/not-found/` markup and
+  the client router's render of an unknown URL differ → React #418.
+  `postbuild` strips the module scripts, so 404.html is plain static HTML.
+- **Version-stamp plugin bug** (also in the canonical
+  `~/work/projects/builder/vite-version-stamp.ts`): `configResolved` fires
+  once, so under Vite's multi-environment build `outDir` ends up as
+  `dist/server`. `dist/client/version.json` was never written. Use
+  `this.environment.config.build.outDir` in `closeBundle`. Other TanStack
+  sites using the builder copy likely have the same gap.
+- **Where the site actually runs:** Pages project `airsucks-com`, not a
+  Worker. `portfolio project hosting` / `project diagnose` misreport it
+  (stale "IN_PROGRESS" June deploy, "cloudflare-workers"). Check the
+  Pages API (`/pages/projects/airsucks-com/deployments`) directly.
+- **E2E:** to test 404s locally, serve `dist/client` with a handler that
+  returns `404.html` + 404 for missing paths (`python -m http.server`
+  doesn't).

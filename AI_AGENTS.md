@@ -153,7 +153,7 @@ make build        # production build → dist/
 
 ## Deployment
 
-- **Platform:** Cloudflare Pages (see § Deployment info). `wrangler.jsonc` points the SSR fallback at `src/server.ts`; prerendered HTML in `dist/client/` is served statically.
+- **Platform:** Cloudflare Pages, project `airsucks-com`: build `pnpm run build` → `dist/client`, served as pure static files (`wrangler.jsonc` is used only by the dev/build plugin, not by the deploy). Unknown URLs get `dist/client/404.html` with a 404 status. Without that file, Pages falls back to SPA mode (index.html + 200 everywhere), so `scripts/postbuild.mjs` fails the build if it's missing.
 - **Live URL:** https://airsucks.com/
 - **Redirects:** `public/_redirects` (e.g. `/diagnose/odor/` → `/diagnose/smell/` 301, since 2026-10-02). Verify after deploy with `curl -sI https://airsucks.com/diagnose/odor/`.
 
