@@ -9,6 +9,9 @@ export const getRouter = () => {
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
+    // Every page is served (and canonicalized) at its trailing-slash URL; make
+    // generated <Link> hrefs match so internal links never hit a 307.
+    trailingSlash: "always",
     defaultPreloadStaleTime: 0,
   });
 

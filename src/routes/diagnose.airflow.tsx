@@ -32,9 +32,9 @@ export const Route = createFileRoute("/diagnose/airflow")({
           { q: "How do I know if my return air is undersized?", a: "If the filter is sucked tight, the supply registers howl, or static pressure exceeds the equipment spec, the return is likely too small." },
         ],
         related: [
-          { title: "House smells stale", to: "/diagnose/odor" },
-          { title: "Vacuum lost suction", to: "/diagnose/vacuum" },
-          { title: "Run the full diagnostic", to: "/diagnose" },
+          { title: "Musty smell from the AC", to: "/smells/musty/ac/" },
+          { title: "Vacuum lost suction", to: "/diagnose/vacuum/" },
+          { title: "Run the full diagnostic", to: "/diagnose/" },
         ],
       }}
     />

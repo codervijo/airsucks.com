@@ -49,7 +49,7 @@ function LearnPage() {
         <h3 className="text-lg font-semibold">Want to skip the reading?</h3>
         <p className="mt-1 text-sm text-muted-foreground">Run a diagnosis and we'll only explain what's relevant to your problem.</p>
         <Link
-          to="/diagnose"
+          to="/diagnose/"
           className="mt-4 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
         >
           Start diagnosis

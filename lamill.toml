@@ -22,18 +22,24 @@ framework = "tanstack"
 # Declarative content identity for this site.
 # Authored by the human; consumed by rankmill to generate drafts and run audits.
 # Leave fields empty until you have a deliberate answer. Empty is better than wrong.
-site_type = "tool"        # diagnostic tool (v1 = vacuums; odor + airflow follow)
-primary_keyword = "vacuum lost suction"   # the one phrase this site should rank for
+site_type = "tool"        # diagnostic tool — v2 (smells) is the lead silo since 2026-10-02; v1 vacuums paused
+primary_keyword = "musty smell in house"  # the one phrase this site should rank for (changed 2026-10-02, docs/prd.md § v2 decisions log)
 secondary_keywords = [
-    "vacuum not picking up",
-    "vacuum smells like burning",
-    "vacuum overheating",
-    "room smells musty",
-    "musty smell in house",
-    "weak airflow from vents",
+    "how to get rid of musty smell in house",
+    "why does my house smell musty",
+    "musty smell in basement",
+    "why does my room smell musty",
+    "house smells like rotten eggs",
+    "house smells musty but no mold",
+    "house smells like gas but no leak",
+    "my house smells like sewage",
+    "musty smell from AC",
+    "house smells like cat pee but I can't find it",
+    "house smells like dog",
+    "vacuum lost suction",
 ]
-icp = "A homeowner whose vacuum (or home air) suddenly stopped working right — weak suction, a bad smell, poor airflow — who wants to diagnose the cause and decide fix-vs-replace before spending money."
-urgency_trigger = "Their vacuum just failed or a smell won't go away and they're about to buy a replacement or call a pro — they want to know if it's a 5-minute fix first."
-penalty = "Overspending — a new $200+ vacuum or a pro visit for what's often a clogged filter or full bin they could fix free in minutes."
+icp = "A homeowner or renter with a smell in the house they can't explain — musty, rotten eggs, sewage, gas, burning, pet — who wants to know whether it's dangerous, what's causing it, and whether they can fix it themselves before paying a pro."
+urgency_trigger = "The smell just appeared or won't go away, they're worried it's gas, mold, or something electrical, and they're deciding right now whether to leave, call someone, or investigate."
+penalty = "Either a missed hazard (gas, overheating wiring) or wasted money — air fresheners, mold tests, and pro visits for what's often a dry drain trap, an AC drain, or humidity they could fix themselves."
 tone = "practical, plain-English, reassuring; DIY-first but honest about when to call a pro (explicitly not medical advice)"
 law = ""                  # statute or regulation if applicable, else empty

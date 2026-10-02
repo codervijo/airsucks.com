@@ -17,21 +17,21 @@ export const Route = createFileRoute("/")({
 });
 
 const WHAT_SUCKS = [
-  { title: "My vacuum lost suction", to: "/diagnose/vacuum" },
-  { title: "My vacuum smells bad", to: "/diagnose/vacuum" },
-  { title: "My room smells musty", to: "/diagnose/odor" },
-  { title: "My house feels stale", to: "/diagnose/odor" },
-  { title: "My vent barely blows", to: "/diagnose/airflow" },
-  { title: "My room is always dusty", to: "/diagnose/airflow" },
+  { title: "My vacuum lost suction", to: "/diagnose/vacuum/" },
+  { title: "My vacuum smells bad", to: "/diagnose/vacuum/" },
+  { title: "My room smells musty", to: "/smells/musty/room/" },
+  { title: "My house smells like rotten eggs", to: "/smells/rotten-eggs/" },
+  { title: "My vent barely blows", to: "/diagnose/airflow/" },
+  { title: "My room is always dusty", to: "/diagnose/airflow/" },
 ];
 
 const POPULAR = [
-  { title: "Burning smell from vacuum", to: "/diagnose/vacuum" },
-  { title: "Musty bedroom", to: "/diagnose/odor" },
-  { title: "One room hotter than the rest", to: "/diagnose/airflow" },
-  { title: "Bathroom smells after rain", to: "/diagnose/odor" },
-  { title: "Vacuum smells like dog", to: "/diagnose/vacuum" },
-  { title: "Filter choking airflow", to: "/diagnose/airflow" },
+  { title: "Burning smell from vacuum", to: "/diagnose/vacuum/" },
+  { title: "Musty smell in the basement", to: "/smells/musty/basement/" },
+  { title: "One room hotter than the rest", to: "/diagnose/airflow/" },
+  { title: "House smells like sewage", to: "/smells/sewage/" },
+  { title: "Vacuum smells like dog", to: "/diagnose/vacuum/" },
+  { title: "Filter choking airflow", to: "/diagnose/airflow/" },
 ];
 
 const FAQS = [
@@ -93,7 +93,7 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
-              to="/diagnose"
+              to="/diagnose/"
               className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
             >
               Start diagnosis <ArrowRight className="h-4 w-4" />

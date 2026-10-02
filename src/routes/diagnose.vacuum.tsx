@@ -32,9 +32,9 @@ export const Route = createFileRoute("/diagnose/vacuum")({
           { q: "How often should I change vacuum filters?", a: "Most pre-motor foam filters should be washed every 1–3 months and HEPA filters replaced every 6–12 months depending on use and pets." },
         ],
         related: [
-          { title: "Filter choking airflow", to: "/diagnose/airflow" },
-          { title: "Pet smell in the home", to: "/diagnose/odor" },
-          { title: "Run the full diagnostic", to: "/diagnose" },
+          { title: "Filter choking airflow", to: "/diagnose/airflow/" },
+          { title: "House smells like dog", to: "/smells/dog/" },
+          { title: "Run the full diagnostic", to: "/diagnose/" },
         ],
       }}
     />

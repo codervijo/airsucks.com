@@ -6,7 +6,7 @@ export type CategoryConfig = {
   intro: string;
   cards: { title: string; hint?: string }[];
   faqs: { q: string; a: string }[];
-  related: { title: string; to: "/diagnose/vacuum" | "/diagnose/odor" | "/diagnose/airflow" | "/diagnose" }[];
+  related: { title: string; to: string }[];
   slug: string;
 };
 
@@ -16,7 +16,7 @@ export function CategoryPage({ config }: { config: CategoryConfig }) {
       <nav className="text-xs text-muted-foreground">
         <Link to="/" className="hover:text-foreground">Home</Link>
         <span className="mx-1">/</span>
-        <Link to="/diagnose" className="hover:text-foreground">Diagnose</Link>
+        <Link to="/diagnose/" className="hover:text-foreground">Diagnose</Link>
         <span className="mx-1">/</span>
         <span className="capitalize text-foreground">{config.slug}</span>
       </nav>
@@ -25,7 +25,7 @@ export function CategoryPage({ config }: { config: CategoryConfig }) {
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         {config.cards.map((c) => (
-          <SymptomCard key={c.title} title={c.title} hint={c.hint} to="/diagnose" />
+          <SymptomCard key={c.title} title={c.title} hint={c.hint} to="/diagnose/" />
         ))}
       </div>
 
@@ -49,7 +49,7 @@ export function CategoryPage({ config }: { config: CategoryConfig }) {
         <h3 className="text-lg font-semibold">Not sure which one fits?</h3>
         <p className="mt-1 text-sm text-muted-foreground">Run the full diagnostic — it takes about a minute.</p>
         <Link
-          to="/diagnose"
+          to="/diagnose/"
           className="mt-4 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
         >
           Start diagnosis

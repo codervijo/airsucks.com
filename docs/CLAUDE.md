@@ -1,5 +1,7 @@
 # airsucks.com — Build Spec v1
 
+> **Partly superseded (2026-10-02).** The product intent below still holds for v1 (vacuums). The **Tech Stack** (Astro/Vercel), **Data Model** (Supabase), and **Route Taxonomy** sections are superseded: the site is TanStack Start + static prerender on Cloudflare Pages, with content as typed data in `src/content/`. v2 (smells) was pulled ahead of v1. See `AI_AGENTS.md` § Stack, § Smell content architecture, and `docs/prd.md` § v2.A decisions.
+
 ## Project Context
 
 airsucks.com is a diagnostic platform for home air problems. Three pillars, one brand, one engine.

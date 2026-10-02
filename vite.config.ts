@@ -9,6 +9,7 @@ import { execSync } from "node:child_process";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { Plugin } from "vite";
+import { smellPaths } from "./src/content/smells/index";
 
 // ─── v15.C version-stamp ─────────────────────────────────────────────────────
 // Inline copy from ~/work/projects/builder/vite-version-stamp.ts (canonical).
@@ -85,7 +86,7 @@ function versionStamp(): Plugin {
 // Both are on by default and, left on, they discovered a trailing-slash
 // "/diagnose/" (from the diagnose layout route) alongside "/diagnose" and emitted
 // BOTH into the sitemap — a duplicate-URL signal we don't want. Explicit list =
-// deterministic, exactly-8-entry sitemap. Tradeoff: a new route in src/routes must
+// deterministic sitemap. Tradeoff: a new route in src/routes must
 // be added to PAGES below to be prerendered/listed (intentional — see
 // docs/delegate-notes.md).
 //
@@ -102,12 +103,20 @@ const PAGES = [
   { path: "/", sitemap: { priority: 1.0, changefreq: "weekly" } },
   { path: "/diagnose/", sitemap: { priority: 0.9, changefreq: "weekly" } },
   { path: "/diagnose/vacuum/", sitemap: { priority: 0.8, changefreq: "weekly" } },
-  { path: "/diagnose/odor/", sitemap: { priority: 0.8, changefreq: "weekly" } },
+  { path: "/diagnose/smell/", sitemap: { priority: 0.9, changefreq: "weekly" } },
   { path: "/diagnose/airflow/", sitemap: { priority: 0.8, changefreq: "weekly" } },
   { path: "/calculate/", sitemap: { priority: 0.7, changefreq: "weekly" } },
   { path: "/learn/", sitemap: { priority: 0.7, changefreq: "weekly" } },
   { path: "/about/", sitemap: { priority: 0.5, changefreq: "monthly" } },
-] as const;
+  // v2 — /smells/ silo. The hub is listed here; every page in the smell
+  // registry (src/content/smells/index.ts) is appended automatically, so a new
+  // smell page is a data entry, not an edit to this list.
+  { path: "/smells/", sitemap: { priority: 0.9, changefreq: "weekly" } },
+  ...smellPaths().map((path) => ({
+    path,
+    sitemap: { priority: path.split("/").filter(Boolean).length > 2 ? 0.7 : 0.8, changefreq: "monthly" as const },
+  })),
+];
 
 // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
 // @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.

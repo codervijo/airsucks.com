@@ -14,9 +14,11 @@ import { Route as DiagnoseRouteImport } from './routes/diagnose'
 import { Route as CalculateRouteImport } from './routes/calculate'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SmellsIndexRouteImport } from './routes/smells.index'
 import { Route as DiagnoseIndexRouteImport } from './routes/diagnose.index'
+import { Route as SmellsSplatRouteImport } from './routes/smells.$'
 import { Route as DiagnoseVacuumRouteImport } from './routes/diagnose.vacuum'
-import { Route as DiagnoseOdorRouteImport } from './routes/diagnose.odor'
+import { Route as DiagnoseSmellRouteImport } from './routes/diagnose.smell'
 import { Route as DiagnoseAirflowRouteImport } from './routes/diagnose.airflow'
 
 const LearnRoute = LearnRouteImport.update({
@@ -44,19 +46,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SmellsIndexRoute = SmellsIndexRouteImport.update({
+  id: '/smells/',
+  path: '/smells/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiagnoseIndexRoute = DiagnoseIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DiagnoseRoute,
+} as any)
+const SmellsSplatRoute = SmellsSplatRouteImport.update({
+  id: '/smells/$',
+  path: '/smells/$',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnoseVacuumRoute = DiagnoseVacuumRouteImport.update({
   id: '/vacuum',
   path: '/vacuum',
   getParentRoute: () => DiagnoseRoute,
 } as any)
-const DiagnoseOdorRoute = DiagnoseOdorRouteImport.update({
-  id: '/odor',
-  path: '/odor',
+const DiagnoseSmellRoute = DiagnoseSmellRouteImport.update({
+  id: '/smell',
+  path: '/smell',
   getParentRoute: () => DiagnoseRoute,
 } as any)
 const DiagnoseAirflowRoute = DiagnoseAirflowRouteImport.update({
@@ -72,9 +84,11 @@ export interface FileRoutesByFullPath {
   '/diagnose': typeof DiagnoseRouteWithChildren
   '/learn': typeof LearnRoute
   '/diagnose/airflow': typeof DiagnoseAirflowRoute
-  '/diagnose/odor': typeof DiagnoseOdorRoute
+  '/diagnose/smell': typeof DiagnoseSmellRoute
   '/diagnose/vacuum': typeof DiagnoseVacuumRoute
+  '/smells/$': typeof SmellsSplatRoute
   '/diagnose/': typeof DiagnoseIndexRoute
+  '/smells/': typeof SmellsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -82,9 +96,11 @@ export interface FileRoutesByTo {
   '/calculate': typeof CalculateRoute
   '/learn': typeof LearnRoute
   '/diagnose/airflow': typeof DiagnoseAirflowRoute
-  '/diagnose/odor': typeof DiagnoseOdorRoute
+  '/diagnose/smell': typeof DiagnoseSmellRoute
   '/diagnose/vacuum': typeof DiagnoseVacuumRoute
+  '/smells/$': typeof SmellsSplatRoute
   '/diagnose': typeof DiagnoseIndexRoute
+  '/smells': typeof SmellsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -94,9 +110,11 @@ export interface FileRoutesById {
   '/diagnose': typeof DiagnoseRouteWithChildren
   '/learn': typeof LearnRoute
   '/diagnose/airflow': typeof DiagnoseAirflowRoute
-  '/diagnose/odor': typeof DiagnoseOdorRoute
+  '/diagnose/smell': typeof DiagnoseSmellRoute
   '/diagnose/vacuum': typeof DiagnoseVacuumRoute
+  '/smells/$': typeof SmellsSplatRoute
   '/diagnose/': typeof DiagnoseIndexRoute
+  '/smells/': typeof SmellsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,9 +125,11 @@ export interface FileRouteTypes {
     | '/diagnose'
     | '/learn'
     | '/diagnose/airflow'
-    | '/diagnose/odor'
+    | '/diagnose/smell'
     | '/diagnose/vacuum'
+    | '/smells/$'
     | '/diagnose/'
+    | '/smells/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -117,9 +137,11 @@ export interface FileRouteTypes {
     | '/calculate'
     | '/learn'
     | '/diagnose/airflow'
-    | '/diagnose/odor'
+    | '/diagnose/smell'
     | '/diagnose/vacuum'
+    | '/smells/$'
     | '/diagnose'
+    | '/smells'
   id:
     | '__root__'
     | '/'
@@ -128,9 +150,11 @@ export interface FileRouteTypes {
     | '/diagnose'
     | '/learn'
     | '/diagnose/airflow'
-    | '/diagnose/odor'
+    | '/diagnose/smell'
     | '/diagnose/vacuum'
+    | '/smells/$'
     | '/diagnose/'
+    | '/smells/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -139,6 +163,8 @@ export interface RootRouteChildren {
   CalculateRoute: typeof CalculateRoute
   DiagnoseRoute: typeof DiagnoseRouteWithChildren
   LearnRoute: typeof LearnRoute
+  SmellsSplatRoute: typeof SmellsSplatRoute
+  SmellsIndexRoute: typeof SmellsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -178,12 +204,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/smells/': {
+      id: '/smells/'
+      path: '/smells'
+      fullPath: '/smells/'
+      preLoaderRoute: typeof SmellsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diagnose/': {
       id: '/diagnose/'
       path: '/'
       fullPath: '/diagnose/'
       preLoaderRoute: typeof DiagnoseIndexRouteImport
       parentRoute: typeof DiagnoseRoute
+    }
+    '/smells/$': {
+      id: '/smells/$'
+      path: '/smells/$'
+      fullPath: '/smells/$'
+      preLoaderRoute: typeof SmellsSplatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/diagnose/vacuum': {
       id: '/diagnose/vacuum'
@@ -192,11 +232,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiagnoseVacuumRouteImport
       parentRoute: typeof DiagnoseRoute
     }
-    '/diagnose/odor': {
-      id: '/diagnose/odor'
-      path: '/odor'
-      fullPath: '/diagnose/odor'
-      preLoaderRoute: typeof DiagnoseOdorRouteImport
+    '/diagnose/smell': {
+      id: '/diagnose/smell'
+      path: '/smell'
+      fullPath: '/diagnose/smell'
+      preLoaderRoute: typeof DiagnoseSmellRouteImport
       parentRoute: typeof DiagnoseRoute
     }
     '/diagnose/airflow': {
@@ -211,14 +251,14 @@ declare module '@tanstack/react-router' {
 
 interface DiagnoseRouteChildren {
   DiagnoseAirflowRoute: typeof DiagnoseAirflowRoute
-  DiagnoseOdorRoute: typeof DiagnoseOdorRoute
+  DiagnoseSmellRoute: typeof DiagnoseSmellRoute
   DiagnoseVacuumRoute: typeof DiagnoseVacuumRoute
   DiagnoseIndexRoute: typeof DiagnoseIndexRoute
 }
 
 const DiagnoseRouteChildren: DiagnoseRouteChildren = {
   DiagnoseAirflowRoute: DiagnoseAirflowRoute,
-  DiagnoseOdorRoute: DiagnoseOdorRoute,
+  DiagnoseSmellRoute: DiagnoseSmellRoute,
   DiagnoseVacuumRoute: DiagnoseVacuumRoute,
   DiagnoseIndexRoute: DiagnoseIndexRoute,
 }
@@ -233,6 +273,8 @@ const rootRouteChildren: RootRouteChildren = {
   CalculateRoute: CalculateRoute,
   DiagnoseRoute: DiagnoseRouteWithChildren,
   LearnRoute: LearnRoute,
+  SmellsSplatRoute: SmellsSplatRoute,
+  SmellsIndexRoute: SmellsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

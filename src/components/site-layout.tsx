@@ -15,10 +15,11 @@ export function SiteLayout() {
 
 function SiteHeader() {
   const links = [
-    { to: "/diagnose", label: "Diagnose" },
-    { to: "/calculate", label: "Calculate" },
-    { to: "/learn", label: "Learn" },
-    { to: "/about", label: "About" },
+    { to: "/diagnose/", label: "Diagnose" },
+    { to: "/smells/", label: "Smells" },
+    { to: "/calculate/", label: "Calculate" },
+    { to: "/learn/", label: "Learn" },
+    { to: "/about/", label: "About" },
   ] as const;
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur">
@@ -42,7 +43,7 @@ function SiteHeader() {
           ))}
         </nav>
         <Link
-          to="/diagnose"
+          to="/diagnose/"
           className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
         >
           Start diagnosis
@@ -55,8 +56,8 @@ function SiteHeader() {
 function SiteFooter() {
   return (
     <footer className="mt-16 border-t border-border/60 bg-muted/30">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">
-        <div>
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-12 md:grid-cols-5">
+        <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-2 font-semibold">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Wind className="h-4 w-4" />
@@ -68,17 +69,25 @@ function SiteFooter() {
           </p>
         </div>
         <FooterCol title="Diagnose" links={[
-          { to: "/diagnose", label: "All diagnostics" },
-          { to: "/diagnose/vacuum", label: "Vacuum" },
-          { to: "/diagnose/odor", label: "Odors" },
-          { to: "/diagnose/airflow", label: "Airflow" },
+          { to: "/diagnose/", label: "All diagnostics" },
+          { to: "/diagnose/vacuum/", label: "Vacuum" },
+          { to: "/diagnose/smell/", label: "Smell diagnostic" },
+          { to: "/diagnose/airflow/", label: "Airflow" },
+        ]} />
+        <FooterCol title="Smells" links={[
+          { to: "/smells/", label: "All smells" },
+          { to: "/smells/musty/", label: "Musty smell" },
+          { to: "/smells/rotten-eggs/", label: "Rotten eggs" },
+          { to: "/smells/sewage/", label: "Sewage" },
+          { to: "/smells/gas/", label: "Smell gas?" },
+          { to: "/smells/burning-plastic/", label: "Burning plastic" },
         ]} />
         <FooterCol title="Tools" links={[
-          { to: "/calculate", label: "Calculators" },
-          { to: "/learn", label: "Learn" },
+          { to: "/calculate/", label: "Calculators" },
+          { to: "/learn/", label: "Learn" },
         ]} />
         <FooterCol title="Company" links={[
-          { to: "/about", label: "About" },
+          { to: "/about/", label: "About" },
         ]} />
       </div>
       <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">

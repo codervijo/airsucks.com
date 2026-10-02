@@ -109,3 +109,38 @@ the stub removal.)
   `<meta name="description">`, and 145–420 words of visible body text.
 - `dist/client/sitemap.xml` lists exactly the 8 routes (no missing, no extras,
   no trailing-slash dupes).
+
+## 2026-10-02 — Local container builds: use pnpm 10, not the image's pnpm 12
+
+**Symptom:** in the `sites1` image, `pnpm install --frozen-lockfile` (pnpm 12.5)
+fails with `ERR_PNPM_IGNORED_BUILDS`. It then writes a root-owned
+`pnpm-workspace.yaml` stub (`allowBuilds: esbuild: set this to true or false`),
+and `vite build` dies with `Rollup failed to resolve import "@tanstack/query-core"`.
+
+**Cause:** pnpm 11+ no longer reads the `package.json` `"pnpm"` field
+(`onlyBuiltDependencies`), and it ignores `.npmrc`'s `shamefully-hoist`. That
+gives a strict, non-hoisted layout, which this stack can't resolve (see
+`.npmrc`). The repo's lockfile is pnpm-10 format (it carries `libc:` fields).
+pnpm 9 also works but strips those fields, so it churns the lockfile.
+
+**Working recipe** (clean `node_modules` matters — a pnpm-12 layout lingers):
+```bash
+docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app sites1 bash -lc \
+  'export VOLTA_HOME=/root/.volta; export PATH=$VOLTA_HOME/bin:$PATH;
+   rm -rf node_modules; npx -y pnpm@10 install --frozen-lockfile && npx -y pnpm@10 build;
+   chown -R 1000:1000 dist node_modules'
+```
+Then `node scripts/seo-audit.mjs` (in the same container — host node is v12)
+and `./node_modules/.bin/vitest run`. Delete any stray `pnpm-workspace.yaml`
+a pnpm-12 run leaves behind.
+
+**Also learned while building v2:**
+- `trailingSlash: "always"` (in `src/router.tsx`) makes the generated
+  `routeTree.gen.ts` type every route with its slash, so `<Link to="/x">`
+  literals fail `tsc`. Use `to="/x/"`.
+- Route **loaders aren't code-split**. A static import of a big data module in
+  a loader lands in the main bundle on every page. `smells.$.tsx` imports
+  the registry dynamically for that reason; it was +34 KB gz on every page
+  before the fix.
+- Prerendered pages + client-side navigation into an async loader: tests must
+  wait for the new H1 or title, not just the URL.

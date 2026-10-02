@@ -77,8 +77,8 @@ const RESULTS: Record<string, DiagnosticResult> = {
     toolsParts: ["Replacement belt", "Replacement filter", "Scissors or seam ripper", "Compressed air"],
     callPro: ["Smoke appears", "Electrical smell persists after cleaning", "Vacuum trips a circuit breaker"],
     related: [
-      { title: "Vacuum lost suction", to: "/diagnose/vacuum" },
-      { title: "Filter clogged", to: "/diagnose/vacuum" },
+      { title: "Vacuum lost suction", to: "/diagnose/vacuum/" },
+      { title: "Filter clogged", to: "/diagnose/vacuum/" },
     ],
   },
   "bedroom-musty": {
@@ -100,8 +100,8 @@ const RESULTS: Record<string, DiagnosticResult> = {
     toolsParts: ["Hygrometer", "HVAC filter (correct MERV)", "Dehumidifier", "Enzyme cleaner"],
     callPro: ["Visible mold growth larger than a dinner plate", "Persistent wet drywall", "Sewage or gas smell"],
     related: [
-      { title: "House smells stale", to: "/diagnose/odor" },
-      { title: "Vent barely blows", to: "/diagnose/airflow" },
+      { title: "Musty smell in the house", to: "/smells/musty/" },
+      { title: "Vent barely blows", to: "/diagnose/airflow/" },
     ],
   },
   "vacuum-weak-suction": {
@@ -122,8 +122,8 @@ const RESULTS: Record<string, DiagnosticResult> = {
     toolsParts: ["Replacement filter", "Replacement hose", "Soft brush"],
     callPro: ["Motor whines or won't start", "Sparking from the motor housing"],
     related: [
-      { title: "Vacuum smells like burning", to: "/diagnose/vacuum" },
-      { title: "Brush not spinning", to: "/diagnose/vacuum" },
+      { title: "Vacuum smells like burning", to: "/diagnose/vacuum/" },
+      { title: "Brush not spinning", to: "/diagnose/vacuum/" },
     ],
   },
   "vent-weak": {
@@ -144,8 +144,8 @@ const RESULTS: Record<string, DiagnosticResult> = {
     toolsParts: ["HVAC filter", "Foil mastic tape", "Anemometer (optional)"],
     callPro: ["Ice on the indoor coil", "Burning smell from the air handler", "No air movement at all"],
     related: [
-      { title: "One room hotter than the rest", to: "/diagnose/airflow" },
-      { title: "Return air problem", to: "/diagnose/airflow" },
+      { title: "One room hotter than the rest", to: "/diagnose/airflow/" },
+      { title: "Return air problem", to: "/diagnose/airflow/" },
     ],
   },
   generic: {
@@ -166,7 +166,7 @@ const RESULTS: Record<string, DiagnosticResult> = {
     toolsParts: ["HVAC filter", "Hygrometer", "Air purifier"],
     callPro: ["Symptoms persist for weeks", "You suspect mold or combustion gases"],
     related: [
-      { title: "Browse all diagnostics", to: "/diagnose" },
+      { title: "Browse all diagnostics", to: "/diagnose/" },
     ],
   },
 };
