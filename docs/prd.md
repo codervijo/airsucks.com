@@ -227,7 +227,7 @@ Goal: measure whether the strategy is working before investing more.
 
 ## v2 — Smells & odor diagnosis (Quality pillar, pulled forward)
 
-**Status:** v2.A–E built and validated locally 2026-10-02 (not yet deployed); v2.F–L planned — see § v2 decisions log. Pulled ahead of v1 by
+**Status:** v2.A–F done 2026-10-02 (not yet deployed); v2.G–J queued — v2.G blocks deploy. v2 is scoped to *prove* the smell silo (build, deploy, measure, decide); scale-out moved to v3, monetization to v4. Pulled ahead of v1 by
 operator direction; the old "gated on v1 Month-6 thresholds" condition
 is waived.
 
@@ -266,13 +266,11 @@ safe checks → fix → when DIY stops → which trade to call.
 | v2.C | ☑ | **`/smells/` silo, Phase-1 pages.** Hub plus 12 problem pages (§ v2 URL inventory). One splat route renders every page from data. Each page has: quick answer, safety block where relevant, ranked likely causes, a distinguishing-signs table, a decision path, safe checks, fixes, when DIY stops, who to call, urgency, FAQ, and related pages. |
 | v2.D | ☑ | **`/diagnose/smell/` interactive diagnostic.** Steps: odor family → where → when → observations → ranked causes, red-flag override, safe checks, next action, links into `/smells/` pages. Deterministic scoring over the same cause library (no ML, no LLM at runtime). |
 | v2.E | ☑ | **Integration, migration, validation.** Header, footer and homepage entry points; `/diagnose/odor/` 301 → `/diagnose/smell/`; site-wide `trailingSlash: 'always'`; a post-build SEO audit script (`scripts/seo-audit.mjs`) checking titles, H1s, metas, canonicals, schema, broken links, sitemap parity and near-duplicate detection; unit tests for data integrity and the engine. |
-| v2.F | ☐ | **Credibility cleanup (blocks deploy).** Remove the non-functional homepage email capture; replace the disabled "Find local pros (coming soon)" button with the cause's real trade guidance; add a mobile header menu with Smells; pin CI to pnpm 10 to match the lockfile. |
-| v2.G | ☐ | **Deploy + indexing push.** Deploy; verify `/diagnose/odor/` 301 and the 22 sitemap URLs live; resubmit the sitemap; Request Indexing for `/smells/` + the top-5 target pages; IndexNow ping; confirm `lamill.toml [content]` (updated 2026-10-02) is picked up by rankmill. |
-| v2.H | ☐ | **Soak + measure (28 days after deploy).** Search Console per page: indexed state, impressions, positions, queries. Fill in the Result for the 2026-10-02 `growth.md` entry. Decide the v2.J cluster from the data. |
-| v2.I | ☐ | **Cause pages + per-page content chunks.** `/smells/causes/<cause>/` for the 44 library causes. Cause cards on odor pages get shorter and link to their cause page. Content data is code-split per page, since the silo passes ~60 pages here. |
-| v2.J | ☐ | **Second ring of odor pages**, chosen by v2.H data from the shortlist in § v2.F–v2.L phase detail. Each page is one data file and must pass the audit's similarity check. |
-| v2.K | ☐ | **v2 continue/stop review.** Compare against v2.H; recommend scaling, holding, or returning to v1. |
-| v2.L | ☐ | **"Who to call" lead path** — gated: only after v2.K says continue *and* smell pages show commercial queries in GSC. Partner choice happens then. |
+| v2.F | ☑ | **Credibility cleanup (2026-10-02).** Removed the non-functional homepage email capture; replaced the disabled "Find local pros (coming soon)" button with per-result who-to-call guidance; removed the fake "Find it" part links + affiliate disclosure (no affiliate links exist); fixed the legacy wizard's mold threshold to EPA's ~10 sq ft; added a mobile header menu (native `<details>`); CI pinned to pnpm 10. |
+| v2.G | ☐ | **Retire placeholder pages (blocks deploy).** `/learn/` and `/calculate/` are whole "Coming soon" pages, live and indexed. `/learn/` becomes the guides index, listing the real `/smells/` guides by family. `/calculate/` drops out of nav, footer and sitemap and gets `noindex` until v5 (Engineering) builds real calculators. |
+| v2.H | ☐ | **Deploy + indexing push.** Deploy; verify `/diagnose/odor/` 301 and every sitemap URL live; resubmit the sitemap; Request Indexing for `/smells/` + the top-5 target pages; IndexNow ping; confirm `lamill.toml [content]` (updated 2026-10-02) is picked up by rankmill. |
+| v2.I | ☐ | **Soak + measure (28 days after deploy).** Search Console per page: indexed state, impressions, positions, queries. Fill in the Result for the 2026-10-02 `growth.md` entry. |
+| v2.J | ☐ | **Continue/stop review.** From v2.I data: start v3 (scale smells), hold, or resume v1 (vacuums). Closes v2. |
 
 ### v2.A decisions
 
@@ -347,7 +345,7 @@ below can be overridden; overriding one moves the affected phase.
 - **"Find local pros (coming soon)" → REPLACE (v2.F).** Show the
   trade-to-call guidance the cause data already has. A disabled
   "coming soon" button is a dead end.
-- **Lead-gen partner → DEFERRED to v2.L.** It's gated on traffic, so
+- **Lead-gen partner → DEFERRED to v4.** It's gated on traffic, so
   no partner is chosen until there is something to monetize.
 - **Mobile nav → BUILD (v2.F).** On phones the header shows only
   "Start diagnosis", so the silo is invisible on the device most
@@ -361,30 +359,48 @@ below can be overridden; overriding one moves the affected phase.
   - boxwood shrubs smelling like cat pee
   - the gas odorant reading as "skunky"
 
-  A sourcing pass happens in v2.I (cause pages need citations anyway).
-- **Order: deploy before building more (v2.G → v2.H before v2.I/J).**
+  A sourcing pass happens in v3.B (cause pages need citations anyway).
+- **Placeholder pages → `/learn/` repurposed, `/calculate/` noindexed
+  (v2.G).** Found after v2.F. Both are "Coming soon" pages with no
+  real content. `/learn/` can carry real content today (the smell
+  guides). The calculators belong to the Engineering pillar (v5), so
+  `/calculate/` is hidden rather than faked. Not redirected: it keeps
+  its URL for v5.
+- **Tier split (operator, 2026-10-02): v2 proves, v3 scales, v4
+  monetizes.** v2 keeps only what's needed to ship Phase 1 and judge
+  it (F–I). Cause pages, per-page chunks and the second ring of odor
+  pages → v3. The who-to-call lead path → v4. The Engineering pillar
+  (formerly v3) → v5.
+- **Order: deploy before building more (v2.H → v2.I → v2.J before v3).**
   Phase-1 pages need indexing time, and their data should pick the
   next cluster. Building more first risks scaling the wrong family.
 
 ### v2 open items (operator)
 
-- None blocking. The v2.L partner choice is deliberately deferred.
+- None blocking. The v4 partner choice is deliberately deferred.
 
-### v2.F–v2.L phase detail
+### v2.F–v2.J phase detail
 
-**v2.F — Credibility cleanup (blocks deploy).** Pre-existing
-non-functional UI ships to every visitor, so it goes before any
-deploy:
-- Homepage: delete `EmailCapture` (`src/routes/index.tsx`).
-- `ProHelpCard` (`src/components/diagnostic-cards.tsx`): replace the
-  disabled button with "Who to call" text drawn from the result.
-- Mobile header: a disclosure menu (Diagnose · Smells · Calculate ·
-  Learn · About), with no JS-only content and the links in the HTML.
-- `.github/workflows/ci.yml`: `pnpm/action-setup` version 9 → 10.
-- Gates: `pnpm test`, build, `pnpm seo:audit` at 0 errors, and the
-  Playwright mobile pass.
+**v2.F — Credibility cleanup — done 2026-10-02.**
+- Gates: `tsc` 0 errors, 21 tests passing, build of 22 prerendered
+  pages, SEO audit 0/0.
+- Playwright mobile pass: no overflow or console errors on 19 pages,
+  the menu navigates and closes, and no dead buttons in the results.
 
-**v2.G — Deploy + indexing push.** Deploying is the operator's call.
+**v2.G — Retire placeholder pages.**
+- `/learn/`: replace the "Coming soon" cards with a guides index built
+  from the smell registry (one source of truth, so it never goes
+  stale). Keep its URL, title and canonical. Retitle the meta to
+  match.
+- `/calculate/`: remove it from header, footer, mobile menu and
+  homepage links; take it out of `PAGES`, which drops it from the
+  sitemap; add `<meta name="robots" content="noindex">`. Keep the
+  route for v5.
+- Audit: it must not flag the noindexed page. The audit's sitemap
+  parity check needs an allowlist for intentionally unlisted pages.
+- Gates as for v2.F.
+
+**v2.H — Deploy + indexing push.** Deploying is the operator's call.
 After deploy:
 - `curl -sI https://airsucks.com/diagnose/odor/` returns 301 →
   `/diagnose/smell/`.
@@ -396,28 +412,57 @@ After deploy:
   `/smells/gas-but-no-leak/` and `/smells/musty/no-visible-mold/`.
 - Ping IndexNow.
 
-**v2.H — Soak + measure.** At deploy +28 days, use
+**v2.I — Soak + measure.** At deploy +28 days, use
 `uv run portfolio project seo airsucks.com --refresh` plus GSC page
 and query exports. Record in `growth.md`:
 - indexed count for `/smells/*`
 - impressions and position per page
 - which odor family surfaces first
-- the queries we don't have pages for (input to v2.J)
+- the queries we don't have pages for (input to v3.C)
 
-**v2.I — Cause pages + per-page chunks.**
+**v2.J — Continue/stop review.** Outcomes:
+- (a) `/smells/` pages indexed and earning impressions → open v3;
+- (b) indexed but no impressions → hold, and extend the soak one more
+  28-day window;
+- (c) not indexed → diagnose indexing before any new content.
+
+The v1 Month-6 kill switch stays as written for v1.
+
+---
+
+## v3 — Smells at scale
+
+**Status:** not started. Gated on v2.J outcome (a).
+
+Grow the `/smells/` silo from 13 to roughly 60+ pages without thin or
+near-duplicate content. Ordered by what Phase 1 taught.
+
+### v3 phase table
+
+| Phase | Status | Feature |
+|---|---|---|
+| v3.A | ☐ | **Kickoff / decisions lock.** Read v2.I data: which family earns impressions, which queries lack pages. Lock the v3.C shortlist and the cause-page URL scheme. |
+| v3.B | ☐ | **Cause pages + per-page content chunks.** `/smells/causes/<cause>/` for the 44 library causes; shorter cause cards on odor pages that link to them; per-page code-split content; citations for the flagged claims (§ v2 decisions log). |
+| v3.C | ☐ | **Second ring of odor pages**, chosen in v3.A from the shortlist below. |
+| v3.D | ☐ | **Soak + measure.** Search Console at +28 days. Also decide whether v4 starts (needs commercial queries in GSC). |
+
+### v3 phase detail
+
+**v3.B — Cause pages + per-page chunks.**
 - Route `/smells/causes/$cause/`, rendered from `CAUSES`.
 - Each page gets: what it is, signs, safe checks, fixes, DIY limit,
   who to call, and "smells this causes" (back-links to every odor
   page that ranks it).
-- Odor-page cause cards drop the full checks/fixes and link instead,
-  which lowers sibling-page similarity.
-- Content split per page via a path-keyed dynamic import.
-- Add citations for the claims flagged in the decisions log.
+- Odor-page cause cards drop the full checks/fixes and link instead.
+  That lowers sibling-page similarity, which was 0.26 at its highest
+  in v2.
+- Content split per page via a path-keyed dynamic import (today all
+  smell content is one 32 KB gz chunk).
 - Done when: audit clean, max similarity under 0.20, and each smell
-  page loads only its own content chunk.
+  page loads only its own content.
 
-**v2.J — Second ring.** Shortlist (operator Ahrefs data first,
-v2.H queries second):
+**v3.C — Second ring.** Shortlist (operator Ahrefs data first, v2.I
+queries second):
 - sewer smell in bathroom
 - musty smell in closet / clothes
 - house smells after rain
@@ -428,21 +473,33 @@ v2.H queries second):
 - house smells like urine (no pets)
 
 Intent-overlap check against existing pages before writing: merge
-rather than duplicate.
-
-**v2.K — Continue/stop review.** Inputs: v2.H plus 4 more weeks.
-Recommend scaling v2, holding, or resuming v1 (vacuum). The v1
-Month-6 kill switch stays as written for v1.
-
-**v2.L — Lead path.** Only if v2.K says continue *and* GSC shows
-commercial queries ("who to call…", "… near me", "… cost"). Choose the
-partner or network then, and add a PRD row for the integration.
+rather than duplicate. Each page is one data file in
+`src/content/smells/pages/`, plus a registry line.
 
 ---
 
-## v3 — Engineering pillar (months 12–18, speculative)
+## v4 — "Who to call" lead path (monetization)
 
-**Status:** not started. Gated on v2.
+**Status:** not started. Gated on v3.D showing commercial queries in
+GSC ("who to call…", "… near me", "… cost") on smell pages.
+
+Signal so far: *who to call for musty smell in house* — 300/mo, KD 0,
+CPC ~$2.50 (operator Ahrefs data). The who-to-call blocks already on
+every smell page are the natural placement.
+
+### v4 phase table
+
+| Phase | Status | Feature |
+|---|---|---|
+| v4.A | ☐ | **Kickoff / decisions lock.** Partner or network choice (lead-gen network vs. direct local trades vs. affiliate), disclosure wording, which trades/pages qualify, and how to keep safety blocks free of monetization. |
+| v4.B | ☐ | **Integration** on the who-to-call blocks of qualifying pages and the diagnostic result. |
+| v4.C | ☐ | **Measure.** Clicks, leads, revenue per page; keep or remove. |
+
+---
+
+## v5 — Engineering pillar (speculative)
+
+**Status:** not started. Gated on v3/v4 outcomes.
 
 Calculators and sizing tools for CFM, duct sizing, return air, room
 balance. Routes under `/diagnose/airflow/...` and `/calculate/...`.

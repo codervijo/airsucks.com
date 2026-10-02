@@ -8,7 +8,7 @@ airsucks.com is a diagnostic platform for home air problems. Three pillars, one 
 
 - **Pillar A — Machines (v1, this spec):** vacuums first; later air purifiers, dehumidifiers, HVAC, fans
 - **Pillar B — Quality (v2, ~months 6–12):** odors, mold, IAQ, ventilation
-- **Pillar C — Engineering (v3, ~months 12–18):** CFM, duct sizing, return air, room balance
+- **Pillar C — Engineering (now v5 — see `docs/prd.md`):** CFM, duct sizing, return air, room balance
 
 This document specs **v1 only: the vacuum diagnostic engine**. The architecture must be pillar-agnostic from day one so v2 and v3 reuse the same engine, data model, and SEO infrastructure without rewrites.
 

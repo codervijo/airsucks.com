@@ -5,6 +5,8 @@ export type DiagnosticResult = {
   diyChecks: string[];
   toolsParts: string[];
   callPro: string[];
+  /** Which trade to call if the DIY checks don't fix it. */
+  whoToCall: { trade: string; when: string }[];
   related: { title: string; to: string }[];
 };
 
@@ -74,8 +76,27 @@ const RESULTS: Record<string, DiagnosticResult> = {
       "Clean or replace the filter",
       "Let the motor cool for 30+ minutes before retesting",
     ],
-    toolsParts: ["Replacement belt", "Replacement filter", "Scissors or seam ripper", "Compressed air"],
-    callPro: ["Smoke appears", "Electrical smell persists after cleaning", "Vacuum trips a circuit breaker"],
+    toolsParts: [
+      "Replacement belt",
+      "Replacement filter",
+      "Scissors or seam ripper",
+      "Compressed air",
+    ],
+    callPro: [
+      "Smoke appears",
+      "Electrical smell persists after cleaning",
+      "Vacuum trips a circuit breaker",
+    ],
+    whoToCall: [
+      {
+        trade: "Vacuum or appliance repair shop",
+        when: "the belt and brush roll are fine but it still smells hot",
+      },
+      {
+        trade: "Manufacturer support",
+        when: "it's under warranty — opening the motor housing can void it",
+      },
+    ],
     related: [
       { title: "Vacuum lost suction", to: "/diagnose/vacuum/" },
       { title: "Filter clogged", to: "/diagnose/vacuum/" },
@@ -98,7 +119,18 @@ const RESULTS: Record<string, DiagnosticResult> = {
       "Run a fan or dehumidifier for 24 hours",
     ],
     toolsParts: ["Hygrometer", "HVAC filter (correct MERV)", "Dehumidifier", "Enzyme cleaner"],
-    callPro: ["Visible mold growth larger than a dinner plate", "Persistent wet drywall", "Sewage or gas smell"],
+    callPro: [
+      "Visible mold larger than about 10 sq ft (EPA guidance)",
+      "Persistent wet drywall",
+      "Sewage or gas smell",
+    ],
+    whoToCall: [
+      {
+        trade: "Water-damage or mold remediation company",
+        when: "you find hidden moisture or more than about 10 sq ft of mold",
+      },
+      { trade: "HVAC technician", when: "the smell comes out of the vents" },
+    ],
     related: [
       { title: "Musty smell in the house", to: "/smells/musty/" },
       { title: "Vent barely blows", to: "/diagnose/airflow/" },
@@ -121,6 +153,12 @@ const RESULTS: Record<string, DiagnosticResult> = {
     ],
     toolsParts: ["Replacement filter", "Replacement hose", "Soft brush"],
     callPro: ["Motor whines or won't start", "Sparking from the motor housing"],
+    whoToCall: [
+      {
+        trade: "Vacuum or appliance repair shop",
+        when: "suction is still weak with a clean filter, empty bin, and clear hose",
+      },
+    ],
     related: [
       { title: "Vacuum smells like burning", to: "/diagnose/vacuum/" },
       { title: "Brush not spinning", to: "/diagnose/vacuum/" },
@@ -142,7 +180,14 @@ const RESULTS: Record<string, DiagnosticResult> = {
       "Feel duct connections for leaking air",
     ],
     toolsParts: ["HVAC filter", "Foil mastic tape", "Anemometer (optional)"],
-    callPro: ["Ice on the indoor coil", "Burning smell from the air handler", "No air movement at all"],
+    callPro: [
+      "Ice on the indoor coil",
+      "Burning smell from the air handler",
+      "No air movement at all",
+    ],
+    whoToCall: [
+      { trade: "HVAC technician", when: "a new filter and open dampers don't restore airflow" },
+    ],
     related: [
       { title: "One room hotter than the rest", to: "/diagnose/airflow/" },
       { title: "Return air problem", to: "/diagnose/airflow/" },
@@ -165,9 +210,11 @@ const RESULTS: Record<string, DiagnosticResult> = {
     ],
     toolsParts: ["HVAC filter", "Hygrometer", "Air purifier"],
     callPro: ["Symptoms persist for weeks", "You suspect mold or combustion gases"],
-    related: [
-      { title: "Browse all diagnostics", to: "/diagnose/" },
+    whoToCall: [
+      { trade: "HVAC technician", when: "it's tied to the heating or cooling system" },
+      { trade: "Home inspector", when: "you can't narrow down where it's coming from" },
     ],
+    related: [{ title: "Browse all diagnostics", to: "/diagnose/" }],
   },
 };
 
@@ -180,6 +227,7 @@ export function diagnose(input: {
   if (location === "vacuum" && symptom === "burning") return RESULTS["vacuum-burning"];
   if (location === "vacuum" && symptom === "weak-suction") return RESULTS["vacuum-weak-suction"];
   if (symptom === "musty") return RESULTS["bedroom-musty"];
-  if (symptom === "vent-weak" || (problem === "airflow" && location === "vent")) return RESULTS["vent-weak"];
+  if (symptom === "vent-weak" || (problem === "airflow" && location === "vent"))
+    return RESULTS["vent-weak"];
   return RESULTS.generic;
 }

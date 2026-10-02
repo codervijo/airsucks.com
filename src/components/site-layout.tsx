@@ -1,5 +1,6 @@
+import { useRef } from "react";
 import { Link, Outlet } from "@tanstack/react-router";
-import { Wind } from "lucide-react";
+import { Menu, Wind, X } from "lucide-react";
 
 export function SiteLayout() {
   return (
@@ -28,7 +29,9 @@ function SiteHeader() {
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Wind className="h-4 w-4" />
           </span>
-          <span className="text-base tracking-tight">AirSucks<span className="text-primary">.com</span></span>
+          <span className="text-base tracking-tight">
+            AirSucks<span className="text-primary">.com</span>
+          </span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
@@ -42,14 +45,53 @@ function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <Link
-          to="/diagnose/"
-          className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
-        >
-          Start diagnosis
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/diagnose/"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+          >
+            Start diagnosis
+          </Link>
+          <MobileMenu links={links} />
+        </div>
       </div>
     </header>
+  );
+}
+
+/** Phone-width nav: a native <details> disclosure, so the links are in the
+ *  prerendered HTML and the menu works before hydration. Closes on navigation. */
+function MobileMenu({ links }: { links: readonly { to: string; label: string }[] }) {
+  const ref = useRef<HTMLDetailsElement>(null);
+  const close = () => ref.current?.removeAttribute("open");
+  return (
+    <details ref={ref} className="group relative md:hidden">
+      <summary
+        aria-label="Menu"
+        className="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-md border border-border bg-background [&::-webkit-details-marker]:hidden"
+      >
+        <Menu className="h-5 w-5 group-open:hidden" aria-hidden />
+        <X className="hidden h-5 w-5 group-open:block" aria-hidden />
+      </summary>
+      <nav
+        aria-label="Main"
+        className="absolute right-0 mt-2 w-56 rounded-xl border border-border bg-card p-2 shadow-lg"
+      >
+        <ul>
+          {links.map((l) => (
+            <li key={l.to}>
+              <Link
+                to={l.to}
+                onClick={close}
+                className="block rounded-md px-3 py-2.5 text-sm text-foreground hover:bg-muted"
+              >
+                {l.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </details>
   );
 }
 
@@ -68,30 +110,38 @@ function SiteFooter() {
             Diagnose everything wrong with your air. Practical, plain-English answers.
           </p>
         </div>
-        <FooterCol title="Diagnose" links={[
-          { to: "/diagnose/", label: "All diagnostics" },
-          { to: "/diagnose/vacuum/", label: "Vacuum" },
-          { to: "/diagnose/smell/", label: "Smell diagnostic" },
-          { to: "/diagnose/airflow/", label: "Airflow" },
-        ]} />
-        <FooterCol title="Smells" links={[
-          { to: "/smells/", label: "All smells" },
-          { to: "/smells/musty/", label: "Musty smell" },
-          { to: "/smells/rotten-eggs/", label: "Rotten eggs" },
-          { to: "/smells/sewage/", label: "Sewage" },
-          { to: "/smells/gas/", label: "Smell gas?" },
-          { to: "/smells/burning-plastic/", label: "Burning plastic" },
-        ]} />
-        <FooterCol title="Tools" links={[
-          { to: "/calculate/", label: "Calculators" },
-          { to: "/learn/", label: "Learn" },
-        ]} />
-        <FooterCol title="Company" links={[
-          { to: "/about/", label: "About" },
-        ]} />
+        <FooterCol
+          title="Diagnose"
+          links={[
+            { to: "/diagnose/", label: "All diagnostics" },
+            { to: "/diagnose/vacuum/", label: "Vacuum" },
+            { to: "/diagnose/smell/", label: "Smell diagnostic" },
+            { to: "/diagnose/airflow/", label: "Airflow" },
+          ]}
+        />
+        <FooterCol
+          title="Smells"
+          links={[
+            { to: "/smells/", label: "All smells" },
+            { to: "/smells/musty/", label: "Musty smell" },
+            { to: "/smells/rotten-eggs/", label: "Rotten eggs" },
+            { to: "/smells/sewage/", label: "Sewage" },
+            { to: "/smells/gas/", label: "Smell gas?" },
+            { to: "/smells/burning-plastic/", label: "Burning plastic" },
+          ]}
+        />
+        <FooterCol
+          title="Tools"
+          links={[
+            { to: "/calculate/", label: "Calculators" },
+            { to: "/learn/", label: "Learn" },
+          ]}
+        />
+        <FooterCol title="Company" links={[{ to: "/about/", label: "About" }]} />
       </div>
       <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} AirSucks.com — Not medical advice. Always follow safety instructions.
+        © {new Date().getFullYear()} AirSucks.com — Not medical advice. Always follow safety
+        instructions.
       </div>
     </footer>
   );

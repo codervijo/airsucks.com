@@ -265,7 +265,7 @@ function ResultView({
 
       <div className="grid gap-4 md:grid-cols-2">
         <PartsCard items={result.toolsParts} />
-        <ProHelpCard />
+        <ProHelpCard who={result.whoToCall} />
       </div>
 
       <Section title="Stop and call a pro if">

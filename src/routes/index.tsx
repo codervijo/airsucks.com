@@ -6,9 +6,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "AirSucks.com — Diagnose everything wrong with your air" },
-      { name: "description", content: "Smells, dust, weak airflow, and machines that don't suck right. Answer a few questions and get likely causes, DIY checks, parts, and when to call a pro." },
+      {
+        name: "description",
+        content:
+          "Smells, dust, weak airflow, and machines that don't suck right. Answer a few questions and get likely causes, DIY checks, parts, and when to call a pro.",
+      },
       { property: "og:title", content: "AirSucks.com — Diagnose everything wrong with your air" },
-      { property: "og:description", content: "A diagnostic engine for bad air and broken air machines." },
+      {
+        property: "og:description",
+        content: "A diagnostic engine for bad air and broken air machines.",
+      },
       { property: "og:url", content: "https://airsucks.com/" },
     ],
     links: [{ rel: "canonical", href: "https://airsucks.com/" }],
@@ -35,17 +42,33 @@ const POPULAR = [
 ];
 
 const FAQS = [
-  { q: "How does AirSucks diagnose my air?", a: "You answer 4 short questions about the problem, location, symptom, and conditions. We map your answers to the most common root causes and surface DIY checks, parts, and pro-help signals." },
-  { q: "Is this medical advice?", a: "No. AirSucks helps with air quality and air-moving machines, not health. If you have health symptoms, see a clinician." },
-  { q: "Do I need to create an account?", a: "No. The diagnostic wizard is free and doesn't require signup." },
-  { q: "What if my problem isn't listed?", a: "Pick the closest match. The wizard always returns a sensible general diagnosis with safe DIY checks." },
+  {
+    q: "How does AirSucks diagnose my air?",
+    a: "You answer 4 short questions about the problem, location, symptom, and conditions. We map your answers to the most common root causes and surface DIY checks, parts, and pro-help signals.",
+  },
+  {
+    q: "Is this medical advice?",
+    a: "No. AirSucks helps with air quality and air-moving machines, not health. If you have health symptoms, see a clinician.",
+  },
+  {
+    q: "Do I need to create an account?",
+    a: "No. The diagnostic wizard is free and doesn't require signup.",
+  },
+  {
+    q: "What if my problem isn't listed?",
+    a: "Pick the closest match. The wizard always returns a sensible general diagnosis with safe DIY checks.",
+  },
 ];
 
 function Index() {
   return (
     <div>
       <Hero />
-      <Section id="what-sucks" title="What sucks?" subtitle="Pick what's bothering you and we'll diagnose it.">
+      <Section
+        id="what-sucks"
+        title="What sucks?"
+        subtitle="Pick what's bothering you and we'll diagnose it."
+      >
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {WHAT_SUCKS.map((c) => (
             <SymptomCard key={c.title} title={c.title} to={c.to} />
@@ -56,7 +79,10 @@ function Index() {
       <FlowPreview />
       <Pillars />
 
-      <Section title="Popular diagnostics" subtitle="The questions other people are answering right now.">
+      <Section
+        title="Popular diagnostics"
+        subtitle="The questions other people are answering right now."
+      >
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {POPULAR.map((c) => (
             <SymptomCard key={c.title} title={c.title} to={c.to} />
@@ -68,8 +94,6 @@ function Index() {
         <TrustBox />
       </Section>
 
-      <EmailCapture />
-
       <Section title="Frequently asked questions">
         <FAQ items={FAQS} />
       </Section>
@@ -79,7 +103,10 @@ function Index() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border/60" style={{ background: "var(--gradient-hero)" }}>
+    <section
+      className="relative overflow-hidden border-b border-border/60"
+      style={{ background: "var(--gradient-hero)" }}
+    >
       <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-1 rounded-full bg-primary-soft px-3 py-1 text-xs font-medium text-primary">
@@ -89,7 +116,8 @@ function Hero() {
             Diagnose everything wrong with your air.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Smells, dust, weak airflow, and machines that don't suck right. Answer a few questions and get likely causes, DIY checks, parts/tools, and when to call a pro.
+            Smells, dust, weak airflow, and machines that don't suck right. Answer a few questions
+            and get likely causes, DIY checks, parts/tools, and when to call a pro.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
@@ -137,9 +165,21 @@ function FlowPreview() {
 
 function Pillars() {
   const pillars = [
-    { icon: Wrench, title: "Machines", body: "Vacuums, purifiers, fans, dehumidifiers — diagnose what broke and why." },
-    { icon: Sparkles, title: "Air quality", body: "Odors, dust, stale air, humidity — find the source instead of masking it." },
-    { icon: Wind, title: "Airflow", body: "Vents, ducts, filters, return air, room balance — make air move where it should." },
+    {
+      icon: Wrench,
+      title: "Machines",
+      body: "Vacuums, purifiers, fans, dehumidifiers — diagnose what broke and why.",
+    },
+    {
+      icon: Sparkles,
+      title: "Air quality",
+      body: "Odors, dust, stale air, humidity — find the source instead of masking it.",
+    },
+    {
+      icon: Wind,
+      title: "Airflow",
+      body: "Vents, ducts, filters, return air, room balance — make air move where it should.",
+    },
   ];
   return (
     <Section title="Three pillars" subtitle="Everything we diagnose fits into one of these.">
@@ -153,40 +193,6 @@ function Pillars() {
             <p className="mt-1 text-sm text-muted-foreground">{p.body}</p>
           </div>
         ))}
-      </div>
-    </Section>
-  );
-}
-
-function EmailCapture() {
-  return (
-    <Section>
-      <div className="overflow-hidden rounded-3xl border border-border bg-card p-8 md:p-12">
-        <div className="grid items-center gap-6 md:grid-cols-2">
-          <div>
-            <h3 className="text-2xl font-semibold tracking-tight">Get the home air diagnosis checklist</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              A printable PDF covering odors, dust, airflow, and machine checks. No spam, unsubscribe anytime.
-            </p>
-          </div>
-          <form
-            onSubmit={(e) => { e.preventDefault(); (e.currentTarget as HTMLFormElement).reset(); }}
-            className="flex flex-col gap-2 sm:flex-row"
-          >
-            <input
-              type="email"
-              required
-              placeholder="you@example.com"
-              className="w-full rounded-md border border-border bg-background px-4 py-3 text-sm outline-none ring-primary/30 transition-shadow focus:ring-2"
-            />
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              Send checklist
-            </button>
-          </form>
-        </div>
       </div>
     </Section>
   );

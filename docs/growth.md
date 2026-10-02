@@ -81,4 +81,4 @@ https://search.google.com/search-console directly.
 - **Baseline (2026-10-02, GSC 28d):** site-wide 11 impressions, 0 clicks, avg position 29.8; 7/8 sitemap URLs indexed; 0 `/smells/` URLs (pages didn't exist).
 - **Action:** Added a structured smell knowledge base (44-cause library, 13 problem pages + hub, deterministic smell diagnostic), BreadcrumbList + Article JSON-LD, sitemap 8 → 22 URLs, `/diagnose/odor/` 301 → `/diagnose/smell/`. Targets come from operator Ahrefs research (9K+ keywords, many KD 0–3; see `docs/prd.md` § v2). Post-deploy: submit sitemap, request indexing on the hub + top 5 pages, IndexNow ping.
 - **Result:** TBD — review 2026-10-30 (28 days after deploy; shift the date if deploy slips)
-- **Learning:** TBD — does a cold, recently re-indexed domain rank low-KD smell queries on structured diagnostic content within one GSC window? Which odor family earns impressions first, to steer v2.J?
+- **Learning:** TBD — does a cold, recently re-indexed domain rank low-KD smell queries on structured diagnostic content within one GSC window? Which odor family earns impressions first, to steer v3.C?

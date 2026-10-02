@@ -6,9 +6,10 @@ airsucks.com is a **diagnostic platform for home air problems**. Three pillars, 
 
 - **Pillar A — Machines (v1, paused 2026-10-02 — re-sequenced behind v2):** vacuums first; later air purifiers, dehumidifiers, HVAC, fans
 - **Pillar B — Quality (v2, in progress — pulled forward 2026-10-02):** household smells first (`/smells/` silo + `/diagnose/smell/`), then mold, IAQ, ventilation
-- **Pillar C — Engineering (v3, ~months 12–18):** CFM, duct sizing, return air, room balance
+- **v3 — Smells at scale** (gated on v2's measure-and-review), **v4 — who-to-call lead path** (monetization, gated on v3)
+- **Pillar C — Engineering (v5, speculative):** CFM, duct sizing, return air, room balance
 
-The architecture is pillar-agnostic from day one: the engine evaluates rules over a structured corpus and accepts a generic `DiagnosticInput` / `DiagnosticOutput` schema. v2 and v3 plug in new corpora without engine changes.
+The architecture is pillar-agnostic from day one: the engine evaluates rules over a structured corpus and accepts a generic `DiagnosticInput` / `DiagnosticOutput` schema. later pillars plug in new corpora without engine changes.
 
 Canonical build spec: [`docs/CLAUDE.md`](docs/CLAUDE.md) for v1 product intent; its stack and data-model sections are superseded by § Stack below and `docs/prd.md` § v2.A decisions. Read both before scaffolding pages, data, or agents.
 
@@ -111,7 +112,7 @@ Month 6: if monthly organic sessions < 1,000 **and** zero affiliate conversions,
 
 ## Agent roles
 
-Five roles, scoped to the v1 vacuum diagnostic build. Adapt over time as v2/v3 land.
+Five roles, scoped to the v1 vacuum diagnostic build. Adapt over time as later tiers land.
 
 1. **SEO & Content Strategist**
    - Owns the pSEO grid (150 money pages), internal-link graph, JSON-LD plan (`Article`, `FAQPage`, `HowTo`, `Product`), and GSC ops (verification, sitemap, URL inspection on first 5 money pages).
@@ -184,7 +185,7 @@ See `hybridautopart.com/AI_AGENTS.md` for the full portfolio context — airsuck
 
 Two-level convention (see `sites/portfolio/AI_AGENTS.md` for the canonical statement):
 
-- **`vN`** — major capability tier (SemVer-MAJOR semantics). v1 = vacuum diagnostic engine. v2 = Quality pillar. v3 = Engineering pillar.
+- **`vN`** — major capability tier (SemVer-MAJOR semantics). v1 = vacuum diagnostic engine (paused). v2 = smells, prove it. v3 = smells at scale. v4 = lead path. v5 = Engineering pillar. Tier map: `docs/prd.md`.
 - **`vN.X`** — phase letter within a tier (A, B, C, …). **`vN.A` is always planning / decisions-lock**; build starts at `.B`.
 - **Two levels only — never `vN.X.Y`.** Follow-up work pushes later phase letters down.
 
