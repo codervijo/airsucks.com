@@ -436,7 +436,7 @@ After deploy:
   - ✓ IndexNow pinged 15 new URLs.
   - ☐ **Operator:** Request Indexing (GSC UI only; there's no API) for
     the 6 URLs above.
-  - ☑ **Soft 404s fixed (locally, 2026-10-02; not yet deployed).**
+  - ☑ **Soft 404s fixed — deployed `7d3c2dc` and verified live 2026-10-02.** Unknown URLs return 404 with the noindex not-found page; `/version.json` reports the commit; all 21 sitemap URLs return 200 with self-canonicals; the redirects and noindex pages are unchanged.
     - Cause: Pages treats a deploy with no top-level `404.html` as an
       SPA and answers every unknown URL with `index.html` + 200. That
       also served `/version.json` as HTML, and the version stamp
