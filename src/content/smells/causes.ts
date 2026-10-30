@@ -337,7 +337,7 @@ export const CAUSES: Cause[] = [
       "Anode replacement on a gas or electric heater is usually a plumber job — you're working with gas lines or 240V and a pressurized tank.",
     trade: "plumber",
     urgency: "routine",
-    page: "/smells/rotten-eggs/",
+    page: "/smells/rotten-eggs/water/",
     engine: {
       base: 3,
       locations: { bathroom: 2, kitchen: 2, "near-appliance": 1 },
@@ -359,7 +359,7 @@ export const CAUSES: Cause[] = [
     diyLimit: "Choose treatment from a lab test, not a guess.",
     trade: "plumber",
     urgency: "routine",
-    page: "/smells/rotten-eggs/",
+    page: "/smells/rotten-eggs/water/",
     engine: {
       base: 1,
       timing: { "running-water-or-flushing": 3 },
@@ -1100,7 +1100,7 @@ export const CAUSES: Cause[] = [
     name: "Dead animal in a wall, attic, or crawlspace",
     summary:
       "A mouse, rat, or bird that died inside a wall or ceiling produces a sickly-sweet, rotten smell. It peaks over days and fades over a few weeks.",
-    families: ["sweet-chemical", "rotten-egg"],
+    families: ["sweet-chemical", "rotten-egg", "fishy"],
     signs: [
       "Rotten or sickly-sweet smell concentrated on one wall or ceiling area",
       "Flies appearing indoors; recent rodent activity",
@@ -1115,7 +1115,7 @@ export const CAUSES: Cause[] = [
     diyLimit: "Opening walls or entering attics with insulation: pest control or a handyman.",
     trade: "pest-control",
     urgency: "routine",
-    page: "/smells/rotten-eggs/",
+    page: "/smells/dead-animal/",
     engine: {
       base: 2,
       locations: { "one-room": 2, garage: 2, "crawlspace-or-under-floor": 2, basement: 1 },

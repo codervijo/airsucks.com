@@ -8,13 +8,21 @@ export const rottenEggs: SmellPage = {
   path: "/smells/rotten-eggs/",
   family: "rotten-egg",
   label: "Rotten egg smell",
-  title: "House Smells Like Rotten Eggs? Causes & What to Do",
+  title: "Rotten Egg or Sulfur Smell in House? What to Do",
   description:
-    "A rotten-egg or sulfur smell at home: rule out a gas leak first, then use the hot-vs-cold water test and drain checks to find the real source fast.",
-  h1: "Why your house smells like rotten eggs (and how to find it)",
-  targets: ["house smells like rotten eggs", "rotten egg smell in house", "sulfur smell in house"],
+    "Rotten egg or sulfur smell in the house, with or without gas: rule out a leak first, then use the hot-vs-cold water test and drain checks to find the source.",
+  h1: "Rotten egg or sulfur smell in your house: what it is and how to find it",
+  targets: [
+    "rotten egg smell in house",
+    "sulfur smell in house",
+    "house smells like rotten eggs",
+    "is rotten egg smell in house dangerous",
+    "rotten egg smell in house no gas",
+    "rotten egg smell in house comes and goes",
+    "house smells like rotten eggs at night",
+  ],
   quickAnswer:
-    "Rotten eggs means sulfur: either the odorant added to natural gas and propane, or hydrogen sulfide from drains, water, or bacteria. Treat it as gas until you've ruled that out. If it's strong, sudden, or near a gas appliance, leave and call from outside. If it's faint and tied to water — one drain, or only the hot water — it's almost always a dried-out drain trap or the water heater. A two-glass test (hot vs cold) settles the water question in a minute.",
+    "A rotten egg smell is a sulfur smell: either the odorant added to natural gas and propane, or hydrogen sulfide from drains, water, or bacteria. Treat it as gas until you've ruled that out. If it's strong, sudden, or near a gas appliance, leave and call from outside. If it's faint and tied to water — one drain, or only the hot water — it's almost always a dried-out drain trap or the water heater. A two-glass test (hot vs cold) settles the water question in a minute.",
   urgency: "urgent",
   safety: GAS_SAFETY,
   causes: [
@@ -130,9 +138,30 @@ export const rottenEggs: SmellPage = {
       ],
     },
     {
-      heading: "Fixing a smelly water heater",
+      heading: "Is a rotten egg smell in the house dangerous?",
       body: [
-        "The smell comes from bacteria in the tank reacting with the anode rod, a metal rod that protects the tank from corrosion. Flushing the tank helps for a while. The lasting fix is usually swapping the standard magnesium anode for an aluminum-zinc or powered anode, and sometimes sanitizing the tank. Because it means working on a pressurized tank connected to gas or 240V power, most people have a plumber do it. Don't remove the anode without replacing it — it protects the tank.",
+        "It depends entirely on the source, which is why the page starts with gas. If it's natural gas or propane, yes: the smell is there to warn you of a fire and explosion risk, and you leave before doing anything else.",
+        "If the source is a drain, the water heater, or well water, the gas is hydrogen sulfide. Noses pick it up at very low levels, so a faint whiff mostly tells you a seal or a water system needs attention. It isn't an emergency in itself. A smell that's strong or getting stronger, or anyone feeling unwell, changes that: open windows, get out, and call for help. Never go into a well pit, septic tank, or sump pit to look; hydrogen sulfide can collect in enclosed spaces like these.",
+      ],
+    },
+    {
+      heading: "Rotten egg smell in the house, but no gas",
+      body: [
+        "If the utility has checked and found no leak, or you don't have gas service at all, the sulfur is almost always coming from water. Work through these in order: the two-glass test (hot vs cold), every drain trap, the sink overflows, then any lead-acid batteries. On a private well, test the water. The full elimination order for homes the utility has cleared is on the gas-but-no-leak page.",
+        "Where the smell is strongest tells you a lot. At a tap while water runs, suspect the water. At a drain with the taps off, suspect the drain. In the garage or near a battery backup, suspect the battery. In one spot on a wall, suspect something that died there, which smells more rotten-sweet than pure sulfur.",
+      ],
+    },
+    {
+      heading: "Why the smell comes and goes, or shows up at night",
+      body: [
+        "Sulfur smells track whatever releases them. A water-heater smell appears when hot water runs, so it's worst after a shower or a run of laundry. A dry trap fills when someone uses that fixture, then slowly dries out again. A blocked vent depends on wind and on when toilets are flushed.",
+        "Night is when a house is most closed up: windows shut, fans off, and fewer fixtures being used, so a weak smell builds up instead of being diluted. A rotten-egg smell that shows up only when the furnace or water heater fires deserves a utility check, even if it's faint.",
+      ],
+    },
+    {
+      heading: "When only the water smells",
+      body: [
+        "If the two-glass test points at the water, the hot-water and well-water causes have their own page, with the anode-rod fix, tank sanitizing, and what a water test should cover.",
       ],
     },
   ],
@@ -181,10 +210,15 @@ export const rottenEggs: SmellPage = {
       href: "/smells/gas-but-no-leak/",
       hint: "Elimination order",
     },
+    {
+      title: "Hot water smells like rotten eggs",
+      href: "/smells/rotten-eggs/water/",
+      hint: "Water heater and well water",
+    },
     { title: "House smells like sewage", href: "/smells/sewage/", hint: "Traps, vents, toilets" },
     { title: "Skunk smell in the house", href: "/smells/skunk/", hint: "Also a gas look-alike" },
   ],
-  sources: [SOURCES.agaGas, SOURCES.cpscCo],
+  sources: [SOURCES.agaGas, SOURCES.cpscCo, SOURCES.mdhSulfur],
   diagnose: { family: "rotten-egg" },
-  updated: "2026-10-02",
+  updated: "2026-10-29",
 };

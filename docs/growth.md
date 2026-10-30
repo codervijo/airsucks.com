@@ -116,3 +116,50 @@ https://search.google.com/search-console directly.
   - The order families surface in doesn't match the Ahrefs plan. The primary target (musty) sits at positions 81–100. Rotten eggs (sulfur) and burning plastic surface first. KD 0–3 didn't mean easy ranking for this domain.
   - Google is testing the pages on broad head terms (positions 70–100). The narrow "X but no Y" queries rank best, which supports one-page-per-intent and points v3.C toward situational pages.
   - The gas / rotten-eggs / gas-but-no-leak intent split holds: each draws its own queries.
+
+## 2026-10-29 — v2 pre-review snapshot (deploy +27d): impressions double, still 0 clicks
+- **Status:** active (interim reading of the 2026-10-02 entry; that entry's Result is due 2026-10-30)
+- **KPI:** same as 2026-10-02: impressions, indexed count, and query/page mix for `/smells/*`.
+- **Baseline:** 2026-10-20 snapshot — 102 impressions, 0 clicks, position 63.7, 57 queries.
+- **Action:** No site change. Live check: serving `4301e60`; the spot-checked pages return 200, `/diagnose/odor/` 301s, unknown URLs 404, sitemap 21 URLs. Pulled GSC 28d (2026-09-28 → 2026-10-26) by date, page and query through `portfolio.gsc.query_with_dims`, plus `uv run portfolio project seo airsucks.com --refresh`.
+- **Result (interim):**
+  - Site-wide: **218 impressions, 0 clicks, position ~66.** 94 distinct queries.
+  - Weekly impressions (week starting Monday): 09-28 3 · 10-05 40 · 10-12 72 · 10-19 102. Each week is higher than the last.
+  - Coverage: 9 of the top 10 inspected URLs are indexed. `/diagnose/vacuum/` is back to "Discovered – not indexed" (it was `url_is_unknown_to_google` on 10-20). Sitemap fetched OK 6 days ago.
+  - By page (impressions / avg position):
+    - `/smells/rotten-eggs/` 132 / 72
+    - `/smells/musty/room/` 23 / 69
+    - `/smells/burning-plastic/` 19 / 50
+    - `/smells/musty/basement/` 11 / 86
+    - `/smells/musty/` 10 / 87
+    - `/smells/dog/` 6 / 31
+    - `/smells/gas/` 4 / 54
+    - `/smells/musty/no-visible-mold/` 3 / 30
+    - `/smells/sewage/` 3 / 32
+    - `/smells/cat-pee/` 2 / 10
+    - `/smells/gas-but-no-leak/` 1 / 15
+    - `/smells/skunk/` 1 / 21
+    - `/smells/` 1 / 2
+    - Non-smell pages (`/about/` 13, `/` 8, `/learn/` 7, `/diagnose/` 6) rank 3–8, but only on brand-like queries ("air suck").
+  - Top queries: "rotten egg smell" (16, position 86), "room smells musty" (14, 72), "rotten egg smell in house" (9, 71), "rotten eggs" (8, 85).
+  - Best positions with 2+ impressions:
+    - "burning plastic smell in home" 42
+    - "house smells of rotten eggs" 51
+    - "why does my house smell like rotten eggs" 52
+    - "burnt plastic smell in house" 54
+- **Learning (provisional — feeds the 10-30 review):**
+  - The impression growth is steady, week over week. Positions haven't improved (63.7 → ~66): Google is testing the pages on more queries, but they don't rank higher yet.
+  - Sulfur leads by a wide margin: `/smells/rotten-eggs/` has ~60% of all impressions, spread across many egg/sulfur variants. Musty, the primary target, is still at positions 69–87.
+  - Narrow situational pages rank best but get almost no impressions (gas-but-no-leak 15, cat-pee 10, skunk 21). Situational pages pass the ranking test; the open question is volume.
+  - Leaning toward v2.J (a)/(b): indexed and earning impressions, but nothing ranks close to page 1 yet.
+
+## 2026-10-29 — v3.B + v3.C: build out sulfur and sewer; add fishy, dead-animal, chemical, and musty closet
+- **Status:** active (not deployed yet; the review clock starts on deploy)
+- **KPI:** site-wide GSC impressions (28d); impressions and position for the new URLs; whether `/smells/rotten-eggs/` picks up "sulfur smell in house" queries.
+- **Baseline:** 2026-10-29 snapshot: 218 impressions, 0 clicks, position ~66, 94 queries; 0 impressions on the new URLs (they don't exist yet).
+- **Action:**
+  - v3.B on-page expansions: `/smells/rotten-eggs/` retitled for sulfur, with "dangerous", "no gas" and "comes and goes / at night" sections; `/smells/sewage/` gets a "comes and goes" section; `/smells/cat-pee/` gets the "no cat / litter box" query.
+  - Six new pages from DataForSEO keyword data (docs/prd.md § v3.A decisions): `/smells/sewage/bathroom/`, `/smells/rotten-eggs/water/`, `/smells/fishy/`, `/smells/dead-animal/`, `/smells/chemical/`, `/smells/musty/closet/`.
+  - Sitemap 21 → 27 URLs.
+- **Result:** TBD — review at deploy +28 days.
+- **Learning:** TBD — do deeper pages on the family that's already earning impressions (sulfur) rank faster than new families (fishy, dead animal)?

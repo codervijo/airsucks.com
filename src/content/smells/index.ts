@@ -10,30 +10,42 @@ import { mustyRoom } from "./pages/musty-room";
 import { mustyBasement } from "./pages/musty-basement";
 import { mustyAc } from "./pages/musty-ac";
 import { mustyNoVisibleMold } from "./pages/musty-no-visible-mold";
+import { mustyCloset } from "./pages/musty-closet";
 import { rottenEggs } from "./pages/rotten-eggs";
+import { rottenEggsWater } from "./pages/rotten-eggs-water";
 import { sewage } from "./pages/sewage";
+import { sewageBathroom } from "./pages/sewage-bathroom";
 import { gas } from "./pages/gas";
 import { gasButNoLeak } from "./pages/gas-but-no-leak";
 import { skunk } from "./pages/skunk";
 import { catPee } from "./pages/cat-pee";
 import { dog } from "./pages/dog";
 import { burningPlastic } from "./pages/burning-plastic";
+import { fishy } from "./pages/fishy";
+import { deadAnimal } from "./pages/dead-animal";
+import { chemical } from "./pages/chemical";
 
 /** Order = hub order within a family group (most-searched / most urgent first). */
 export const SMELL_PAGES: SmellPage[] = [
   gas,
   rottenEggs,
+  rottenEggsWater,
   gasButNoLeak,
   burningPlastic,
+  fishy,
   musty,
   mustyRoom,
   mustyBasement,
   mustyAc,
   mustyNoVisibleMold,
+  mustyCloset,
   sewage,
+  sewageBathroom,
   catPee,
   dog,
   skunk,
+  deadAnimal,
+  chemical,
 ];
 
 export const SMELLS_HUB_PATH = "/smells/";
@@ -116,6 +128,11 @@ const HUB_ORDER: { family: OdorFamilyId; heading: string; blurb: string }[] = [
     family: "pet-urine",
     heading: "Pets, urine & animals",
     blurb: "Cat-pee and dog smells — including when you don't have a pet — and skunks.",
+  },
+  {
+    family: "sweet-chemical",
+    heading: "Rotting, sweet & chemical",
+    blurb: "Something died in a wall, or a solvent, glue, or refrigerant smell you can't place.",
   },
 ];
 

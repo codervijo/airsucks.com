@@ -165,6 +165,11 @@ export const mustyRoom: SmellPage = {
   ],
   related: [
     {
+      title: "Musty smell in the closet",
+      href: "/smells/musty/closet/",
+      hint: "Closet walls, storage, and clothes",
+    },
+    {
       title: "Musty smell in the whole house",
       href: "/smells/musty/",
       hint: "If it's not just one room",

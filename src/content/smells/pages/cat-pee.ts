@@ -13,7 +13,8 @@ export const catPee: SmellPage = {
   h1: "House smells like cat pee and you can't find it",
   targets: [
     "house smells like cat pee but I can't find it",
-    "cat pee smell in house no cat",
+    "house smells like cat pee but no cat",
+    "house smells like litter box but no cat",
     "ammonia smell in house",
   ],
   quickAnswer:
@@ -165,6 +166,10 @@ export const catPee: SmellPage = {
       a: "The most common reasons are a previous owner's pet (urine in the carpet pad or subfloor), mice, or boxwood shrubs near open windows. Less often, it's an overheating electrical part — check outlets and fixtures near the smell.",
     },
     {
+      q: "Why does my house smell like a litter box when I don't have a cat?",
+      a: "A litter-box smell is usually urine plus something stale or fecal. With no cat, the usual answer is mice. A colony leaves urine trails and droppings along walls, behind appliances, and in insulation, and the smell is strongest where they nest. Look for droppings first. If there are none, run the UV hunt for a previous owner's pet, and check outlets near the smell in case it's electrical.",
+    },
+    {
       q: "What does an ammonia smell in the house mean?",
       a: "Most often old urine, from pets or rodents, or an overdue litter box. Ammonia-based cleaners also leave the smell. If it's sharp and near something electrical, treat it as possible overheating.",
     },
@@ -192,5 +197,5 @@ export const catPee: SmellPage = {
     { title: "All smells", href: "/smells/", hint: "Browse by odor" },
   ],
   diagnose: { family: "pet-urine" },
-  updated: "2026-10-02",
+  updated: "2026-10-29",
 };

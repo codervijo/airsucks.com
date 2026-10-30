@@ -227,7 +227,7 @@ Goal: measure whether the strategy is working before investing more.
 
 ## v2 — Smells & odor diagnosis (Quality pillar, pulled forward)
 
-**Status:** v2.A–F done 2026-10-02 (not yet deployed); v2.H–J queued. v2 is scoped to *prove* the smell silo (build, deploy, measure, decide); scale-out moved to v3, monetization to v4. Pulled ahead of v1 by
+**Status:** done 2026-10-29. v2.A–H deployed 2026-10-02; v2.I measured; v2.J closed with outcome (a), so v3 is open. v2 is scoped to *prove* the smell silo (build, deploy, measure, decide); scale-out moved to v3, monetization to v4. Pulled ahead of v1 by
 operator direction; the old "gated on v1 Month-6 thresholds" condition
 is waived.
 
@@ -269,8 +269,8 @@ safe checks → fix → when DIY stops → which trade to call.
 | v2.F | ☑ | **Credibility cleanup (2026-10-02).** Removed the non-functional homepage email capture; replaced the disabled "Find local pros (coming soon)" button with per-result who-to-call guidance; removed the fake "Find it" part links + affiliate disclosure (no affiliate links exist); fixed the legacy wizard's mold threshold to EPA's ~10 sq ft; added a mobile header menu (native `<details>`); CI pinned to pnpm 10. |
 | v2.G | ☑ | **Retire placeholder pages (2026-10-02).** `/learn/` and `/calculate/` are whole "Coming soon" pages, live and indexed. `/learn/` becomes the guides index, listing the real `/smells/` guides by family. `/calculate/` drops out of nav, footer and sitemap and gets `noindex` until v5 (Engineering) builds real calculators. |
 | v2.H | ☐ | **Deploy + indexing push.** Deploy; verify `/diagnose/odor/` 301 and every sitemap URL live; resubmit the sitemap; Request Indexing for `/smells/` + the top-5 target pages; IndexNow ping; confirm `lamill.toml [content]` (updated 2026-10-02) is picked up by rankmill. |
-| v2.I | ☐ | **Soak + measure (28 days after deploy).** Search Console per page: indexed state, impressions, positions, queries. Fill in the Result for the 2026-10-02 `growth.md` entry. |
-| v2.J | ☐ | **Continue/stop review.** From v2.I data: start v3 (scale smells), hold, or resume v1 (vacuums). Closes v2. |
+| v2.I | ☑ | **Soak + measure (28 days after deploy).** Search Console per page: indexed state, impressions, positions, queries. Fill in the Result for the 2026-10-02 `growth.md` entry. |
+| v2.J | ☑ | **Continue/stop review.** From v2.I data: start v3 (scale smells), hold, or resume v1 (vacuums). Closes v2. |
 
 ### v2.A decisions
 
@@ -359,7 +359,7 @@ below can be overridden; overriding one moves the affected phase.
   - boxwood shrubs smelling like cat pee
   - the gas odorant reading as "skunky"
 
-  A sourcing pass happens in v3.B (cause pages need citations anyway).
+  A sourcing pass happens in v3.F (cause pages need citations anyway).
 - **Placeholder pages → `/learn/` repurposed, `/calculate/` noindexed
   (v2.G).** Found after v2.F. Both are "Coming soon" pages with no
   real content. `/learn/` can carry real content today (the smell
@@ -472,11 +472,17 @@ and query exports. Record in `growth.md`:
 
 The v1 Month-6 kill switch stays as written for v1.
 
+- **Result (operator, 2026-10-29): outcome (a) → open v3.** At deploy
+  +27 days, 9 of the 10 inspected URLs are indexed, with 218
+  impressions over 28 days. Weekly impressions rose 3 → 40 → 72 → 102,
+  but there are still 0 clicks at average position ~66. Data:
+  `growth.md` 2026-10-29.
+
 ---
 
 ## v3 — Smells at scale
 
-**Status:** not started. Gated on v2.J outcome (a).
+**Status:** v3.A–C done 2026-10-29 (built, not deployed); v3.D–E linkable assets queued.
 
 Grow the `/smells/` silo from 13 to roughly 60+ pages without thin or
 near-duplicate content. Ordered by what Phase 1 taught.
@@ -485,14 +491,63 @@ near-duplicate content. Ordered by what Phase 1 taught.
 
 | Phase | Status | Feature |
 |---|---|---|
-| v3.A | ☐ | **Kickoff / decisions lock.** Read v2.I data: which family earns impressions, which queries lack pages. Lock the v3.C shortlist and the cause-page URL scheme. |
-| v3.B | ☐ | **Cause pages + per-page content chunks.** `/smells/causes/<cause>/` for the 44 library causes; shorter cause cards on odor pages that link to them; per-page code-split content; citations for the flagged claims (§ v2 decisions log). |
-| v3.C | ☐ | **Second ring of odor pages**, chosen in v3.A from the shortlist below. |
-| v3.D | ☐ | **Soak + measure.** Search Console at +28 days. Also decide whether v4 starts (needs commercial queries in GSC). |
+| v3.A | ☑ | **Kickoff / decisions lock (2026-10-29).** Shortlist and order locked from v2.I GSC data + DataForSEO keyword research. New pages go before cause pages (operator). See v3.A decisions below. |
+| v3.B | ☑ | **Expand indexed pages.** Add the GSC/keyword gaps to `/smells/rotten-eggs/`, `/smells/sewage/` and `/smells/cat-pee/`. No new URLs. |
+| v3.C | ☑ | **Second ring of odor pages** (6/6 built 2026-10-29), in v3.A order: `/smells/sewage/bathroom/`, `/smells/rotten-eggs/water/`, `/smells/fishy/`, `/smells/dead-animal/`, then `/smells/chemical/` and `/smells/musty/closet/`. |
+| v3.D | ☐ | **Embeddable smell diagnostic widget.** `/diagnose/smell/` as a copy-paste embed (iframe + snippet) for plumbers, HVAC firms, inspectors and property managers. Every embed carries a visible "Powered by AirSucks" link. Linkable asset #1 (operator, option C, 2026-10-29). |
+| v3.E | ☐ | **Printable "new home smell inspection" checklist.** An HTML page plus a print-ready PDF generated from the smell registry, for buyers, realtors and inspectors. Linkable asset #2. |
+| v3.F | ☐ | **Cause pages + per-page content chunks.** `/smells/causes/<cause>/` for the library causes; shorter cause cards on odor pages that link to them; per-page code-split content; citations for the flagged claims (§ v2 decisions log). |
+| v3.G | ☐ | **Soak + measure.** Search Console at +28 days after the v3.C deploy; referring domains from the v3.D–E assets. Also decide whether v4 starts (needs commercial queries in GSC). |
 
 ### v3 phase detail
 
-**v3.B — Cause pages + per-page chunks.**
+**v3.A decisions (2026-10-29).**
+- **Source:** GSC 28d (2026-09-28 → 10-26) plus DataForSEO related
+  keywords via treg (US, 13 seeds, about $0.18). Volumes are
+  DataForSEO's US monthly estimates; KD is its difficulty score.
+- **Why this order:** sulfur (`/smells/rotten-eggs/`) carries ~60% of
+  impressions, so build out sulfur and sewer first, then two new
+  families with big head queries.
+- **v3.B on-page targets:**
+  - `/smells/rotten-eggs/`: add "sulfur smell in house" (2.9K, KD 0)
+    to the title/H1, plus sections for "is rotten egg smell in house
+    dangerous" (590), "rotten egg smell in house no gas" (480), and
+    "comes and goes" / "at night" (110 each).
+  - `/smells/sewage/`: "sewage smell in house comes and goes" (880).
+  - `/smells/cat-pee/`: "house smells like cat pee but no cat" (320),
+    "litter box smell but no cat" (110).
+- **v3.C pages (main query, vol / KD):**
+  1. `/smells/sewage/bathroom/` — sewer smell in bathroom (4.4K / 0);
+     shower drain smells but not clogged (720); sewer smell in bathroom
+     comes and goes (320); bathroom sink drain smells like sewage (260).
+  2. `/smells/rotten-eggs/water/` — hot water smells like rotten eggs
+     (1.6K / 0); water smells like sulfur when first turned on (260);
+     water smells like rotten eggs how to fix (260); water heater
+     rotten egg smell dangerous (210); cold water (110).
+  3. `/smells/fishy/` — fishy smell in house (1.9K / 0); sudden
+     fishy smell (390); fishy smell not electrical (210).
+  4. `/smells/dead-animal/` — what does a dead mouse smell like
+     (2.4K / 0); my house smells like something died (210); will dead
+     mouse smell go away (110); dead mouse smell but can't find it (90).
+  5. `/smells/chemical/` — acetone smell in house (320); house smells
+     like paint thinner or nail polish (260); ammonia smell (140).
+  6. `/smells/musty/closet/` — how to get rid of musty smell in closet
+     (320); how to get rid of closet smell (210).
+- **Out of scope:** "spiritual meaning" smell queries (off-brand),
+  health-risk queries (sewer gas symptoms, "can it kill you": YMYL),
+  car-AC smells (not the home silo).
+- Dropped from the old shortlist for now: house smells after rain, AC
+  smells like vinegar (590), urine with no pets. Their volume is low or
+  the intent overlaps an existing page.
+
+**v3.D–E — Linkable assets (operator, 2026-10-29, option C).** The
+widget and the checklist reuse the smell data, so they live in v3. The
+three calculators (dehumidifier sizing, bathroom fan CFM, air purifier
+CADR) stay in v5, Engineering. Neither asset earns links without
+outreach, so plan outreach as part of each phase. Details are locked
+when each phase starts.
+
+**v3.F — Cause pages + per-page chunks.**
 - Route `/smells/causes/$cause/`, rendered from `CAUSES`.
 - Each page gets: what it is, signs, safe checks, fixes, DIY limit,
   who to call, and "smells this causes" (back-links to every odor
@@ -505,16 +560,36 @@ near-duplicate content. Ordered by what Phase 1 taught.
 - Done when: audit clean, max similarity under 0.20, and each smell
   page loads only its own content.
 
-**v3.C — Second ring.** Shortlist (operator Ahrefs data first, v2.I
-queries second):
-- sewer smell in bathroom
-- musty smell in closet / clothes
-- house smells after rain
-- AC smells like vinegar
-- fishy smell in house (electrical)
-- dead animal smell in wall
-- new carpet / paint chemical smell
-- house smells like urine (no pets)
+**v3.C — Second ring.** The shortlist and order are in v3.A decisions
+above.
+- **Built 2026-10-29 (pages 1–4):** `/smells/sewage/bathroom/`,
+  `/smells/rotten-eggs/water/`, `/smells/fishy/`, `/smells/dead-animal/`.
+  - Each was written to the `write-lamill-seo-page` checklist: SERP
+    checked first (top results are forums, Reddit and contractor
+    blogs), FAQs drawn from Google's People Also Ask, worked examples
+    including a failure case, and safety blocks where electrical or gas
+    is in play.
+  - New hub group "Rotting, sweet & chemical" (the `sweet-chemical`
+    family).
+  - New cited source: Minnesota Department of Health on hydrogen
+    sulfide in water.
+  - Cause → page links repointed (water heater, well water, dead
+    animal). The dead-animal cause gains the `fishy` family.
+  - Gates: tsc 0, 21 tests, 27 pages prerendered, audit 0 errors. Max
+    similarity between a new page and its parent is 0.163
+    (`/sewage/bathroom/` ~ `/sewage/`).
+  - No `FAQPage` JSON-LD, per the v2.A decision.
+- **Built 2026-10-29 (pages 5–6):** `/smells/chemical/`,
+  `/smells/musty/closet/`.
+  - Search results checked first: product blogs, HVAC blogs and forums
+    rank.
+  - Closet humidity and mold-size claims match EPA's guidance (below
+    60% RH, ideally 30–50%; DIY under about 10 sq ft).
+  - The refrigerant "nail polish" claim is stated with its hedge.
+  - `/smells/musty/room/` now links to the closet page.
+  - Gates: tsc 0, 21 tests, 29 pages prerendered, audit 0 errors and
+    0 warnings, sitemap 27 URLs, highest similarity 0.167 (closet ~
+    room).
 
 Intent-overlap check against existing pages before writing: merge
 rather than duplicate. Each page is one data file in
@@ -524,7 +599,7 @@ rather than duplicate. Each page is one data file in
 
 ## v4 — "Who to call" lead path (monetization)
 
-**Status:** not started. Gated on v3.D showing commercial queries in
+**Status:** not started. Gated on v3.G showing commercial queries in
 GSC ("who to call…", "… near me", "… cost") on smell pages.
 
 Signal so far: *who to call for musty smell in house* — 300/mo, KD 0,
@@ -547,6 +622,10 @@ every smell page are the natural placement.
 
 Calculators and sizing tools for CFM, duct sizing, return air, room
 balance. Routes under `/diagnose/airflow/...` and `/calculate/...`.
+Candidate linkable calculators (operator, 2026-10-29): dehumidifier
+sizing (AHAM chart), bathroom exhaust fan CFM (HVI guidance), and air
+purifier room size (AHAM CADR guidance). Cite each source, and verify
+it before building.
 
 ---
 

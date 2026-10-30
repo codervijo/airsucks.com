@@ -7,9 +7,13 @@ export const sewage: SmellPage = {
   label: "Sewage smell",
   title: "House Smells Like Sewage? Find the Leak in Order",
   description:
-    "Sewer smell in the house or bathroom: the order to check traps, drains, toilet seals, vents, and lines — and when sewer gas means ventilate and get out.",
+    "Sewer smell in the house, constant or on and off: the order to check traps, drains, toilet seals, vents, and lines, and when sewer gas means get out.",
   h1: "Sewer smell in your house: where it's coming from and how to stop it",
-  targets: ["my house smells like sewage", "sewer smell in house", "sewer smell in bathroom"],
+  targets: [
+    "my house smells like sewage",
+    "sewer smell in house",
+    "sewage smell in house comes and goes",
+  ],
   quickAnswer:
     "Sewer smell means gas from the drain system is getting past a seal it shouldn't. Most of the time the cheapest seal has failed: a drain trap that dried out, slime in a sink drain, or the wax ring under a toilet. Work in that order — refill every trap, clean the smelly drain, check the toilet base — before suspecting vents or a broken sewer line. A plumber or a camera or smoke test finds what's left.",
   urgency: "soon",
@@ -129,9 +133,16 @@ export const sewage: SmellPage = {
   ],
   sections: [
     {
-      heading: "Sewer smell in the bathroom only",
+      heading: "Sewage smell in the house that comes and goes",
       body: [
-        "Bathrooms concentrate the cheap failures: a shower trap that dried out, a sink overflow full of slime, a toilet seal that gave up. Check in that order. If a bathroom smells right after someone showers in the next room, suspect a vent problem, because fixtures sharing a drain can pull each other's traps dry.",
+        "An on-and-off sewer smell is a clue, not a dead end, because each cause has its own rhythm. Write down when it shows up for a few days. The pattern usually narrows it to one or two causes.",
+        "Shows up after a fixture has sat unused, then vanishes once someone uses it: a trap drying out. Shows up right after a toilet flushes, a tub drains, or the washer empties: a large flow of water is pulling air through the system, which points to a vent that's blocked or undersized, or a trap being siphoned. Worse on windy days or when the weather changes: air pressure at the roof vent is pushing gas back down. Worse when the furnace, bathroom fans, or a range hood run: the house is under negative pressure and pulling air in through the weakest seal, often a dry floor drain. Worse after heavy rain: on septic, a saturated drain field; on city sewer, a main line that's backing up.",
+      ],
+    },
+    {
+      heading: "If it's mainly the bathroom",
+      body: [
+        "Bathrooms have more traps and seals per square foot than any other room, so most sewer smells start there. The bathroom page goes fixture by fixture: shower drain, sink overflow, toilet base, and the vent tests that work in one room.",
       ],
     },
     {
@@ -180,6 +191,11 @@ export const sewage: SmellPage = {
   ],
   related: [
     {
+      title: "Sewer smell in the bathroom",
+      href: "/smells/sewage/bathroom/",
+      hint: "Fixture-by-fixture checks",
+    },
+    {
       title: "House smells like rotten eggs",
       href: "/smells/rotten-eggs/",
       hint: "If it's more sulfur than sewer",
@@ -198,5 +214,5 @@ export const sewage: SmellPage = {
   ],
   sources: [SOURCES.cpscCo],
   diagnose: { family: "sewage" },
-  updated: "2026-10-02",
+  updated: "2026-10-29",
 };
