@@ -128,6 +128,8 @@ const PAGES = [
   // registry (src/content/smells/index.ts) is appended automatically, so a new
   // smell page is a data entry, not an edit to this list.
   { path: "/smells/", sitemap: { priority: 0.9, changefreq: "weekly" } },
+  // v3.E — printable house-showing checklist (own route, not a registry page).
+  { path: "/smells/checklist/", sitemap: { priority: 0.6, changefreq: "monthly" } },
   ...smellPaths().map((path) => ({
     path,
     sitemap: {

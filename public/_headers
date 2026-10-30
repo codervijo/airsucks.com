@@ -10,10 +10,8 @@
   Referrer-Policy: strict-origin-when-cross-origin
 
 # v3.D: the smell widget is meant to be framed by other sites. Only this path.
-/embed/smell/
-  ! X-Frame-Options
-  Content-Security-Policy: frame-ancestors *
-
+# One rule: the splat also matches /embed/smell/ itself (a second rule for the
+# bare path sent the CSP header twice).
 /embed/smell/*
   ! X-Frame-Options
   Content-Security-Policy: frame-ancestors *

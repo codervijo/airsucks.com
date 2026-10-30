@@ -16,6 +16,7 @@ import {
   normalizeSmellPath,
 } from "../content/smells";
 import { FAMILIES } from "../content/smells/reference";
+import { CHECKLIST_AREAS } from "../content/smells/checklist";
 import type { Likelihood } from "../content/smells/types";
 
 // Every internal path a smell page may link to.
@@ -30,6 +31,16 @@ const STATIC_ROUTES = new Set([
   "/about/",
 ]);
 const KNOWN = new Set([...STATIC_ROUTES, ...SMELL_PAGES.map((p) => p.path)]);
+
+describe("showing checklist", () => {
+  it("links only to smell pages that exist, with unique area ids", () => {
+    const ids = CHECKLIST_AREAS.map((a) => a.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const a of CHECKLIST_AREAS)
+      for (const it of a.items)
+        if (it.href) expect(KNOWN.has(it.href), `${a.id} → ${it.href}`).toBe(true);
+  });
+});
 
 describe("smell pages", () => {
   it("have unique canonical paths with trailing slashes", () => {

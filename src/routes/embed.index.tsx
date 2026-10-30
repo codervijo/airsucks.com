@@ -154,6 +154,13 @@ function EmbedLanding() {
           Many smell complaints are a dry drain trap or a dirty overflow that the tenant can fix in
           five minutes, and the real emergencies are flagged clearly.
         </p>
+        <p>
+          Prefer something to hand out? The{" "}
+          <Link to="/smells/checklist/" className="underline underline-offset-2">
+            printable house showing smell checklist
+          </Link>{" "}
+          is free to link to and print for clients.
+        </p>
       </section>
 
       <section className="mx-auto mt-12 max-w-3xl space-y-3 text-foreground/90">

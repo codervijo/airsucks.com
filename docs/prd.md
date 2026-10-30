@@ -482,7 +482,7 @@ The v1 Month-6 kill switch stays as written for v1.
 
 ## v3 — Smells at scale
 
-**Status:** v3.A–C done and deployed 2026-10-30 (`5e74951`); v3.D built, not deployed; v3.E queued.
+**Status:** v3.A–C done and deployed 2026-10-30 (`5e74951`); v3.D deployed 2026-10-30 (`5c29e32`); v3.E built, not deployed.
 
 Grow the `/smells/` silo from 13 to roughly 60+ pages without thin or
 near-duplicate content. Ordered by what Phase 1 taught.
@@ -495,7 +495,7 @@ near-duplicate content. Ordered by what Phase 1 taught.
 | v3.B | ☑ | **Expand indexed pages.** Add the GSC/keyword gaps to `/smells/rotten-eggs/`, `/smells/sewage/` and `/smells/cat-pee/`. No new URLs. |
 | v3.C | ☑ | **Second ring of odor pages** (6/6 built 2026-10-29), in v3.A order: `/smells/sewage/bathroom/`, `/smells/rotten-eggs/water/`, `/smells/fishy/`, `/smells/dead-animal/`, then `/smells/chemical/` and `/smells/musty/closet/`. |
 | v3.D | ☑ | **Embeddable smell diagnostic widget.** `/diagnose/smell/` as a copy-paste embed (iframe + snippet) for plumbers, HVAC firms, inspectors and property managers. Every embed carries a visible "Powered by AirSucks" link. Linkable asset #1 (operator, option C, 2026-10-29). |
-| v3.E | ☐ | **Printable "new home smell inspection" checklist.** An HTML page plus a print-ready PDF generated from the smell registry, for buyers, realtors and inspectors. Linkable asset #2. |
+| v3.E | ☑ | **Printable "new home smell inspection" checklist.** An HTML page plus a print-ready PDF generated from the smell registry, for buyers, realtors and inspectors. Linkable asset #2. |
 | v3.F | ☐ | **Cause pages + per-page content chunks.** `/smells/causes/<cause>/` for the library causes; shorter cause cards on odor pages that link to them; per-page code-split content; citations for the flagged claims (§ v2 decisions log). |
 | v3.G | ☐ | **Soak + measure.** Search Console at +28 days after the v3.C deploy; referring domains from the v3.D–E assets. Also decide whether v4 starts (needs commercial queries in GSC). |
 
@@ -600,6 +600,46 @@ when each phase starts.
   https://airsucks.com/embed/smell/` must show no `X-Frame-Options`
   and `frame-ancestors *`; `/embed/` must keep `DENY`. Then check
   `resize.js` from a page on another origin.
+  - **Verified live 2026-10-30 (`5c29e32`):** `/embed/smell/` sends no
+    `X-Frame-Options` and does send `frame-ancestors *`; `/embed/` keeps
+    `DENY`. The real snippet embedded from another origin rendered, and
+    `resize.js` resized it to 674px with no console errors. The CSP was
+    being sent twice, because two `_headers` rules matched; that rule
+    is now merged into one.
+
+**v3.E locked (2026-10-30, operator).**
+- **Scope: smell-only, as a link asset.** Keyword data found no
+  measurable volume for any smell-checklist phrasing. The nearest real
+  query, "house hunting checklist" (320/mo, KD 0), returns full buyer
+  checklists (Redfin, a .gov PDF), so a smell checklist won't rank for
+  it. Its value comes from outreach to home inspectors, realtors and
+  first-time-buyer guides.
+- **Delivery:** print stylesheet. One page, a "Print / Save as PDF"
+  button, and the site chrome hidden in print. No PDF build step.
+- **URL `/smells/checklist/`:** a specific route, which wins over the
+  `smells.$` splat. Its data file lives under `src/content/smells/`,
+  and every guide link it contains is checked by tests.
+- **Content:**
+  - Room by room: what to sniff for, what it usually means, and the
+    guide to read.
+  - Signs a smell is being masked.
+  - What a nose can't check: CO and radon (EPA: "you can't see or
+    smell it").
+  - What to ask the seller, and what to ask the inspector for.
+- **Links to it:** the smells hub, the footer, and `/embed/`.
+- **Built 2026-10-30.**
+  - Files: `src/content/smells/checklist.ts` (7 areas, 23 checks;
+    masking signs; can't-smell items; seller and inspector questions)
+    and `src/routes/smells.checklist.tsx`. The site header and footer
+    are `print:hidden`.
+  - New source: `SOURCES.epaRadon`.
+  - A test checks that every checklist link points at a real smell
+    page.
+  - Gates: tsc 0, 25 tests, 32 pages prerendered, audit 0/0 (1,733
+    words).
+  - Print check (Playwright PDF, US Letter): 3 pages; site chrome and
+    buttons hidden; on-screen-only "Read the guide" links hidden; the
+    address and date line, notes box, and credit line all fit.
 
 **v3.F — Cause pages + per-page chunks.**
 - Route `/smells/causes/$cause/`, rendered from `CAUSES`.

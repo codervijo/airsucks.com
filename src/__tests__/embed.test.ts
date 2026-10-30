@@ -27,7 +27,8 @@ describe("embed snippet", () => {
 
   it("lets only the widget path be framed", () => {
     const h = readFileSync("public/_headers", "utf8");
-    expect(h).toMatch(/\/embed\/smell\/\n {2}! X-Frame-Options/);
+    expect(h).toMatch(/\/embed\/smell\/\*\n {2}! X-Frame-Options/);
+    expect(h.match(/frame-ancestors/g)).toHaveLength(1);
     expect(h).toMatch(/\/\*\n(?: {2}.*\n)* {2}X-Frame-Options: DENY/);
   });
 });

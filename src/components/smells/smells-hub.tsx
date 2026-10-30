@@ -50,6 +50,14 @@ export function SmellsHub() {
         </p>
       </header>
 
+      <p className="mt-4 text-sm text-muted-foreground">
+        Buying a house?{" "}
+        <Link to="/smells/checklist/" className="font-medium text-foreground underline underline-offset-2">
+          Take the printable house showing smell checklist
+        </Link>{" "}
+        to your next viewing.
+      </p>
+
       <div className="mt-8">
         <SafetyPanel
           block={{ ...GAS_SAFETY, title: "Smell gas or something burning? Read this first" }}

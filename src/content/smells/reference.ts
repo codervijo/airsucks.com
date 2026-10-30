@@ -193,6 +193,11 @@ export const SOURCES = {
     url: "https://www.phmsa.dot.gov/safety-awareness/pipeline/pipeline-leak-recognition-and-what-do",
     publisher: "U.S. DOT PHMSA",
   },
+  epaRadon: {
+    title: "Radon",
+    url: "https://www.epa.gov/radon",
+    publisher: "U.S. EPA",
+  },
   mdhSulfur: {
     title: "Hydrogen Sulfide and Sulfur Bacteria in Well Water",
     url: "https://www.health.state.mn.us/communities/environment/water/wells/waterquality/hydrosulfide.html",

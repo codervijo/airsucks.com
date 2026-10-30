@@ -171,3 +171,11 @@ https://search.google.com/search-console directly.
 - **Action:** `/embed/` landing page plus the framable `/embed/smell/` widget. The snippet carries a branded, followed link ("Smell diagnostic by AirSucks") in the host page's HTML (docs/prd.md § v3.D locked).
 - **Result:** TBD — depends on outreach to plumbers, HVAC firms, inspectors and property managers; review 28 days after the first outreach batch.
 - **Learning:** TBD — do trade sites embed a free diagnostic tool, and do branded widget links get counted?
+
+## 2026-10-30 — v3.E: printable house-showing smell checklist as linkable asset #2
+- **Status:** active (built; not deployed)
+- **KPI:** referring domains to `/smells/checklist/`; mentions from inspector, realtor, and buyer-guide sites.
+- **Baseline:** 0 referring domains to that URL (it's new). No search target: keyword data showed no measurable volume for smell-checklist phrasings (docs/prd.md § v3.E locked).
+- **Action:** `/smells/checklist/`, which prints to a 3-page PDF from the browser. Linked from the smells hub, the footer, and `/embed/`.
+- **Result:** TBD — depends on outreach; review 28 days after the first outreach batch.
+- **Learning:** TBD — does a niche, genuinely useful printable earn links from inspector and realtor sites without paid placement?
