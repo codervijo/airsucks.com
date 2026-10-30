@@ -154,18 +154,18 @@ https://search.google.com/search-console directly.
   - Leaning toward v2.J (a)/(b): indexed and earning impressions, but nothing ranks close to page 1 yet.
 
 ## 2026-10-29 — v3.B + v3.C: build out sulfur and sewer; add fishy, dead-animal, chemical, and musty closet
-- **Status:** active (not deployed yet; the review clock starts on deploy)
+- **Status:** active (deployed 2026-10-29 `5e74951`; IndexNow pinged 2026-10-29)
 - **KPI:** site-wide GSC impressions (28d); impressions and position for the new URLs; whether `/smells/rotten-eggs/` picks up "sulfur smell in house" queries.
 - **Baseline:** 2026-10-29 snapshot: 218 impressions, 0 clicks, position ~66, 94 queries; 0 impressions on the new URLs (they don't exist yet).
 - **Action:**
   - v3.B on-page expansions: `/smells/rotten-eggs/` retitled for sulfur, with "dangerous", "no gas" and "comes and goes / at night" sections; `/smells/sewage/` gets a "comes and goes" section; `/smells/cat-pee/` gets the "no cat / litter box" query.
   - Six new pages from DataForSEO keyword data (docs/prd.md § v3.A decisions): `/smells/sewage/bathroom/`, `/smells/rotten-eggs/water/`, `/smells/fishy/`, `/smells/dead-animal/`, `/smells/chemical/`, `/smells/musty/closet/`.
   - Sitemap 21 → 27 URLs.
-- **Result:** TBD — review at deploy +28 days.
+- **Result:** TBD — review ~2026-11-26 (deploy +28 days).
 - **Learning:** TBD — do deeper pages on the family that's already earning impressions (sulfur) rank faster than new families (fishy, dead animal)?
 
 ## 2026-10-30 — v3.D: embeddable smell diagnostic as linkable asset #1
-- **Status:** active (built; not deployed)
+- **Status:** active (deployed 2026-10-29 `5c29e32`; cross-origin embed verified live)
 - **KPI:** referring domains linking to `/diagnose/smell/` (Ahrefs or GSC Links); `/embed/` impressions; referral visits from embeds (no analytics yet, so this is GSC/Ahrefs only).
 - **Baseline:** referring domains — not yet measured. Pull before outreach so there's a real number to compare.
 - **Action:** `/embed/` landing page plus the framable `/embed/smell/` widget. The snippet carries a branded, followed link ("Smell diagnostic by AirSucks") in the host page's HTML (docs/prd.md § v3.D locked).
@@ -173,9 +173,14 @@ https://search.google.com/search-console directly.
 - **Learning:** TBD — do trade sites embed a free diagnostic tool, and do branded widget links get counted?
 
 ## 2026-10-30 — v3.E: printable house-showing smell checklist as linkable asset #2
-- **Status:** active (built; not deployed)
+- **Status:** active (deployed 2026-10-30 `c797d82`; IndexNow pinged with `/embed/` + `/smells/checklist/`; sitemap 29 URLs)
 - **KPI:** referring domains to `/smells/checklist/`; mentions from inspector, realtor, and buyer-guide sites.
 - **Baseline:** 0 referring domains to that URL (it's new). No search target: keyword data showed no measurable volume for smell-checklist phrasings (docs/prd.md § v3.E locked).
 - **Action:** `/smells/checklist/`, which prints to a 3-page PDF from the browser. Linked from the smells hub, the footer, and `/embed/`.
 - **Result:** TBD — depends on outreach; review 28 days after the first outreach batch.
 - **Learning:** TBD — does a niche, genuinely useful printable earn links from inspector and realtor sites without paid placement?
+
+## 2026-10-30 — Session close: operator to-dos before the v3.G soak
+- **Status:** open (operator-owned)
+- **Action:** resubmit sitemap in GSC; Request Indexing for the 8 new URLs (6 v3.C pages + `/embed/` + `/smells/checklist/`); pull a referring-domains baseline before the first outreach batch; start outreach for the widget and checklist.
+- **Result:** TBD — v3.C GSC review ~2026-11-26; asset reviews 28 days after first outreach.

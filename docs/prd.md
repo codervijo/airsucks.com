@@ -482,7 +482,7 @@ The v1 Month-6 kill switch stays as written for v1.
 
 ## v3 — Smells at scale
 
-**Status:** v3.A–C done and deployed 2026-10-30 (`5e74951`); v3.D deployed 2026-10-30 (`5c29e32`); v3.E built, not deployed.
+**Status:** v3.A–C done and deployed 2026-10-30 (`5e74951`); v3.D deployed 2026-10-30 (`5c29e32`); v3.E deployed 2026-10-30 (`c797d82`; IndexNow pinged). Next: v3.F on operator signal; outreach and GSC steps are operator-owned.
 
 Grow the `/smells/` silo from 13 to roughly 60+ pages without thin or
 near-duplicate content. Ordered by what Phase 1 taught.
