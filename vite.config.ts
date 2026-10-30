@@ -120,6 +120,10 @@ const PAGES = [
   { path: "/not-found/", sitemap: { exclude: true } },
   { path: "/learn/", sitemap: { priority: 0.7, changefreq: "weekly" } },
   { path: "/about/", sitemap: { priority: 0.5, changefreq: "monthly" } },
+  // v3.D — embeddable smell diagnostic. The landing page is indexed; the framed
+  // widget is noindex and out of the sitemap (it's only ever seen in an iframe).
+  { path: "/embed/", sitemap: { priority: 0.6, changefreq: "monthly" } },
+  { path: "/embed/smell/", sitemap: { exclude: true } },
   // v2 — /smells/ silo. The hub is listed here; every page in the smell
   // registry (src/content/smells/index.ts) is appended automatically, so a new
   // smell page is a data entry, not an edit to this list.

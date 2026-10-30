@@ -163,3 +163,11 @@ https://search.google.com/search-console directly.
   - Sitemap 21 → 27 URLs.
 - **Result:** TBD — review at deploy +28 days.
 - **Learning:** TBD — do deeper pages on the family that's already earning impressions (sulfur) rank faster than new families (fishy, dead animal)?
+
+## 2026-10-30 — v3.D: embeddable smell diagnostic as linkable asset #1
+- **Status:** active (built; not deployed)
+- **KPI:** referring domains linking to `/diagnose/smell/` (Ahrefs or GSC Links); `/embed/` impressions; referral visits from embeds (no analytics yet, so this is GSC/Ahrefs only).
+- **Baseline:** referring domains — not yet measured. Pull before outreach so there's a real number to compare.
+- **Action:** `/embed/` landing page plus the framable `/embed/smell/` widget. The snippet carries a branded, followed link ("Smell diagnostic by AirSucks") in the host page's HTML (docs/prd.md § v3.D locked).
+- **Result:** TBD — depends on outreach to plumbers, HVAC firms, inspectors and property managers; review 28 days after the first outreach batch.
+- **Learning:** TBD — do trade sites embed a free diagnostic tool, and do branded widget links get counted?

@@ -482,7 +482,7 @@ The v1 Month-6 kill switch stays as written for v1.
 
 ## v3 — Smells at scale
 
-**Status:** v3.A–C done 2026-10-29 (built, not deployed); v3.D–E linkable assets queued.
+**Status:** v3.A–C done and deployed 2026-10-30 (`5e74951`); v3.D built, not deployed; v3.E queued.
 
 Grow the `/smells/` silo from 13 to roughly 60+ pages without thin or
 near-duplicate content. Ordered by what Phase 1 taught.
@@ -494,7 +494,7 @@ near-duplicate content. Ordered by what Phase 1 taught.
 | v3.A | ☑ | **Kickoff / decisions lock (2026-10-29).** Shortlist and order locked from v2.I GSC data + DataForSEO keyword research. New pages go before cause pages (operator). See v3.A decisions below. |
 | v3.B | ☑ | **Expand indexed pages.** Add the GSC/keyword gaps to `/smells/rotten-eggs/`, `/smells/sewage/` and `/smells/cat-pee/`. No new URLs. |
 | v3.C | ☑ | **Second ring of odor pages** (6/6 built 2026-10-29), in v3.A order: `/smells/sewage/bathroom/`, `/smells/rotten-eggs/water/`, `/smells/fishy/`, `/smells/dead-animal/`, then `/smells/chemical/` and `/smells/musty/closet/`. |
-| v3.D | ☐ | **Embeddable smell diagnostic widget.** `/diagnose/smell/` as a copy-paste embed (iframe + snippet) for plumbers, HVAC firms, inspectors and property managers. Every embed carries a visible "Powered by AirSucks" link. Linkable asset #1 (operator, option C, 2026-10-29). |
+| v3.D | ☑ | **Embeddable smell diagnostic widget.** `/diagnose/smell/` as a copy-paste embed (iframe + snippet) for plumbers, HVAC firms, inspectors and property managers. Every embed carries a visible "Powered by AirSucks" link. Linkable asset #1 (operator, option C, 2026-10-29). |
 | v3.E | ☐ | **Printable "new home smell inspection" checklist.** An HTML page plus a print-ready PDF generated from the smell registry, for buyers, realtors and inspectors. Linkable asset #2. |
 | v3.F | ☐ | **Cause pages + per-page content chunks.** `/smells/causes/<cause>/` for the library causes; shorter cause cards on odor pages that link to them; per-page code-split content; citations for the flagged claims (§ v2 decisions log). |
 | v3.G | ☐ | **Soak + measure.** Search Console at +28 days after the v3.C deploy; referring domains from the v3.D–E assets. Also decide whether v4 starts (needs commercial queries in GSC). |
@@ -546,6 +546,60 @@ three calculators (dehumidifier sizing, bathroom fan CFM, air purifier
 CADR) stay in v5, Engineering. Neither asset earns links without
 outreach, so plan outreach as part of each phase. Details are locked
 when each phase starts.
+
+**v3.D locked (2026-10-29).**
+- **Attribution: branded, followed link (operator).** The snippet puts
+  `<a href="https://airsucks.com/diagnose/smell/">Smell diagnostic by
+  AirSucks</a>` in the host page's own HTML, below the iframe.
+  - A link inside the iframe lives on our document, so it's never a
+    backlink.
+  - Branded rather than keyword anchor text: Google's link-spam policy
+    names keyword-rich widget links.
+  - Google may still discount widget links. Referral clicks and brand
+    exposure are the floor.
+- **`/embed/smell/`** — the framed widget.
+  - The bare `SmellDiagnostic` with no site header or footer; accepts
+    `?odor=` / `?where=` presets.
+  - `noindex` and out of the sitemap.
+  - Framable: `_headers` detaches `X-Frame-Options` and sets
+    `frame-ancestors *` for that path only.
+  - Links inside the widget open in a new tab, so they never navigate
+    the host's iframe.
+  - It posts its height to the parent page for auto-resize.
+- **`/embed/resize.js`** — an optional one-line script that auto-sizes
+  the iframe. It only acts on messages from `https://airsucks.com`.
+  Without it, the iframe uses a fixed height and scrolls, which suits
+  sites that strip scripts.
+- **`/embed/`** — the indexed landing page: who it's for, a live
+  preview, a copy-paste snippet with an optional odor preset, and an
+  FAQ. Linked from the footer and from `/diagnose/smell/`.
+- **Not in v3.D:** theming options, analytics on embeds, any
+  registration. Add them only if operators ask.
+- **Constraint:** `/embed/` promises "no cookies, no analytics" (true
+  as of 2026-10-30: no beacon, no Set-Cookie). Any future analytics
+  must exclude `/embed/smell/`, or that FAQ answer has to change.
+- **Built 2026-10-30.**
+  - Files: `src/lib/embed.ts` (snippet builder),
+    `src/routes/embed.smell.tsx` (bare widget, noindex, height
+    `postMessage`, links open in a new tab), `src/routes/embed.index.tsx`
+    (landing: generator with odor preset and optional auto-fit, live
+    preview, who it's for, FAQ), `public/embed/resize.js`.
+  - `public/_headers`: `/embed/smell/` detaches `X-Frame-Options` and
+    sets `frame-ancestors *`.
+  - Links: footer "Free smell widget", plus a callout on
+    `/diagnose/smell/`.
+  - The SEO audit now skips noindex pages in its near-duplicate check;
+    the widget duplicates `/diagnose/smell/` by design.
+  - Gates: tsc 0, 24 tests (3 new: the link sits outside the iframe and
+    is followed, the absolute URLs, frame headers on the widget path
+    only), 31 pages prerendered, audit 0/0.
+  - Playwright, with the widget framed from another origin: renders
+    with no site chrome, posts its height, a guide link opens in a new
+    tab while the iframe stays on the widget, no console errors.
+- **After deploy (not testable locally):** `curl -sI
+  https://airsucks.com/embed/smell/` must show no `X-Frame-Options`
+  and `frame-ancestors *`; `/embed/` must keep `DENY`. Then check
+  `resize.js` from a page on another origin.
 
 **v3.F — Cause pages + per-page chunks.**
 - Route `/smells/causes/$cause/`, rendered from `CAUSES`.

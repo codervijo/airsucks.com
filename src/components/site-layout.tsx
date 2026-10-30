@@ -1,8 +1,14 @@
 import { useRef } from "react";
-import { Link, Outlet } from "@tanstack/react-router";
+import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { Menu, Wind, X } from "lucide-react";
 
 export function SiteLayout() {
+  // Framed widgets (/embed/smell/ etc.) render bare: no header, nav, or footer.
+  // The /embed/ landing page itself keeps the normal chrome.
+  const bare = useRouterState({
+    select: (s) => /^\/embed\/[^/]+/.test(s.location.pathname),
+  });
+  if (bare) return <Outlet />;
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <SiteHeader />
@@ -130,7 +136,13 @@ function SiteFooter() {
           ]}
         />
         <FooterCol title="Guides" links={[{ to: "/learn/", label: "All guides" }]} />
-        <FooterCol title="Company" links={[{ to: "/about/", label: "About" }]} />
+        <FooterCol
+          title="Company"
+          links={[
+            { to: "/about/", label: "About" },
+            { to: "/embed/", label: "Free smell widget" },
+          ]}
+        />
       </div>
       <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} AirSucks.com — Not medical advice. Always follow safety

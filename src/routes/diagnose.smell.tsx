@@ -67,6 +67,14 @@ function SmellDiagnosePage() {
         </div>
       </section>
 
+      <p className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border bg-card p-4 text-sm text-muted-foreground">
+        Run a plumbing, HVAC, or inspection business?{" "}
+        <Link to="/embed/" className="font-medium text-foreground underline underline-offset-2">
+          Put this diagnostic on your own website for free
+        </Link>
+        .
+      </p>
+
       <section className="mx-auto mt-12 max-w-3xl">
         <h2 className="text-2xl font-semibold tracking-tight">Or go straight to a guide</h2>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">

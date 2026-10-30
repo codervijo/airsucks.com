@@ -206,7 +206,9 @@ const shingles = (text) => {
   for (let i = 0; i + 5 <= w.length; i++) s.add(w.slice(i, i + 5).join(" "));
   return s;
 };
-const sh = pages.map((p) => ({ url: p.url, s: shingles(p.mainText) }));
+// noindex pages can't compete in search, so they can't be duplicate content
+// (e.g. /embed/smell/ is the /diagnose/smell/ tool by design).
+const sh = pages.filter((p) => !p.noindex).map((p) => ({ url: p.url, s: shingles(p.mainText) }));
 const similar = [];
 for (let i = 0; i < sh.length; i++) {
   for (let j = i + 1; j < sh.length; j++) {
