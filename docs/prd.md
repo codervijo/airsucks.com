@@ -483,7 +483,7 @@ The v1 Month-6 kill switch stays as written for v1.
 
 ## v3 — Smells at scale
 
-**Status:** v3.A–C done and deployed 2026-10-30 (`5e74951`); v3.D deployed 2026-10-30 (`5c29e32`); v3.E deployed 2026-10-30 (`c797d82`; IndexNow pinged). v3.F + v3.G built 2026-11-07 (not deployed). Next: operator review, then deploy; v3.H soak after; outreach and GSC steps are operator-owned.
+**Status:** v3.A–C done and deployed 2026-10-30 (`5e74951`); v3.D deployed 2026-10-30 (`5c29e32`); v3.E deployed 2026-10-30 (`c797d82`; IndexNow pinged). v3.F + v3.G deployed 2026-11-07 (`cdcb2f2`; IndexNow pinged 17 URLs). Next: v3.H soak; outreach and GSC steps are operator-owned.
 
 Grow the `/smells/` silo from 13 to roughly 60+ pages without thin or
 near-duplicate content. Ordered by what Phase 1 taught.
@@ -497,8 +497,8 @@ near-duplicate content. Ordered by what Phase 1 taught.
 | v3.C | ☑ | **Second ring of odor pages** (6/6 built 2026-10-29), in v3.A order: `/smells/sewage/bathroom/`, `/smells/rotten-eggs/water/`, `/smells/fishy/`, `/smells/dead-animal/`, then `/smells/chemical/` and `/smells/musty/closet/`. |
 | v3.D | ☑ | **Embeddable smell diagnostic widget.** `/diagnose/smell/` as a copy-paste embed (iframe + snippet) for plumbers, HVAC firms, inspectors and property managers. Every embed carries a visible "Powered by AirSucks" link. Linkable asset #1 (operator, option C, 2026-10-29). |
 | v3.E | ☑ | **Printable "new home smell inspection" checklist.** An HTML page plus a print-ready PDF generated from the smell registry, for buyers, realtors and inspectors. Linkable asset #2. |
-| v3.F | ☑ | **Per-page content chunks + citations** (built 2026-11-07, not deployed). Per-page code-split smell content; source the four flagged claims (§ v2 decisions log). No new URLs. |
-| v3.G | ☑ | **Cause pages, shortlist only** (9 built 2026-11-07, not deployed). `/smells/causes/<cause>/` only for causes with search demand, each written thick (≥400 words, `write-lamill-seo-page`). Odor-page cause cards keep their full content and add a link where a cause page exists. |
+| v3.F | ☑ | **Per-page content chunks + citations** (deployed 2026-11-07 `cdcb2f2`). Per-page code-split smell content; source the four flagged claims (§ v2 decisions log). No new URLs. |
+| v3.G | ☑ | **Cause pages, shortlist only** (9 deployed 2026-11-07 `cdcb2f2`). `/smells/causes/<cause>/` only for causes with search demand, each written thick (≥400 words, `write-lamill-seo-page`). Odor-page cause cards keep their full content and add a link where a cause page exists. |
 | v3.H | ☐ | **Soak + measure.** Search Console at +28 days after the v3.C deploy; referring domains from the v3.D–E assets. Also decide whether v4 starts (needs commercial queries in GSC). |
 
 ### v3 phase detail
@@ -745,7 +745,7 @@ cards cut down to a link) was re-scoped before build:
   - 8 ✓ p-trap (2,900 words; InterNACHI, OSHA H2S)
   - 9 ✓ sump-pump (2,895 words; EPA radon reduction guide, Zoeller
     manual, OSHA H2S)
-- **v3.G done 2026-11-07 (not deployed):** 9 cause pages, sitemap 29 →
+- **v3.G done 2026-11-07 (deployed `cdcb2f2`):** 9 cause pages, sitemap 29 →
   38 URLs. Gates: tsc 0, 29 tests, audit 0 errors / 0 warnings, every
   cause-page similarity pair < 0.15. Every claim checked against a
   fetched source; no `[VERIFY]` markers left. Needs operator review
