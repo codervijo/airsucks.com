@@ -1,21 +1,26 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SmellArticle } from "@/components/smells/smell-article";
-import { getSmellPage } from "@/content/smells";
 import { articleJsonLd, breadcrumbJsonLd, pageHead } from "@/lib/seo";
 
 // One route renders every /smells/<odor>/[<context>/] page from the registry
 // in src/content/smells/. Unknown paths 404 (and are never prerendered).
 //
-// The loader imports the registry dynamically: route loaders aren't
-// code-split, so a static import here would put every page's content into the
-// main bundle shipped on *all* pages. The loader returns only head metadata;
-// the component (its own chunk) reads the full page from the registry.
+// The loader fetches only this page's content (src/content/smells/load.ts,
+// one chunk per page) and returns it with the causes it ranks. Prerendered
+// HTML carries that loader data, so a first view hydrates without loading any
+// content chunk, and no route ever bundles the whole registry (v3.F).
 export const Route = createFileRoute("/smells/$")({
   loader: async ({ params }) => {
-    const { breadcrumbsFor, getSmellPage: lookup } = await import("@/content/smells");
-    const page = lookup(params._splat ?? "");
-    if (!page) throw notFound();
+    const [{ loadSmellPage }, { breadcrumbsFor }] = await Promise.all([
+      import("@/content/smells/load"),
+      import("@/content/smells/nav"),
+    ]);
+    const loaded = await loadSmellPage(params._splat ?? "");
+    if (!loaded) throw notFound();
+    const { page, causes } = loaded;
     return {
+      page,
+      causes,
       path: page.path,
       title: page.title,
       description: page.description,
@@ -50,6 +55,6 @@ export const Route = createFileRoute("/smells/$")({
 const PUBLISHED = "2026-10-02";
 
 function SmellRoute() {
-  const { path } = Route.useLoaderData();
-  return <SmellArticle page={getSmellPage(path)!} />;
+  const { page, causes } = Route.useLoaderData();
+  return <SmellArticle page={page} causes={causes} />;
 }

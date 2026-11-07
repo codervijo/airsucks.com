@@ -165,7 +165,13 @@ export const gas: SmellPage = {
       hint: "Electrical hazards",
     },
   ],
-  sources: [SOURCES.agaGas, SOURCES.propaneSafety, SOURCES.phmsaLeak, SOURCES.cpscCo],
+  sources: [
+    SOURCES.agaGas,
+    SOURCES.propaneSafety,
+    SOURCES.phmsaLeak,
+    SOURCES.iucGasSafety,
+    SOURCES.cpscCo,
+  ],
   diagnose: { family: "gas" },
   updated: "2026-10-02",
 };

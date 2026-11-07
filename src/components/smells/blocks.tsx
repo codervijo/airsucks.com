@@ -9,18 +9,17 @@ import {
   ExternalLink,
   PhoneCall,
 } from "lucide-react";
-import { causeById } from "@/content/smells/causes";
 import { TRADES } from "@/content/smells/reference";
 import type {
   DecisionStep,
   LinkRef,
-  RankedCause,
+  Cause,
   SafetyBlock,
   SourceRef,
   TradeId,
   Urgency,
 } from "@/content/smells/types";
-import type { Crumb } from "@/content/smells";
+import type { Crumb } from "@/content/smells/nav";
 
 // ─── Urgency ────────────────────────────────────────────────────────────────
 
@@ -198,18 +197,26 @@ export function SafetyPanel({
 }
 
 export function CauseCard({
-  ranked,
+  cause: c,
+  note,
   index,
   chip,
   because,
+  currentPath,
 }: {
-  ranked: RankedCause | { cause: string; note?: string };
+  cause: Cause;
+  /** The page rendering this card; its own link is suppressed. */
+  currentPath?: string;
+  /** Page-specific note; falls back to the cause summary. */
+  note?: string;
   index: number;
   chip: string;
   because?: string[];
 }) {
-  const c = causeById(ranked.cause);
   const trade = TRADES[c.trade];
+  const link = c.page && c.page !== currentPath ? c.page : undefined;
+  // v3.G: a dedicated cause page gets a visible link, not one inside the fold.
+  const guide = link?.startsWith("/smells/causes/") ? link : undefined;
   return (
     <li className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
       <div className="flex items-start gap-3">
@@ -222,7 +229,15 @@ export function CauseCard({
             <LikelihoodChip value={chip} />
             {c.urgency !== "routine" ? <UrgencyBadge urgency={c.urgency} /> : null}
           </div>
-          <p className="mt-2 text-sm text-muted-foreground">{ranked.note ?? c.summary}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{note ?? c.summary}</p>
+          {guide ? (
+            <Link
+              to={guide}
+              className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+            >
+              Full guide: {c.name} <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+            </Link>
+          ) : null}
           {because && because.length ? (
             <p className="mt-2 text-xs text-muted-foreground">
               <span className="font-medium text-foreground">Why it's here:</span>{" "}
@@ -271,9 +286,9 @@ export function CauseCard({
               <p>
                 <span className="font-medium">Who fixes it:</span> {trade.name}
               </p>
-              {c.page ? (
+              {link && !guide ? (
                 <Link
-                  to={c.page}
+                  to={link}
                   className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
                 >
                   More on this <ArrowRight className="h-3.5 w-3.5" aria-hidden />

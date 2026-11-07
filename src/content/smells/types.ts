@@ -193,7 +193,19 @@ export type SmellPage = {
   diagnose: { family: OdorFamilyId; location?: LocationId };
   /** ISO date the content was last materially reviewed. */
   updated: string;
+  /** Cause pages only (/smells/causes/<slug>/, docs/prd.md § v3.G): the
+   *  library cause this page explains. That cause's `page` must point here,
+   *  and `related` must link every odor page that ranks it. */
+  about?: string;
 };
+
+/** The slice of a page that lists, nav, breadcrumbs and the route head need.
+ *  Lives in manifest.gen.ts so client code can list pages without bundling
+ *  every page's content (docs/prd.md § v3.F). */
+export type SmellMeta = Pick<
+  SmellPage,
+  "path" | "family" | "title" | "description" | "h1" | "label" | "urgency" | "diagnose" | "updated"
+>;
 
 export type OdorFamily = {
   id: OdorFamilyId;

@@ -10,6 +10,13 @@ import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { Plugin } from "vite";
 import { smellPaths } from "./src/content/smells/index";
+import { writeSmellManifest } from "./src/content/smells/manifest-build";
+
+// v3.F: client code lists smell pages from a generated metadata manifest and
+// loads one page's content on demand. Regenerate it from the registry on every
+// dev/build start (src/__tests__/smells.test.ts fails if the committed copy
+// is stale).
+writeSmellManifest();
 
 // ─── v15.C version-stamp ─────────────────────────────────────────────────────
 // Inline copy from ~/work/projects/builder/vite-version-stamp.ts (canonical).

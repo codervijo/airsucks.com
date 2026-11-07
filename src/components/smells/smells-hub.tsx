@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { childrenOf, hubGroups } from "@/content/smells";
+import { causePages, childrenOf, hubGroups } from "@/content/smells/nav";
 import { FAMILIES } from "@/content/smells/reference";
 import { Breadcrumbs, CompareTable, DiagnoseCta, SafetyPanel, Section } from "./blocks";
 import { GAS_SAFETY } from "@/content/smells/reference";
@@ -30,6 +30,7 @@ const SMELL_FINDER = {
 
 export function SmellsHub() {
   const groups = hubGroups();
+  const culprits = causePages();
   const unpaged = FAMILIES.filter((f) => !f.page);
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 md:py-12">
@@ -110,6 +111,31 @@ export function SmellsHub() {
               </ul>
             </div>
           ))}
+          {culprits.length ? (
+            <div>
+              <h3 className="text-lg font-semibold">Common culprits, explained</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Guides to one source each: how to confirm it, fix it, and keep it from coming back.
+              </p>
+              <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+                {culprits.map((p) => (
+                  <li key={p.path} className="rounded-2xl border border-border bg-card p-4">
+                    <Link
+                      to={p.path}
+                      className="group flex items-center justify-between gap-2 font-medium"
+                    >
+                      <span>{p.h1.split(":")[0]}</span>
+                      <ChevronRight
+                        className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary"
+                        aria-hidden
+                      />
+                    </Link>
+                    <p className="mt-1 text-sm text-muted-foreground">{p.description}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
           {unpaged.length ? (
             <div>
               <h3 className="text-lg font-semibold">Something else</h3>

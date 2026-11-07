@@ -144,7 +144,7 @@ export const CAUSES: Cause[] = [
       "If refilling the traps doesn't stop it within a day, the problem is past the trap — call a plumber.",
     trade: "plumber",
     urgency: "routine",
-    page: "/smells/sewage/",
+    page: "/smells/causes/p-trap/",
     engine: {
       base: 5,
       locations: { basement: 2, bathroom: 3, laundry: 2, "one-room": 1 },
@@ -171,7 +171,7 @@ export const CAUSES: Cause[] = [
     diyLimit: "Roof work and snaking vents are a job for a plumber.",
     trade: "plumber",
     urgency: "soon",
-    page: "/smells/sewage/",
+    page: "/smells/causes/plumbing-vent/",
     engine: {
       base: 3,
       locations: { bathroom: 2, "whole-house": 2 },
@@ -287,7 +287,7 @@ export const CAUSES: Cause[] = [
     diyLimit: "Opening a sewage ejector pit or servicing its pump is a plumber's job.",
     trade: "plumber",
     urgency: "soon",
-    page: "/smells/sewage/",
+    page: "/smells/causes/sump-pump/",
     engine: { base: 2, locations: { basement: 5 } },
   },
   {
@@ -653,24 +653,28 @@ export const CAUSES: Cause[] = [
   },
   {
     id: "front-load-washer",
-    name: "Front-load washer gasket or drum",
+    name: "Smelly washing machine",
     summary:
-      "The door gasket and drum of front-loaders trap water and detergent residue. Biofilm grows, and clothes and the laundry room smell musty.",
+      "Detergent and softener residue, lint, and standing water build up in the door gasket, the dispenser drawer, the drain pump filter, and under the drum. Biofilm grows there, and the clothes and laundry room smell musty. Front-loaders are the usual suspects; top-loaders get it under the tub.",
     families: ["musty", "sewage"],
     signs: [
       "Clothes smell musty right out of the washer",
-      "Dark residue in the folds of the door gasket",
+      "Dark residue in the folds of the door gasket or slime in the dispenser drawer",
+      "Smell is strongest with your head inside the drum",
     ],
-    checks: ["Pull back the gasket folds and look; smell the detergent drawer."],
+    checks: [
+      "Pull back the gasket folds and look; pull out the detergent drawer and smell the cavity.",
+      "Open the drain pump filter (front-loaders, low front corner) over a towel and a shallow pan.",
+    ],
     fixes: [
-      "Clean the gasket and drawer; run the washer's cleaning cycle.",
-      "Leave the door and drawer open between loads.",
+      "Clean the gasket, drawer, and pump filter; run the washer's tub-clean cycle.",
+      "Use less detergent, skip or cut softener, and leave the door and drawer open between loads.",
     ],
     diyLimit:
       "Persistent smell after cleaning can be a slow drain or the drain pump — appliance repair.",
     trade: "appliance-repair",
     urgency: "routine",
-    page: "/smells/musty/",
+    page: "/smells/causes/washing-machine/",
     engine: { base: 2, locations: { laundry: 7 } },
   },
   {
@@ -719,7 +723,7 @@ export const CAUSES: Cause[] = [
     diyLimit: "Coil cleaning means opening the air handler — HVAC tech.",
     trade: "hvac",
     urgency: "soon",
-    page: "/smells/musty/ac/",
+    page: "/smells/causes/dirty-sock-syndrome/",
     engine: {
       base: 4,
       locations: { "hvac-vents": 7, "whole-house": 2 },
@@ -747,7 +751,7 @@ export const CAUSES: Cause[] = [
     diyLimit: "Duct and air-handler mold is professional work.",
     trade: "hvac",
     urgency: "soon",
-    page: "/smells/musty/ac/",
+    page: "/smells/causes/mold-in-ducts/",
     engine: {
       base: 2,
       locations: { "hvac-vents": 5, "whole-house": 2 },
@@ -854,7 +858,7 @@ export const CAUSES: Cause[] = [
       "If it persists past a day, smells like plastic or rubber, or the burner looks wrong, shut the system off and call HVAC.",
     trade: "diy",
     urgency: "routine",
-    page: "/smells/burning-plastic/",
+    page: "/smells/causes/furnace-burning-smell/",
     engine: {
       base: 4,
       locations: { "hvac-vents": 3, "whole-house": 2 },
@@ -992,7 +996,7 @@ export const CAUSES: Cause[] = [
     diyLimit: "Ongoing activity, nests in walls or attic, or rats: call pest control.",
     trade: "pest-control",
     urgency: "soon",
-    page: "/smells/cat-pee/",
+    page: "/smells/causes/mouse-urine/",
     engine: {
       base: 3,
       locations: { kitchen: 3, garage: 2, basement: 2, "one-room": 1 },
@@ -1004,7 +1008,7 @@ export const CAUSES: Cause[] = [
     id: "boxwood-shrubs",
     name: "Boxwood shrubs near the house",
     summary:
-      "Some boxwood varieties give off a smell many people describe as cat urine, especially in spring and warm, damp weather. It drifts in through open windows.",
+      "Some boxwoods, English boxwood best known among them, have foliage many people liken to cat urine. Virginia Tech Extension notes the smell is strongest in warm, humid weather. It drifts in through open windows.",
     families: ["pet-urine"],
     signs: ["Smell is stronger outdoors near the hedges", "Seasonal, and worse with windows open"],
     checks: [
@@ -1182,7 +1186,7 @@ export const CAUSES: Cause[] = [
     id: "refrigerant-leak",
     name: "Refrigerant leak",
     summary:
-      "Some people notice a faint sweet or chloroform-like smell near an AC, heat pump, or refrigerator that is leaking refrigerant. Cooling gets weaker over time.",
+      "Refrigerant has little or no smell. Some people notice a faint sweet or chloroform-like smell near an AC, heat pump, or refrigerator that is leaking, but the reliable signs are weaker cooling, ice on the coil or lines, and a hiss at the unit.",
     families: ["sweet-chemical"],
     signs: [
       "AC or fridge cooling poorly",
@@ -1195,6 +1199,7 @@ export const CAUSES: Cause[] = [
     diyLimit: "Refrigerant work requires a certified technician.",
     trade: "hvac",
     urgency: "soon",
+    page: "/smells/causes/refrigerant-leak/",
     engine: {
       base: 2,
       locations: { "hvac-vents": 3, "near-appliance": 3, kitchen: 1 },

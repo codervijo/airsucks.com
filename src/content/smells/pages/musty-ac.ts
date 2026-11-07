@@ -12,7 +12,6 @@ export const mustyAc: SmellPage = {
   targets: [
     "musty smell from ac",
     "ac smells musty when turned on",
-    "dirty sock smell from ac",
     "heat pump smells musty",
   ],
   quickAnswer:
@@ -134,8 +133,7 @@ export const mustyAc: SmellPage = {
     {
       heading: 'What is "dirty sock syndrome"?',
       body: [
-        "It's the trade nickname for the funky, gym-locker smell some ACs and heat pumps blow for the first few minutes of a cycle. The cause is biofilm — bacteria and mold growing in the film of water and dust on the indoor coil. Heat pumps are known for it because the coil goes through wet and dry phases as the system switches modes.",
-        "The fix is cleaning the coil and drain pan, keeping the filter fresh, and making sure the condensate drains freely. Spraying air freshener into the return just perfumes the biofilm.",
+        "It's the trade nickname for the sour, gym-locker smell an AC or heat pump blows for the first few minutes after it starts: growth on the damp indoor coil, released as the coil gets wet. Heat pumps in humid climates get it most. Our dirty sock syndrome guide covers why, what cleaning has to include, and how to keep it from coming back.",
       ],
     },
   ],
@@ -176,11 +174,21 @@ export const mustyAc: SmellPage = {
       a: "Sometimes, if the filter itself was the source. Usually it helps but doesn't finish the job, because the smell lives on the coil and in the pan downstream of the filter.",
     },
     {
-      q: "Why does my heat pump smell like dirty socks in heating mode?",
-      a: "Heat pumps cycle the indoor coil between wet (cooling or defrost) and warm. Biofilm on the coil gets warmed and blown out — same cause as in summer, same fix.",
+      q: "Why does my heat pump smell like dirty socks?",
+      a: "That's dirty sock syndrome: growth on the indoor coil that dries out while the system is off or heating and is released when the coil gets wet again. The fix is cleaning the coil, drain pan, and blower. See the dirty sock syndrome guide for the details.",
     },
   ],
   related: [
+    {
+      title: "Dirty sock syndrome",
+      href: "/smells/causes/dirty-sock-syndrome/",
+      hint: "The start-up smell, in depth",
+    },
+    {
+      title: "Mold in air ducts",
+      href: "/smells/causes/mold-in-ducts/",
+      hint: "Is it really in the ducts?",
+    },
     {
       title: "Musty smell in the whole house",
       href: "/smells/musty/",
@@ -202,7 +210,7 @@ export const mustyAc: SmellPage = {
       hint: "Hidden moisture",
     },
   ],
-  sources: [SOURCES.epaMold, SOURCES.epaMoldCleanup],
+  sources: [SOURCES.epaMold, SOURCES.epaMoldCleanup, SOURCES.achrDirtySock],
   diagnose: { family: "musty", location: "hvac-vents" },
-  updated: "2026-10-02",
+  updated: "2026-11-07",
 };

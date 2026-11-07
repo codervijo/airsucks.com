@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SmellDiagnostic } from "@/components/smells/smell-diagnostic";
 import { Breadcrumbs } from "@/components/smells/blocks";
-import { SMELL_PAGES, parentOf } from "@/content/smells";
+import { topLevelPages } from "@/content/smells/nav";
 import { breadcrumbJsonLd, pageHead, webAppJsonLd } from "@/lib/seo";
 
 const PATH = "/diagnose/smell/";
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/diagnose/smell")({
 
 function SmellDiagnosePage() {
   const search = Route.useSearch();
-  const guides = SMELL_PAGES.filter((p) => !parentOf(p));
+  const guides = topLevelPages();
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 md:py-12">
       <Breadcrumbs crumbs={CRUMBS} />

@@ -1,3 +1,4 @@
+import { SOURCES } from "../reference";
 import type { SmellPage } from "../types";
 
 // "House smells like cat pee but I can't find it" — including no-cat homes.
@@ -197,5 +198,6 @@ export const catPee: SmellPage = {
     { title: "All smells", href: "/smells/", hint: "Browse by odor" },
   ],
   diagnose: { family: "pet-urine" },
-  updated: "2026-10-29",
+  sources: [SOURCES.humanePetStains, SOURCES.vtBoxwood],
+  updated: "2026-11-07",
 };

@@ -180,7 +180,15 @@ https://search.google.com/search-console directly.
 - **Result:** TBD — depends on outreach; review 28 days after the first outreach batch.
 - **Learning:** TBD — does a niche, genuinely useful printable earn links from inspector and realtor sites without paid placement?
 
-## 2026-10-30 — Session close: operator to-dos before the v3.G soak
+## 2026-10-30 — Session close: operator to-dos before the v3.H soak (was v3.G; renumbered 2026-11-07)
 - **Status:** open (operator-owned)
 - **Action:** resubmit sitemap in GSC; Request Indexing for the 8 new URLs (6 v3.C pages + `/embed/` + `/smells/checklist/`); pull a referring-domains baseline before the first outreach batch; start outreach for the widget and checklist.
 - **Result:** TBD — v3.C GSC review ~2026-11-26; asset reviews 28 days after first outreach.
+
+## 2026-11-07 — v3.F + v3.G: per-page content split, sourced claims, 9 cause pages
+- **Status:** built, not deployed (awaiting operator review)
+- **KPI:** impressions and position for the 9 cause-page targets; site-wide 28d impressions; whether "Full guide" links lift the odor pages that rank those causes.
+- **Baseline:** 0 impressions on the new URLs (they don't exist yet). Target volumes are in docs/prd.md § v3.G shortlist (DataForSEO US, 2026-11-07): washing machine smells 5.4K; what does freon smell like 2.9K; mold in air ducts 2.9K; dirty sock syndrome 2.4K; plumbing vent clogged 1.9K; mouse urine/pee smell 880+880; heater smells like burning 1.3K; p trap smell 480; sump pump smell 590.
+- **Action:** v3.F moved smell content out of the shared bundle. The 54 KB gz all-pages chunk is gone, and first views load no content JS. It also sourced the four flagged claims. v3.G added 9 thick cause pages (2.5–3.1K words each), a hub section, and visible "Full guide" links on cause cards. Sitemap 29 → 38.
+- **Result:** TBD — review at deploy +28 days.
+- **Learning:** TBD — do problem-named cause pages (e.g. "washing machine smells") index and rank faster than the odor pages did, now that the silo has some history?

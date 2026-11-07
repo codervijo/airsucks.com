@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { childrenOf, hubGroups } from "@/content/smells";
+import { causePages, childrenOf, hubGroups } from "@/content/smells/nav";
 import { breadcrumbJsonLd, pageHead } from "@/lib/seo";
 
 // v2.G: the guides index. Built from the smell registry, so it can't go stale
@@ -35,6 +35,7 @@ const TOOLS = [
 
 function LearnPage() {
   const groups = hubGroups();
+  const culprits = causePages();
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 md:py-16">
       <div className="max-w-2xl">
@@ -76,6 +77,20 @@ function LearnPage() {
               </ul>
             </div>
           ))}
+          {culprits.length ? (
+            <div>
+              <h3 className="font-semibold">Common culprits, explained</h3>
+              <ul className="mt-2 space-y-1.5 text-sm">
+                {culprits.map((p) => (
+                  <li key={p.path}>
+                    <Link to={p.path} className="text-primary underline-offset-2 hover:underline">
+                      {p.h1.split(":")[0]}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </section>
 

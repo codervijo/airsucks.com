@@ -359,7 +359,8 @@ below can be overridden; overriding one moves the affected phase.
   - boxwood shrubs smelling like cat pee
   - the gas odorant reading as "skunky"
 
-  A sourcing pass happens in v3.F (cause pages need citations anyway).
+  A sourcing pass happens in v3.F. **Done 2026-11-07** (see § v3.F
+  built).
 - **Placeholder pages → `/learn/` repurposed, `/calculate/` noindexed
   (v2.G).** Found after v2.F. Both are "Coming soon" pages with no
   real content. `/learn/` can carry real content today (the smell
@@ -482,7 +483,7 @@ The v1 Month-6 kill switch stays as written for v1.
 
 ## v3 — Smells at scale
 
-**Status:** v3.A–C done and deployed 2026-10-30 (`5e74951`); v3.D deployed 2026-10-30 (`5c29e32`); v3.E deployed 2026-10-30 (`c797d82`; IndexNow pinged). Next: v3.F on operator signal; outreach and GSC steps are operator-owned.
+**Status:** v3.A–C done and deployed 2026-10-30 (`5e74951`); v3.D deployed 2026-10-30 (`5c29e32`); v3.E deployed 2026-10-30 (`c797d82`; IndexNow pinged). v3.F + v3.G built 2026-11-07 (not deployed). Next: operator review, then deploy; v3.H soak after; outreach and GSC steps are operator-owned.
 
 Grow the `/smells/` silo from 13 to roughly 60+ pages without thin or
 near-duplicate content. Ordered by what Phase 1 taught.
@@ -496,8 +497,9 @@ near-duplicate content. Ordered by what Phase 1 taught.
 | v3.C | ☑ | **Second ring of odor pages** (6/6 built 2026-10-29), in v3.A order: `/smells/sewage/bathroom/`, `/smells/rotten-eggs/water/`, `/smells/fishy/`, `/smells/dead-animal/`, then `/smells/chemical/` and `/smells/musty/closet/`. |
 | v3.D | ☑ | **Embeddable smell diagnostic widget.** `/diagnose/smell/` as a copy-paste embed (iframe + snippet) for plumbers, HVAC firms, inspectors and property managers. Every embed carries a visible "Powered by AirSucks" link. Linkable asset #1 (operator, option C, 2026-10-29). |
 | v3.E | ☑ | **Printable "new home smell inspection" checklist.** An HTML page plus a print-ready PDF generated from the smell registry, for buyers, realtors and inspectors. Linkable asset #2. |
-| v3.F | ☐ | **Cause pages + per-page content chunks.** `/smells/causes/<cause>/` for the library causes; shorter cause cards on odor pages that link to them; per-page code-split content; citations for the flagged claims (§ v2 decisions log). |
-| v3.G | ☐ | **Soak + measure.** Search Console at +28 days after the v3.C deploy; referring domains from the v3.D–E assets. Also decide whether v4 starts (needs commercial queries in GSC). |
+| v3.F | ☑ | **Per-page content chunks + citations** (built 2026-11-07, not deployed). Per-page code-split smell content; source the four flagged claims (§ v2 decisions log). No new URLs. |
+| v3.G | ☑ | **Cause pages, shortlist only** (9 built 2026-11-07, not deployed). `/smells/causes/<cause>/` only for causes with search demand, each written thick (≥400 words, `write-lamill-seo-page`). Odor-page cause cards keep their full content and add a link where a cause page exists. |
+| v3.H | ☐ | **Soak + measure.** Search Console at +28 days after the v3.C deploy; referring domains from the v3.D–E assets. Also decide whether v4 starts (needs commercial queries in GSC). |
 
 ### v3 phase detail
 
@@ -641,18 +643,113 @@ when each phase starts.
     buttons hidden; on-screen-only "Read the guide" links hidden; the
     address and date line, notes box, and credit line all fit.
 
-**v3.F — Cause pages + per-page chunks.**
-- Route `/smells/causes/$cause/`, rendered from `CAUSES`.
-- Each page gets: what it is, signs, safe checks, fixes, DIY limit,
-  who to call, and "smells this causes" (back-links to every odor
-  page that ranks it).
-- Odor-page cause cards drop the full checks/fixes and link instead.
-  That lowers sibling-page similarity, which was 0.26 at its highest
-  in v2.
+**v3.F/G scope decision (operator, option A, 2026-11-07).** The
+original v3.F (a cause page for every library cause, with odor-page
+cards cut down to a link) was re-scoped before build:
+- The cause library has 44 entries at ~100 words each. Pages built
+  from that data alone would be ~150–250 words, under the audit's
+  400-word thin threshold. 44 thin pages on a cold domain is a
+  site-quality risk.
+- Cutting odor-page cards to links would take content off the pages
+  that earn impressions (`/smells/rotten-eggs/` ≈ 60%).
+- So: v3.F = code split + citations (no URLs); v3.G = cause pages only
+  where keyword data shows demand, each written thick; old v3.G soak
+  → v3.H.
+
+**v3.F — Per-page chunks + citations.**
 - Content split per page via a path-keyed dynamic import (today all
   smell content is one 32 KB gz chunk).
-- Done when: audit clean, max similarity under 0.20, and each smell
-  page loads only its own content.
+- Source the four flagged claims (heat pump "dirty sock", UV urine,
+  boxwood cat-pee, odorant "skunky"); keep, re-hedge, or cut each.
+- Done when: audit clean, each smell page loads only its own content.
+- **Built 2026-11-07:**
+  - `manifest.gen.ts` (metadata + path→file map) is regenerated from
+    the registry by `vite.config.ts`; a test fails if it's stale.
+    Client code uses `nav.ts` (lists, crumbs, hub) and `load.ts`
+    (one page via lazy `import.meta.glob`); `index.ts` is Node-only.
+  - The route loader returns the page plus its ranked causes, so
+    prerendered HTML carries the content and a first view loads no
+    content chunk. Client-side navigation loads one page chunk
+    (~3–5 KB gz) plus the shared cause library (13 KB gz). The old
+    all-pages chunk (54 KB gz) is gone. HTML grows ~18 KB raw per page.
+  - Checked in headless Chromium: hydration with no console errors;
+    hub → page and page → page client navigation render correctly.
+  - Claims: "skunky" odorant → Iowa Utilities Commission (natural gas)
+    and AmeriGas (propane); UV urine → Humane World for Animals;
+    boxwood → Virginia Tech Extension (English boxwood, warm humid
+    weather; copy narrowed to match); dirty sock → ACHR News trade
+    press. That source puts it in spring/fall mode switching, not
+    defrost, so the "defrost" wording was removed.
+  - Gates: tsc 0, 27 tests, audit 0 errors / 0 warnings.
+  - Not addressed here (pre-existing): the highest sibling similarity
+    is 0.238 (`/gas/` ~ `/skunk/`), and 4 pairs are over 0.20. v3.G's
+    under-0.20 bar applies to the new cause pages.
+
+**v3.G — Cause pages (shortlist).**
+- Route `/smells/causes/$cause/`. Shortlist from keyword data
+  (DataForSEO via treg); a cause without measurable demand gets no
+  page.
+- Each page: written to the `write-lamill-seo-page` checklist, SERP
+  checked first, ≥400 words of genuinely new material (not a copy of
+  the card), what it is, signs, safe checks, fixes, DIY limit, who to
+  call, and "smells this causes" back-links.
+- Odor-page cards keep full content; they add a "Full guide" link
+  when the cause has a page.
+- Done when: audit clean, max sibling similarity under 0.20.
+- **Shortlist locked 2026-11-07** (DataForSEO US volume via treg, ~$0.11;
+  every primary term KD 0–2). Order = build order. Cause pages are
+  ordinary registry pages (`SmellPage` + `about: <cause id>`), so
+  routing, prerender, sitemap and audit come free; the hub lists them
+  under "Common culprits, explained", and odor-page cards show a
+  visible "Full guide" link. Slugs follow the query, not the cause id.
+  1. `/smells/causes/washing-machine/` (front-load-washer) — washing
+     machine smells 5.4K, …like mildew 3.6K, front load washer smell 1.3K
+  2. `/smells/causes/refrigerant-leak/` — what does freon smell like
+     2.9K, refrigerant leak smell 390
+  3. `/smells/causes/mold-in-ducts/` — mold in air ducts 2.9K
+  4. `/smells/causes/dirty-sock-syndrome/` (ac-coil-drain) — 2.4K;
+     `/smells/musty/ac/`'s section shrinks to a summary + link
+  5. `/smells/causes/plumbing-vent/` (sewer-vent-blocked) — plumbing
+     vent clogged 1.9K, clogged plumbing vent symptoms 590
+  6. `/smells/causes/mouse-urine/` (rodent-urine) — mouse urine smell
+     880, mouse pee smell 880, rat urine smell 480
+  7. `/smells/causes/furnace-burning-smell/` (furnace-dust-burnoff) —
+     heater smells like burning 1.3K, furnace burning smell 590
+  8. `/smells/causes/p-trap/` (dry-p-trap) — p trap smell 480, dry p
+     trap smell 320
+  9. `/smells/causes/sump-pump/` (sump-ejector-pit) — sump pump smell 590
+- **Deferred, with reasons:** dryer burning smell 1.9K (narrower than
+  its cause; better as a `/smells/burning-plastic/` child); smelly /
+  sink drain 1.3–1.9K (would cannibalize `/smells/sewage/bathroom/`);
+  bathroom smells musty 1.9K (an odor + location page, not a cause
+  page; candidate `/smells/musty/bathroom/`); dog smells like fish
+  3.6K (veterinary/YMYL, out of scope); septic 480, new carpet 390,
+  window condensation 320 (lower demand).
+- **Built (2026-11-07):** each page has audit 0/0, every cause-page
+  similarity pair < 0.15, and the back-link test passes.
+  - 1 ✓ washing-machine (2,975 words; Samsung + LG support pages)
+  - 2 ✓ refrigerant-leak (3,130 words; EPA SNAP + HFC rules, EPA 608,
+    OSHA refrigeration fact sheet, GE sealed-system page)
+  - 3 ✓ mold-in-ducts (2,945 words; EPA duct-cleaning guide, EPA mold
+    guides)
+  - 4 ✓ dirty-sock-syndrome (2,760 words; ACHR News, HVAC School,
+    ENERGY STAR checklist). `/smells/musty/ac/` dropped its
+    "dirty sock smell from ac" target; its section + FAQ became a
+    summary + link.
+  - 5 ✓ plumbing-vent (2,776 words; InterNACHI plumbing terms)
+  - 6 ✓ mouse-urine (2,544 words; CDC rodent clean-up + seal-up pages,
+    cleanup steps exactly as CDC's current page)
+  - 7 ✓ furnace-burning-smell (2,913 words; Trane, Carrier, CPSC 2023
+    heater release, ENERGY STAR, CPSC CO). Manufacturers disagree on
+    how long burn-off lasts, so the page quotes both.
+  - 8 ✓ p-trap (2,900 words; InterNACHI, OSHA H2S)
+  - 9 ✓ sump-pump (2,895 words; EPA radon reduction guide, Zoeller
+    manual, OSHA H2S)
+- **v3.G done 2026-11-07 (not deployed):** 9 cause pages, sitemap 29 →
+  38 URLs. Gates: tsc 0, 29 tests, audit 0 errors / 0 warnings, every
+  cause-page similarity pair < 0.15. Every claim checked against a
+  fetched source; no `[VERIFY]` markers left. Needs operator review
+  of the pages before deploy.
 
 **v3.C — Second ring.** The shortlist and order are in v3.A decisions
 above.
@@ -693,7 +790,7 @@ rather than duplicate. Each page is one data file in
 
 ## v4 — "Who to call" lead path (monetization)
 
-**Status:** not started. Gated on v3.G showing commercial queries in
+**Status:** not started. Gated on v3.H showing commercial queries in
 GSC ("who to call…", "… near me", "… cost") on smell pages.
 
 Signal so far: *who to call for musty smell in house* — 300/mo, KD 0,

@@ -212,7 +212,7 @@ export function SmellDiagnostic({ preset }: { preset?: { odor?: string; where?: 
                   {ranked.map((r, i) => (
                     <CauseCard
                       key={r.cause.id}
-                      ranked={{ cause: r.cause.id }}
+                      cause={r.cause}
                       index={i}
                       chip={r.match}
                       because={r.because}

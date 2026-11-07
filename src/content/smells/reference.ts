@@ -203,6 +203,127 @@ export const SOURCES = {
     url: "https://www.health.state.mn.us/communities/environment/water/wells/waterquality/hydrosulfide.html",
     publisher: "Minnesota Department of Health",
   },
+  // v3.F — sources for the four claims flagged in the v2 decisions log.
+  iucGasSafety: {
+    title: "Natural Gas and Propane Gas Safety (Safety Minute, July 2026)",
+    url: "https://iuc.iowa.gov/media/2195/download",
+    publisher: "Iowa Utilities Commission",
+  },
+  amerigasSafety: {
+    title: "Propane Safety Tips",
+    url: "https://www.amerigas.com/about-propane/propane-safety",
+    publisher: "AmeriGas",
+  },
+  vtBoxwood: {
+    title: "Selecting Landscape Plants: Boxwoods",
+    url: "https://www.pubs.ext.vt.edu/426/426-603/426-603.html",
+    publisher: "Virginia Cooperative Extension (Virginia Tech)",
+  },
+  humanePetStains: {
+    title: "How to Remove Pet Stains and Odors Naturally",
+    url: "https://www.humaneworld.org/resources/how-remove-pet-stains-and-odors",
+    publisher: "Humane World for Animals",
+  },
+  samsungWasherOdor: {
+    title: "Washing machine or laundry smells bad",
+    url: "https://www.samsung.com/us/support/troubleshoot/TSG10007246/",
+    publisher: "Samsung US Support",
+  },
+  lgWasherOdor: {
+    title: "LG Washer — Troubleshooting Odor / Buildup",
+    url: "https://www.lg.com/us/support/help-library/lg-washer-troubleshooting-odor-buildup--1337716047757",
+    publisher: "LG US Support",
+  },
+  epaRadonReduction: {
+    title: "Consumer's Guide to Radon Reduction: How to Fix Your Home",
+    url: "https://www.epa.gov/sites/default/files/2016-12/documents/2016_consumers_guide_to_radon_reduction.pdf",
+    publisher: "U.S. EPA",
+  },
+  zoellerManual: {
+    title: "Sump pump owner's manual (FM2298), maintenance schedule",
+    url: "https://zoellerpumps.com/wp-content/uploads/sites/3/2024/02/fm2298.pdf",
+    publisher: "Zoeller Pump Company",
+  },
+  oshaH2s: {
+    title: "Hydrogen Sulfide — Hazards",
+    url: "https://www.osha.gov/hydrogen-sulfide/hazards",
+    publisher: "U.S. OSHA",
+  },
+  carrierBurningSmell: {
+    title: "Burning Smell in House? Discover How To Get Rid of It",
+    url: "https://www.carrier.com/residential/en/us/products/furnaces/burning-smell-in-house/",
+    publisher: "Carrier",
+  },
+  traneBurningSmell: {
+    title: "Help! My Furnace Smells Like Burning",
+    url: "https://www.trane.com/residential/en/resources/troubleshooting/gas-furnaces/furnace-smells-like-burning/",
+    publisher: "Trane",
+  },
+  cpscHeaters2023: {
+    title: "CPSC Warns Consumers to be Cautious When Using Space Heaters, Furnaces and Fireplaces This Winter",
+    url: "https://www.cpsc.gov/Newsroom/News-Releases/2023/CPSC-Warns-Consumers-to-be-Cautious-When-Using-Space-Heaters-Furnaces-and-Fireplaces-This-Winter",
+    publisher: "U.S. CPSC",
+  },
+  cdcRodentCleanup: {
+    title: "How to Clean Up After Rodents",
+    url: "https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html",
+    publisher: "U.S. CDC",
+  },
+  cdcRodentSealUp: {
+    title: "How to Seal Up to Prevent Rodents",
+    url: "https://www.cdc.gov/healthy-pets/rodent-control/seal-up.html",
+    publisher: "U.S. CDC",
+  },
+  nachiPlumbingTerms: {
+    title: "Plumbing Terms",
+    url: "https://www.nachi.org/plumbing-terms.htm",
+    publisher: "InterNACHI (International Association of Certified Home Inspectors)",
+  },
+  hvacSchoolDirtySock: {
+    title: "What Causes Dirty Sock Syndrome?",
+    url: "https://www.hvacrschool.com/what-causes-dirty-sock-syndrome/",
+    publisher: "HVAC School",
+  },
+  energyStarMaintenance: {
+    title: "Maintenance Checklist",
+    url: "https://www.energystar.gov/saveathome/heating-cooling/maintenance-checklist",
+    publisher: "ENERGY STAR (U.S. EPA / DOE)",
+  },
+  epaDuctCleaning: {
+    title: "Should You Have the Air Ducts in Your Home Cleaned?",
+    url: "https://www.epa.gov/indoor-air-quality-iaq/should-you-have-air-ducts-your-home-cleaned",
+    publisher: "U.S. EPA",
+  },
+  epa608: {
+    title: "Section 608 Technician Certification",
+    url: "https://www.epa.gov/section608/section-608-technician-certification-0",
+    publisher: "U.S. EPA",
+  },
+  epaAcRefrigerants: {
+    title: "Substitutes in Residential and Light Commercial Air Conditioning and Heat Pumps",
+    url: "https://www.epa.gov/snap/substitutes-residential-and-light-commercial-air-conditioning-and-heat-pumps",
+    publisher: "U.S. EPA (SNAP program)",
+  },
+  epaHfcSectors: {
+    title: "Technology Transitions HFC Restrictions by Sector",
+    url: "https://www.epa.gov/hfcs/technology-transitions-hfc-restrictions-sector",
+    publisher: "U.S. EPA",
+  },
+  oshaRefrigeration: {
+    title: "Hazards during the Repair and Maintenance of Refrigeration Systems on Vessels (fact sheet)",
+    url: "https://www.osha.gov/sites/default/files/publications/OSHA3836.pdf",
+    publisher: "U.S. OSHA",
+  },
+  geSealedSystem: {
+    title: "Refrigerator — Puncture in the Sealed System",
+    url: "https://products.geappliances.com/appliance/gea-support-search-content?contentId=16703",
+    publisher: "GE Appliances",
+  },
+  achrDirtySock: {
+    title: "Dirty Sock Syndrome: What It Is, How to Prevent It",
+    url: "https://www.achrnews.com/articles/127583-dirty-sock-syndrome-what-it-is-how-to-prevent-it",
+    publisher: "ACHR News",
+  },
 } satisfies Record<string, SourceRef>;
 
 /** The standard "leave and call" block for any page where gas is in play.

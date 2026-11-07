@@ -176,7 +176,13 @@ export const skunk: SmellPage = {
       hint: "Other sulfur sources",
     },
   ],
-  sources: [SOURCES.agaGas, SOURCES.propaneSafety, SOURCES.cpscCo],
+  sources: [
+    SOURCES.agaGas,
+    SOURCES.propaneSafety,
+    SOURCES.iucGasSafety,
+    SOURCES.amerigasSafety,
+    SOURCES.cpscCo,
+  ],
   diagnose: { family: "skunk" },
   updated: "2026-10-02",
 };

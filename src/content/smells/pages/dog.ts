@@ -154,7 +154,7 @@ export const dog: SmellPage = {
     { title: "Musty smell from the AC", href: "/smells/musty/ac/", hint: "When vents smell" },
     { title: "All smells", href: "/smells/", hint: "Browse by odor" },
   ],
-  sources: [SOURCES.epaMold],
+  sources: [SOURCES.epaMold, SOURCES.humanePetStains],
   diagnose: { family: "pet-urine" },
   updated: "2026-10-02",
 };

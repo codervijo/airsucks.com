@@ -1,5 +1,5 @@
-import { breadcrumbsFor, childrenOf, diagnoseHref, parentOf } from "@/content/smells";
-import type { SmellPage } from "@/content/smells/types";
+import { breadcrumbsFor, childrenOf, diagnoseHref, parentOf } from "@/content/smells/nav";
+import type { Cause, SmellPage } from "@/content/smells/types";
 import {
   Breadcrumbs,
   CauseCard,
@@ -20,7 +20,14 @@ import {
   WhoToCall,
 } from "./blocks";
 
-export function SmellArticle({ page }: { page: SmellPage }) {
+export function SmellArticle({
+  page,
+  causes,
+}: {
+  page: SmellPage;
+  /** Every cause the page ranks, keyed by id (from the route loader). */
+  causes: Record<string, Cause>;
+}) {
   const crumbs = breadcrumbsFor(page);
   const parent = parentOf(page);
   const children = childrenOf(page);
@@ -72,7 +79,14 @@ export function SmellArticle({ page }: { page: SmellPage }) {
       >
         <ol className="space-y-4">
           {page.causes.map((rc, i) => (
-            <CauseCard key={rc.cause} ranked={rc} index={i} chip={rc.likelihood} />
+            <CauseCard
+              key={rc.cause}
+              cause={causes[rc.cause]}
+              currentPath={page.path}
+              note={rc.note}
+              index={i}
+              chip={rc.likelihood}
+            />
           ))}
         </ol>
         <p className="mt-4 text-xs text-muted-foreground">{METHODOLOGY}</p>

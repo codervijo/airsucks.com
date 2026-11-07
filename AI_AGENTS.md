@@ -63,9 +63,14 @@ Read this before any SEO/indexing work — it explains why the site gets 0 impre
   - `causes.ts` — the shared cause library (each cause: signs, safe checks, fixes, DIY limit, trade, urgency, engine weights);
   - `reference.ts` — odor families, trades, cited sources, the standard `GAS_SAFETY` block;
   - `pages/*.ts` — one file per `/smells/` page;
-  - `index.ts` — the registry;
+  - `index.ts` — the registry (Node-side only: vite.config, prerender, tests);
+  - `manifest.gen.ts` — **generated** page metadata + path→file map (vite.config regenerates it; a test fails if stale; never hand-edit);
+  - `nav.ts` — client-safe lists, parent/child, breadcrumbs, hub groups (reads the manifest);
+  - `load.ts` — loads one page's content on demand (lazy `import.meta.glob`, one chunk per page);
   - `engine.ts` — the `/diagnose/smell/` scoring + red-flag rules.
-- **Add a page:** write `pages/<slug>.ts`, then add it to `SMELL_PAGES` in `index.ts`. That's it — routing (`src/routes/smells.$.tsx`), prerender, sitemap, hub, breadcrumbs, and JSON-LD all follow from the registry.
+- **Client code never imports `index.ts`** (it would bundle every page). Import `nav.ts` for metadata and `load.ts` for content. The `/smells/$` loader returns the page plus its ranked causes, so prerendered HTML carries the content (v3.F).
+- **Add a page:** write `pages/<slug>.ts`, then add it to `SMELL_PAGES` in `index.ts`, then run a build (or dev) to regenerate `manifest.gen.ts`. Routing (`src/routes/smells.$.tsx`), prerender, sitemap, hub, breadcrumbs, and JSON-LD all follow from the registry.
+- **Cause pages (v3.G)** are registry pages under `/smells/causes/<slug>/` with `about: <cause id>`. The cause's `page` must point back, and the page's `related` must link every odor page that ranks that cause (both enforced by test). Odor-page cause cards show a visible "Full guide" link to it. Only causes with measured search demand get a page (docs/prd.md § v3.F/G scope decision).
 - **Gates before shipping content:**
   - `pnpm test` — data integrity + engine behavior;
   - `pnpm build`, then `pnpm seo:audit` — titles/H1/meta/canonical uniqueness, schema, broken links, redirect hops, orphans, sitemap parity, thin and near-duplicate pages.

@@ -18,6 +18,10 @@ import {
 import { FAMILIES } from "../content/smells/reference";
 import { CHECKLIST_AREAS } from "../content/smells/checklist";
 import type { Likelihood } from "../content/smells/types";
+import { readFileSync } from "node:fs";
+import { SMELL_MANIFEST_PATH, renderSmellManifest } from "../content/smells/manifest-build";
+import { SMELL_FILES, SMELL_META } from "../content/smells/manifest.gen";
+import { loadSmellPage } from "../content/smells/load";
 
 // Every internal path a smell page may link to.
 const STATIC_ROUTES = new Set([
@@ -214,5 +218,49 @@ describe("smell engine", () => {
 
   it("returns nothing without an odor family", () => {
     expect(run({}).ranked).toEqual([]);
+  });
+});
+
+describe("per-page content split (v3.F)", () => {
+  it("has a current manifest.gen.ts (run a dev/build to regenerate)", () => {
+    expect(readFileSync(SMELL_MANIFEST_PATH, "utf8")).toBe(renderSmellManifest());
+    expect(SMELL_META.map((m) => m.path)).toEqual(SMELL_PAGES.map((p) => p.path));
+  });
+
+  it("loads every registry page, with all its ranked causes, by any path spelling", async () => {
+    for (const p of SMELL_PAGES) {
+      const loaded = await loadSmellPage(p.path.replace(/\/$/, ""));
+      expect(loaded?.page, p.path).toBe(p);
+      for (const r of p.causes)
+        expect(loaded?.causes[r.cause]?.id, `${p.path} ${r.cause}`).toBe(r.cause);
+    }
+    expect(Object.keys(SMELL_FILES)).toHaveLength(SMELL_PAGES.length);
+    expect(await loadSmellPage("/smells/nope/")).toBeUndefined();
+  });
+});
+
+describe("cause pages (v3.G)", () => {
+  const causePagesList = SMELL_PAGES.filter((p) => p.path.startsWith("/smells/causes/"));
+
+  it("each explain exactly one library cause, and that cause points back", () => {
+    for (const p of causePagesList) {
+      expect(p.about, `${p.path} needs about`).toBeTruthy();
+      expect(hasCause(p.about!), `${p.path} about=${p.about}`).toBe(true);
+      expect(CAUSES.find((c) => c.id === p.about)!.page, p.about).toBe(p.path);
+    }
+    const abouts = causePagesList.map((p) => p.about);
+    expect(new Set(abouts).size).toBe(abouts.length);
+    for (const p of SMELL_PAGES.filter((x) => !x.path.startsWith("/smells/causes/")))
+      expect(p.about, p.path).toBeUndefined();
+  });
+
+  it("link back to every odor page that ranks their cause", () => {
+    for (const p of causePagesList) {
+      const linked = new Set(p.related.map((l) => l.href));
+      const rankers = SMELL_PAGES.filter(
+        (o) => o.path !== p.path && o.causes.some((c) => c.cause === p.about),
+      );
+      for (const o of rankers) expect(linked, `${p.path} → ${o.path}`).toContain(o.path);
+    }
   });
 });
