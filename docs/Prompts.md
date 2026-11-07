@@ -18,4 +18,4 @@
 > (session, abridged) Build the embeddable smell widget (branded, followed attribution link); commit and push; fix the duplicate CSP header, then build the house-showing checklist (smell-only link asset, print stylesheet); commit and push; ping IndexNow; log growth and prompts and get ready to exit.
 
 ## 2026-11-07
-> (session, abridged) Load project context; show the feature table; start v3.F. Re-scope chosen: option A (cause pages only where there's search demand, each thick; v3.F = code split + citations, v3.G = cause pages, v3.H = soak). "Make all pages thick and useful, take your time with adequate delays in between pages."
+> (session, abridged) Load project context; show the feature table; start v3.F. Re-scope chosen: option A (cause pages only where there's search demand, each thick; v3.F = code split + citations, v3.G = cause pages, v3.H = soak). "Make all pages thick and useful, take your time with adequate delays in between pages." Then: commit and push, ping IndexNow; log prompts and get ready to exit.
