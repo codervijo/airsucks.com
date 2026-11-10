@@ -114,6 +114,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* GA4 (LaMill Sites; ID committed per ADR-0029) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NYEWT8YRF" />
+        <script dangerouslySetInnerHTML={{ __html: "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-0NYEWT8YRF');" }} />
       </head>
       <body>
         {children}
